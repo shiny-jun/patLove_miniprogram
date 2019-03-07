@@ -1,6 +1,6 @@
 const CONF = {
   port: '5757',
-  rootPathname: '',
+  rootPathname: '/data/release/weapp',
 
   // 微信小程序 App ID
   appId: 'wx9ccb262232e0729a',
@@ -17,11 +17,11 @@ const CONF = {
    * 开发环境下，MySQL 的初始密码为您的微信小程序 appid
    */
   mysql: {
-    host: 'localhost',
+    host: '172.16.0.13',
     port: 3306,
     user: 'root',
     db: 'cAuth',
-    pass: 'wx9ccb262232e0729a',
+    pass: '090130mnw',
     char: 'utf8mb4'
   },
 
@@ -36,7 +36,10 @@ const CONF = {
     // 文件夹
     uploadFolder: ''
   },
-
+// 其他配置 ...
+    serverHost: 'https://shiny-jun.cn',
+    tunnelServerUrl: 'http://tunnel.ws.qcloud.la',
+    tunnelSignatureKey: '27fb7d1c161b7ca52d73cce0f1d833f9f5b5ec89',
   // 微信登录态有效期
   wxLoginExpires: 7200,
   wxMessageToken: 'abcdefgh',
