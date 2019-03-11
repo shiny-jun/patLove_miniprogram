@@ -1,4 +1,6 @@
 // pages/home/home.js
+import { get } from "../../utils/index.js";
+const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
 Page({
 
   /**
@@ -21,7 +23,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.showNavigationBarLoading();
+    this.getSwiperList()
   },
 
   /**
@@ -71,5 +74,15 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  // 获取types列表的数据
+  async getSwiperList(){
+    const types = await get("/weapp/swiperlist", {});
+    console.log(types)
+    this.setData({
+      types:types.list
+    })
+    wx.hideNavigationBarLoading();
   }
+
 })
