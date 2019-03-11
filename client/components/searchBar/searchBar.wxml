@@ -9,7 +9,7 @@
    <view class="bar flex" wx:else>
        <view class="bar-wrapper">
            <i class="iconfont icon-search"></i>
-           <input class="input" value="{{inpVal}}" type="text" bindblur="handleInput" bindinput="linkInput">
+           <input class="input" value="{{inpVal}}" type="text" bindblur="handleInput" bindinput="linkInput"/>
            <i class="iconfont icon-del2" wx:if="{{inpVal}}"></i>
        </view>
        <view class="close" bindtap="handleInput">搜索</view> 

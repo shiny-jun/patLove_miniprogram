@@ -1,9 +1,9 @@
 <!-- pages/home/home.wxml -->
 <text>
-  <searchBar :canuse="false"></searchBar>
-  <current :types="types">
-    <text v-for="(type,index) in types" :key="index" :slot="type.value">
-      <text>1{{type.name}}</text>
+  <searchBar canuse="false"></searchBar>
+  <current types="{{types}}">
+    <text wx:for="{{types}}" wx:key="index" slot="{{item.value}}">
+      <text>1{{item.name}}</text>
     </text>
   </current>
 </text>
