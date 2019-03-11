@@ -2,14 +2,14 @@
 <view class="current">
         <view class="scroll">
             <scroll-view class="scroll-view_H" scroll-x style="width: 100%">
-                <view wx:for="{{types}}" wx:key="{{index}}" class="scroll-item" style="color:{{currentTab==index?'#000000':'#999999'}}" bindtap="changeCurrentTab(index)">{{item.name}}</view>
+                <view wx:for="{{types}}" wx:key="unique" class="scroll-item" style="color:{{currentTab==index?'#000000':'#999999'}}" bindtap="changeCurrentTab" data-index="{{index}}">{{item.name}}</view>
             </scroll-view>
         </view>
         <view class="swiper">
             <swiper autoplay="false" current="{{currentTab}}">
-                <block wx:for="{{types}}" wx:key="{{index}}">
+                <block wx:for="{{types}}" wx:key="unique">
                     <swiper-item>
-                        <slot name='{{item.value}}'></slot>
+                        <slot name="{{item.value}}"></slot>
                     </swiper-item>
                 </block>
             </swiper>

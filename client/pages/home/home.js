@@ -12,8 +12,8 @@ Page({
       { name: "猫", value: "cat" },
       { name: "兔", value: "rabbit" },
       { name: "鼠", value: "rat" },
-      { name: "鼠", value: "rat" },
-      { name: "鼠", value: "rat" },
+      { name: "鱼", value: "fish" },
+      { name: "其他", value: "other" },
     ]
   },
 

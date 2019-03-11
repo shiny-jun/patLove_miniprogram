@@ -1,9 +1,11 @@
 <!-- pages/home/home.wxml -->
-<text>
+<view>
   <searchBar canuse="false"></searchBar>
   <current types="{{types}}">
-    <text wx:for="{{types}}" wx:key="index" slot="{{item.value}}">
-      <text>1{{item.name}}</text>
-    </text>
+    <block wx:for="{{types}}" wx:key="unique">
+      <view slot="{{item.value}}">
+        <view>1{{item.name}}</view>
+      </view>
+    </block>
   </current>
-</text>
+</view>
