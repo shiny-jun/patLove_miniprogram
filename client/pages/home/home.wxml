@@ -1,12 +1,9 @@
-<!--pages/home/home.wxml-->
-    
+<!-- pages/home/home.wxml -->
 <text>
-        <searchBar :canuse="false"></searchBar>
-        <current :types="types">
-          <text v-for="(type,index) in types" :key="index" :slot="type.value">
-            <text>
-              1{{type.name}}
-           </text>
-          </text>
-        </current>
+  <searchBar :canuse="false"></searchBar>
+  <current :types="types">
+    <text v-for="(type,index) in types" :key="index" :slot="type.value">
+      <text>1{{type.name}}</text>
     </text>
+  </current>
+</text>

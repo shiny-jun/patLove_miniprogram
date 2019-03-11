@@ -5,7 +5,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    types: [
+      { name: "推荐", value: "recommend" },
+      { name: "关注", value: "follow" },
+      { name: "狗", value: "dog" },
+      { name: "猫", value: "cat" },
+      { name: "兔", value: "rabbit" },
+      { name: "鼠", value: "rat" },
+      { name: "鼠", value: "rat" },
+      { name: "鼠", value: "rat" },
+    ]
   },
 
   /**
