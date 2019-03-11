@@ -6,7 +6,7 @@
             </scroll-view>
         </view>
         <view class="swiper">
-            <swiper autoplay="false" current="{{currentTab}}">
+            <swiper autoplay="false" current="{{currentTab}}" bindchange="bindchangeCurrent">
                 <block wx:for="{{types}}" wx:key="unique">
                     <swiper-item>
                         <slot name="{{item.value}}"></slot>

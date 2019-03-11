@@ -1,6 +1,6 @@
 <!--components/searchBar.wxml-->
 <view class="search-bar">
-   <view class="bar" wx:if="{{!canuse}}">
+   <view class="bar" wx:if="!{{canuse}}">
        <view class="bar-wrapper" bindtap="goSearchPage">
            <i class="iconfont icon-search"></i>
            <input class="input" type="text" disabled />

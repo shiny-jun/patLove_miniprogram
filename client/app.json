@@ -2,6 +2,8 @@
   "pages":[
     "pages/home/home",
     "pages/searchPage/searchPage",
+    "pages/dictionary/dictionary",
+    "pages/msg/msg",
     "pages/me/me"
   ],
   "window":{
@@ -10,5 +12,37 @@
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "Wafer Quick Start",
     "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "backgroundColor": "#ffffff",
+    "borderStyle":"white",
+    "color":"#999999",
+    "selectedColor": "#f8d98f",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+       "iconPath":"assets/img/tabBar/home.png",
+       "selectedIconPath":"assets/img/tabBar/home_fill.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/dictionary/dictionary",
+        "iconPath": "assets/img/tabBar/dictionary.png",
+        "selectedIconPath": "assets/img/tabBar/dictionary_fill.png",
+        "text": "百科"
+      },
+      {
+        "pagePath": "pages/msg/msg",
+        "iconPath": "assets/img/tabBar/msg.png",
+        "selectedIconPath": "assets/img/tabBar/msg_fill.png",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/me/me",
+       "iconPath": "assets/img/tabBar/user.png",
+       "selectedIconPath": "assets/img/tabBar/user_fill.png",
+        "text": "我的"
+      }
+    ]
   }
 }

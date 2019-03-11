@@ -26,7 +26,6 @@ Component({
       })
     },
     bindchangeCurrent(e) {
-      console.log(e.detail.current)
       this.setData({
         currentTab : e.detail.current
       })
