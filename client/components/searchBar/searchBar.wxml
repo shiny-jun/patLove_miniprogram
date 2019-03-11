@@ -3,7 +3,7 @@
    <view class="bar" wx:if="{{!canuse}}">
        <view class="bar-wrapper" bindtap="goSearchPage">
            <i class="iconfont icon-search"></i>
-           <input class="input" type="text" disabled="true"/>
+           <input class="input" type="text" disabled />
        </view>
    </view>
    <view class="bar flex" wx:else>
