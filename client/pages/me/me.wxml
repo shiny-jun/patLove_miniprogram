@@ -1,40 +1,43 @@
 <!--pages/me/me.wxml-->
 <view class="container">
-    <!-- 用户登录测试 -->
-    <view class="userinfo">
-        <image
-            class="userinfo-avatar"
-            src="{{logged ? userInfo.avatarUrl : './user-unlogin.png'}}"
-            background-size="cover"
-        ></image>
-        <view>
-            <button class="userinfo-nickname" wx:if="{{!logged}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">点击测试登录接口</button>
-            <text class="userinfo-nickname" wx:else>{{userInfo.nickName}}</text>
+  <!-- 用户登录测试 -->
+  <view class='head'>
+    <view class="userinfo flex">
+      <view>
+        <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : './user-unlogin.png'}}" background-size="cover"></image>
+      </view>
+      <view class='msg-info'>
+        <view class='flex'>
+          <view class='part'>
+            <view class='num'>66</view>
+            <view class='title'>关注</view>
+          </view>
+          <view class='part'>
+            <view class='num'>1234</view>
+            <view class='title'>粉丝</view>
+          </view>
+          <view class='part'>
+            <view class='num'>3.3w</view>
+            <view class='title'>点赞量</view>
+          </view>
         </view>
-    </view>
-
-
-    <!-- 上传图片测试 -->
-    <view class="uploader">
-        <view class="uploader-text" bindtap="doUpload">
-            <text>上传图片</text>
+        <view class='flex btn-wrapper'>
+          <view class='btn btn-msg'>编辑资料</view>
+          <view class='btn setting'>
+            <icon class='iconfont icon-shezhi'></icon>
+          </view>
         </view>
-        <view class="uploader-container" wx:if="{{imgUrl}}">
-            <image
-                class="uploader-image"
-                src="{{imgUrl}}"
-                mode="aspectFit"
-                bindtap="previewImg"
-            ></image>
-        </view>
+      </view>
     </view>
+  </view>
 
-
-    <!-- 上传图片测试 -->
-    <view class="uploader">
-        <navigator url="../addCgi/addCgi" open-type="navigate" class="uploader-text">
-            <text>快速增加 CGI</text>
-        </navigator>
+  <view class="authorize-window" wx:if="{{!userInfo.openId}}">
+    <view class="window-wrapper">
+      <view class="win-tips">授权提示</view>
+      <view class="win-content">
+        <view class="text">由于需要获取你的头像昵称，请点击下方进行授权</view>
+        <button class='get-authorize' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">去授权</button>
+      </view>
     </view>
+  </view>
 </view>
-

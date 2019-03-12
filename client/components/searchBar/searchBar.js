@@ -24,7 +24,7 @@ Component({
     goSearchPage() {
       wx.navigateTo({
         //前往搜索页
-        url: "/pages/searchPage/main"
+        url: "/pages/searchPage/searchPage"
       });
     },
     handleInput(val) {

@@ -2,15 +2,15 @@
 <view class="search-bar">
    <view class="bar" wx:if="!{{canuse}}">
        <view class="bar-wrapper" bindtap="goSearchPage">
-           <i class="iconfont icon-search"></i>
+           <icon class="iconfont icon-search"></icon>
            <input class="input" type="text" disabled />
        </view>
    </view>
    <view class="bar flex" wx:else>
        <view class="bar-wrapper">
-           <i class="iconfont icon-search"></i>
+           <icon class="iconfont icon-search"></icon>
            <input class="input" value="{{inpVal}}" type="text" bindblur="handleInput" bindinput="linkInput"/>
-           <i class="iconfont icon-del2" wx:if="{{inpVal}}"></i>
+           <icon class="iconfont icon-del2" wx:if="{{inpVal}}"></icon>
        </view>
        <view class="close" bindtap="handleInput">搜索</view> 
    </view>
