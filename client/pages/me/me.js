@@ -8,7 +8,8 @@ Page({
     userInfo: {},
     logged: false,
     takeSession: false,
-    requestResult: ''
+    requestResult: '',
+    current:1
   },
   onLoad() {
     let userInfoStr = wx.getStorageSync('userInfo')
@@ -73,5 +74,10 @@ Page({
       })
     }
   },
-
+  // 用于切换current
+  changeCurrent(e){
+    this.setData({
+      current: e.currentTarget.dataset.current
+    })
+  }
 })

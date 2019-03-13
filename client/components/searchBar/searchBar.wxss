@@ -6,7 +6,7 @@
 .search-bar .bar {
     width: 100%;
     height: 100%;
-    padding: 10rpx 0;
+    padding: 20rpx 0;
     background-color: #f8d98f;
 }
 
