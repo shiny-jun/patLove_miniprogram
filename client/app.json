@@ -1,10 +1,10 @@
 {
   "pages":[
+    "pages/msg/msg",
     "pages/dictionary/dictionary",
     "pages/me/me",
     "pages/home/home",
-    "pages/searchPage/searchPage",
-    "pages/msg/msg"
+    "pages/searchPage/searchPage"
   ],
   "window":{
     "backgroundColor":"#ffffff",
