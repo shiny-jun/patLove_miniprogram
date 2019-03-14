@@ -1,9 +1,9 @@
 {
   "pages":[
+    "pages/dictionary/dictionary",
     "pages/me/me",
     "pages/home/home",
     "pages/searchPage/searchPage",
-    "pages/dictionary/dictionary",
     "pages/msg/msg"
   ],
   "window":{

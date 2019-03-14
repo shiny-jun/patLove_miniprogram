@@ -1,1 +1,39 @@
 /* pages/dictionary/dictionary.wxss */
+
+.icon-list {
+  padding: 0 5%;
+  padding-top: 100rpx;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  align-items:center;
+}
+
+.icon {
+  /* display: flex;
+  justify-content:center;
+  align-items: center; */
+  width: 33.3%;
+  text-align: center;
+  height: 300rpx;
+}
+.background{
+  margin: 0 auto;
+  margin-top: 50rpx;
+  width: 180rpx;
+  height: 180rpx;
+  line-height: 180rpx;
+  border-radius: 50%;
+}
+.background>image {
+  width: 50%;
+  vertical-align: middle;
+}
+.name{
+  margin-top: 10rpx;
+  font-size: 28rpx;
+  line-height: 48rpx;
+  color:#999999;
+}
