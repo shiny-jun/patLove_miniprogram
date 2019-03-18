@@ -32,6 +32,10 @@ router.get('/message', controllers.message.get)
 // POST 用来处理微信转发过来的客服消息
 router.post('/message', controllers.message.post)
 // 本次项目新增接口
+//get:swiperlist
 router.get('/swiperlist', controllers.swiperlist)
-
+// get:animallist
+router.get('/animallist', controllers.animallist)
+// get:patlist
+router.get('/patlist', controllers.patlist)
 module.exports = router

@@ -1,18 +1,21 @@
 // pages/dictionary/dictionary.js
+import { get } from "../../utils/index.js";
+const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    types:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.showNavigationBarLoading();
+    this.getAnimalList()
   },
 
   /**
@@ -62,5 +65,22 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  // 获取types列表的数据
+  async getAnimalList(){
+    const types = await get("/weapp/animallist", {});
+    console.log(types)
+    this.setData({
+      types:types.list
+    })
+    wx.hideNavigationBarLoading();
+  },
+  // 通向pattype页
+  gopattype(e){
+    let id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      //前往搜索页
+      url: "/pages/patType/patType?animalId="+id
+    });
   }
 })

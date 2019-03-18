@@ -1,53 +1,9 @@
 <!--pages/dictionary/dictionary.wxml-->
 <view class="icon-list flex">
-  <view class='icon'>
+  <view class='icon' wx:for="{{types}}" wx:key="animal" bindtap="gopattype" data-id="{{item.animalId}}">
     <view class='background' style='background-color:#ceacd1;'>
-      <image src='/assets/img/pat/dog.png' mode='widthFix'></image>
+      <image src="/assets/img/pat/{{item.animalName}}.png" mode='widthFix'></image>
     </view>
-    <view class='name'>狗</view>
-  </view>
-  <view class='icon'>
-    <view class='background' style='background-color:#e78ab7;'>
-      <image src='/assets/img/pat/cat.png' mode='widthFix'></image>
-    </view>
-    <view class='name'>猫</view>
-  </view>
-  <view class='icon'>
-    <view class='background' style='background-color:#f0c5b5;'>
-
-      <image src='/assets/img/pat/rabbit.png' mode='widthFix'></image>
-    </view>
-    <view class='name'>兔</view>
-  </view>
-  <view class='icon'>
-    <view class='background' style='background-color:#e9d0a7;'>
-
-      <image src='/assets/img/pat/bird.png' mode='widthFix'></image>
-    </view>
-    <view class='name'>鸟</view>
-  </view>
-  <view class='icon'>
-    <view class='background' style='background-color:#eada8f;'>
-      <image src='/assets/img/pat/rat.png' mode='widthFix'></image>
-    </view>
-    <view class='name'>鼠</view>
-  </view>
-  <view class='icon'>
-    <view class='background' style='background-color:#b1d6b4;'>
-      <image src='/assets/img/pat/turtle.png' mode='widthFix'></image>
-    </view>
-    <view class='name'>龟</view>
-  </view>
-  <view class='icon'>
-    <view class='background' style='background-color:#7fc9bc;'>
-      <image src='/assets/img/pat/fish.png' mode='widthFix'></image>
-    </view>
-    <view class='name'>鱼</view>
-  </view>
-  <view class='icon'>
-    <view class='background' style='background-color:#7dc5db;'>
-      <image src='/assets/img/pat/other.png' mode='widthFix'></image>
-    </view>
-    <view class='name'>其他</view>
+    <view class='name'>{{item.chineseName}}</view>
   </view>
 </view>

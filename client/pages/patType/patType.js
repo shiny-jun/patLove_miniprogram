@@ -1,4 +1,4 @@
-// pages/home/home.js
+// pages/patType/patType.js
 import { get } from "../../utils/index.js";
 const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
 Page({
@@ -7,15 +7,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    types: []
+    types:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showNavigationBarLoading();
-    this.getSwiperList()
+    let animalId = options.animalId
+    this.getPatList(animalId)
   },
 
   /**
@@ -67,13 +67,12 @@ Page({
 
   },
   // 获取types列表的数据
-  async getSwiperList(){
-    const types = await get("/weapp/swiperlist", {});
+  async getPatList(animalId){
+    const types = await get("/weapp/patlist", {animalId});
     console.log(types)
     this.setData({
       types:types.list
     })
     wx.hideNavigationBarLoading();
-  }
-
+  },
 })

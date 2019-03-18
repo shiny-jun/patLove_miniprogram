@@ -1,0 +1,15 @@
+<!--components/patItem.wxml-->
+<view class="pat-item">
+    <view class="">
+        {{itemMsg.patName}}
+    </view>
+    <view class="">
+        别名：{{itemMsg.EnglishName}}
+    </view>
+    <view class="">
+        别名：{{itemMsg.otherName}}
+    </view>
+    <image class="" src="{{itemMsg.imgSrc}}" mode="widthFix">
+        
+    </image>
+</view>

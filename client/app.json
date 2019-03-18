@@ -4,7 +4,9 @@
     "pages/dictionary/dictionary",
     "pages/me/me",
     "pages/home/home",
-    "pages/searchPage/searchPage"
+    "pages/searchPage/searchPage",
+    "pages/patType/patType"
+
   ],
   "window":{
     "backgroundColor":"#ffffff",
