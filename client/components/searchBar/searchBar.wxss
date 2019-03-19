@@ -1,6 +1,7 @@
 /* components/searchBar.wxss */
 .search-bar {
     width: 100%;
+    background-color: #fff;
 }
 
 .search-bar .bar {

@@ -1,25 +1,21 @@
-// pages/dictionary/dictionary.js
-import {
-  get
-} from "../../utils/index.js";
-const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
-const colors = ['#ceacd1', '#e78bb4', '#f0c5b5', '#e9d0a7', '#eada8f', '#b1d6b4', '#7fc9bc', '#7ec4dd', '#8aa1ca']
+// client/pages/patType/patDetail/patDetail.js
+import { get } from "../../../utils/index.js";
+const regeneratorRuntime = require('../../../utils/regenerator-runtime/runtime')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    types: [],
-    colors: colors
+    detail:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showNavigationBarLoading();
-    this.getAnimalList()
+    let typeId = options.typeId
+    this.getPatList(typeId)
   },
 
   /**
@@ -71,24 +67,12 @@ Page({
 
   },
   // 获取types列表的数据
-  async getAnimalList() {
-    const types = await get("/weapp/animallist", {});
+  async getPatList(typeId) {
+    const types = await get("/weapp/patlist", { typeId });
     console.log(types)
-    let list = types.list
-    list.forEach((item, index) => {
-      item.color = colors[index % colors.length]
-    })
     this.setData({
-      types: list
+      detail: types.list
     })
     wx.hideNavigationBarLoading();
   },
-  // 通向pattype页
-  gopattype(e) {
-    let id = e.currentTarget.dataset.id
-    wx.navigateTo({
-      //前往搜索页
-      url: "/pages/patType/patType?animalId=" + id
-    });
-  }
 })

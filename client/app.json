@@ -1,30 +1,30 @@
 {
-  "pages":[
+  "pages": [
     "pages/msg/msg",
     "pages/dictionary/dictionary",
     "pages/me/me",
     "pages/home/home",
     "pages/searchPage/searchPage",
-    "pages/patType/patType"
-
+    "pages/patType/patType",
+    "pages/patType/patDetail/patDetail"
   ],
-  "window":{
-    "backgroundColor":"#ffffff",
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundColor": "#ffffff",
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#f8d98f",
     "navigationBarTitleText": "Wafer Quick Start",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "backgroundColor": "#ffffff",
-    "borderStyle":"white",
-    "color":"#999999",
+    "borderStyle": "white",
+    "color": "#999999",
     "selectedColor": "#f8d98f",
     "list": [
       {
         "pagePath": "pages/home/home",
-       "iconPath":"assets/img/tabBar/home.png",
-       "selectedIconPath":"assets/img/tabBar/home_fill.png",
+        "iconPath": "assets/img/tabBar/home.png",
+        "selectedIconPath": "assets/img/tabBar/home_fill.png",
         "text": "首页"
       },
       {
@@ -41,8 +41,8 @@
       },
       {
         "pagePath": "pages/me/me",
-       "iconPath": "assets/img/tabBar/user.png",
-       "selectedIconPath": "assets/img/tabBar/user_fill.png",
+        "iconPath": "assets/img/tabBar/user.png",
+        "selectedIconPath": "assets/img/tabBar/user_fill.png",
         "text": "我的"
       }
     ]

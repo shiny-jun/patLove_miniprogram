@@ -12,7 +12,7 @@ module.exports = async (ctx) => {
     if (animalId) {
         detail = await mysql('pattype').select().where('animalId', animalId)
     } else if (typeId) {
-        detail = await mysql('pattype').select().where('typeId', typeId).first()
+        detail = await mysql('pattype').select().where('typeId', typeId)
     } 
     ctx.state.data = {
         list: detail

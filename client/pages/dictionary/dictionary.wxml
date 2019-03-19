@@ -1,7 +1,7 @@
 <!--pages/dictionary/dictionary.wxml-->
 <view class="icon-list flex">
   <view class='icon' wx:for="{{types}}" wx:key="animal" bindtap="gopattype" data-id="{{item.animalId}}">
-    <view class='background' style='background-color:#ceacd1;'>
+    <view class='background' style='background-color:{{item.color}};'>
       <image src="/assets/img/pat/{{item.animalName}}.png" mode='widthFix'></image>
     </view>
     <view class='name'>{{item.chineseName}}</view>

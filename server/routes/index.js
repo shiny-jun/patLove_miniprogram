@@ -38,4 +38,6 @@ router.get('/swiperlist', controllers.swiperlist)
 router.get('/animallist', controllers.animallist)
 // get:patlist
 router.get('/patlist', controllers.patlist)
+// get:patDetail
+router.get('/patDetail', controllers.patDetail)
 module.exports = router

@@ -10,4 +10,7 @@
       </block>
     </current>
   </view>
+  <view class="btn-wrapper">
+    <view class="btn">+</view>
+  </view>
 </view>

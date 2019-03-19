@@ -1,5 +1,5 @@
 <!--components/patItem.wxml-->
-<view class="pat-item">
+<view class="pat-item" bindtap='goPatDetail'>
     <view class="">
         {{itemMsg.patName}}
     </view>

@@ -18,6 +18,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    goPatDetail(){
+      wx.navigateTo({
+        url: '/pages/patType/patDetail/patDetail?typeId=' + this.data.itemMsg.typeId,
+      })
+      
+    }
   }
 })

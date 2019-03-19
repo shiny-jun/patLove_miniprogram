@@ -1,7 +1,7 @@
 <!-- pages/patType/patType.wxml -->
 <view class="patType-wrapper page" bindtap="goPatDetail">
     <view wx:if="{{types.length}}" class="patType">
-        <block wx:for="{{types}}">
+        <block wx:for="{{types}}" wx:key="types">
             <patItem itemMsg="{{item}}"></patItem>
         </block>
     </view>
