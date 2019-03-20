@@ -1,21 +1,18 @@
-// pages/home/home.js
-import { get } from "../../utils/index.js";
-const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
+// pages/addArtical/addArtical.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    types: []
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showNavigationBarLoading();
-    this.getSwiperList()
+
   },
 
   /**
@@ -66,18 +63,7 @@ Page({
   onShareAppMessage: function () {
 
   },
-  // 获取types列表的数据
-  async getSwiperList(){
-    const types = await get("/weapp/swiperlist", {});
-    console.log(types)
-    this.setData({
-      types:types.list
-    })
-    wx.hideNavigationBarLoading();
-  },
-  addArticalPage(){
-    wx.navigateTo({
-      url: '/pages/addArtical/addArtical',
-    })
+  formSubmit(e) {
+    console.log('form发生了submit事件，携带数据为：', e.detail.value)
   }
 })

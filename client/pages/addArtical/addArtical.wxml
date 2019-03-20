@@ -1,0 +1,19 @@
+<!-- pages/addArtical/addArtical.wxml -->
+<view class="addArtical-wrapper">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <view class="title">
+      <input name="input" placeholder="来个很酷的标题让大家能搜到文章" />
+    </view>
+    <view class="content">
+      <textarea placeholder="铲屎官在这里写下感想……" placeholder-style="width:100%; font-size:14px;" maxlength='1000' />
+    </view>
+    <view class='images'>
+      <view class='add-pic'>
+        <image src='/assets/img/get-pic.png' mode="widthFix"></image>
+      </view>
+      <view class='add-pic-btn'>
+        <image class='' src='/assets/img/get-pic.png' mode="widthFix"></image>
+      </view>
+    </view>
+  </form>
+</view>

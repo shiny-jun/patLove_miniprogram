@@ -10,7 +10,7 @@
       </block>
     </current>
   </view>
-  <view class="btn-wrapper">
+  <view class="btn-wrapper" bindtap='addArticalPage'>
     <view class="btn">+</view>
   </view>
 </view>
