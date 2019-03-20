@@ -1,5 +1,6 @@
 {
   "usingComponents": {
     "patItem":"/components/patItem/patItem"
-  }
+  },
+  "navigationBarTitleText": "宠物列表"
 }
