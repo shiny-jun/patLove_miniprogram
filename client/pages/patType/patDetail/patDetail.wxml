@@ -1,2 +1,8 @@
-<!--client/pages/patType/patDetail/patDetail.wxml-->
-<text>client/pages/patType/patDetail/patDetail.wxml</text>
+<view class='content'>
+  <image class='head-img' src='{{detail.imgSrc}}' mode='widthFix' />
+  <view class='name'>{{detail.patName}}({{detail.EnglishName||""}})</view>
+  <view class='yard-text' wx:if='{{detail.otherName}}'>别名：{{detail.otherName}}</view>
+  <view class='yard-text' wx:if='{{detail.country}}'>产地：{{detail.country}}</view>
+  <view class='yard-text '>寿命：{{detail.lifeend}}年</view>
+  <view class='desc'>{{detail.info}}</view>
+</view>

@@ -1,1 +1,23 @@
-/* components/patItem.wxss */
+.pat-item{
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 30rpx;
+  width: 100%;
+  position: relative;
+}
+.head-img{
+  width: 100%;
+  border-radius: 15rpx;
+}
+.name{
+  color: #333;
+  font-size: 34rpx;
+  line-height: 60rpx;
+}
+.yard-text{
+  color: #999;
+  font-size: 30rpx;
+  line-height: 50rpx;
+  margin-bottom: 10rpx;
+}
