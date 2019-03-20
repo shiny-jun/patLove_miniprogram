@@ -1,2 +1,4 @@
 <!--pages/searchPage/searchPage.wxml-->
-<text>pages/searchPage/searchPage.wxml</text>
+<view class="search-wrapper" >
+    <searchBar canuse="true"></searchBar>
+</view>

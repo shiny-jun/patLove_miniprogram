@@ -30,16 +30,16 @@
     padding-top: 8rpx;
 }
 
-.bar .bar-wrapper .icon-search {
+.bar-wrapper .icon-search {
     position: absolute;
-    color: #a5a5a5;
+    color: #999999;
     font-size: 36rpx;
     left: 20rpx;
 }
 
-.bar .bar-wrapper .icon-del2 {
+.bar-wrapper .icon-del2 {
     position: absolute;
-    color: #bebebe;
+    color: #999999;
     font-size: 28rpx;
     top: 0;
     right: 20rpx;
