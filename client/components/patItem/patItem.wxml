@@ -1,15 +1,12 @@
 <!--components/patItem.wxml-->
 <view class="pat-item" bindtap='goPatDetail'>
-    <view class="">
-        {{itemMsg.patName}}
+    <view class="name">
+        {{itemMsg.patName}}({{itemMsg.EnglishName||""}})
     </view>
-    <view class="">
-        别名：{{itemMsg.EnglishName}}
-    </view>
-    <view class="">
+    <view class="yard-text">
         别名：{{itemMsg.otherName}}
     </view>
-    <image class="" src="{{itemMsg.imgSrc}}" mode="widthFix">
+    <image class="head-img" src="{{itemMsg.imgSrc}}" mode="widthFix">
         
     </image>
 </view>

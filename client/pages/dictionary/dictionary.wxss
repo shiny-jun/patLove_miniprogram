@@ -29,6 +29,7 @@
 }
 .background>image {
   width: 50%;
+  height: 150rpx;
   vertical-align: middle;
 }
 .name{
