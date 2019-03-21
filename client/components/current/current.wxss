@@ -1,7 +1,4 @@
 /* components/current/current.wxss */
-.current {
-    height: calc(100vh - 80rpx);
-}
 
 .scroll {
     width: 100%;

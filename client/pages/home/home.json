@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "searchBar":"/components/searchBar/searchBar",
-    "current":"/components/current/current"
+    "current":"/components/current/current",
+    "acticalItem":"/components/acticalItem/acticalItem"
   }
 }

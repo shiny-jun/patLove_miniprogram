@@ -1,4 +1,4 @@
-<!--pages/me/me.wxml-->
+<!-- pages/me/me.wxml -->
 <view class="container">
   <!-- 用户登录测试 -->
   <view class='head'>
@@ -38,9 +38,7 @@
           <text>哈奇士</text>
         </view>
       </view>
-      <view class='Introduction'>
-        hello,欢迎光临
-      </view>
+      <view class='Introduction'>hello,欢迎光临</view>
     </view>
   </view>
   <view class="content">
@@ -50,16 +48,46 @@
       </view>
       <view class="{{current==2?'active':''}} btn" data-current='2' bindtap='changeCurrent'>
         <view>收藏</view>
+      </view>
+    </view>
+    <view class="" hover-class="none" hover-stop-propagation="false">
+        <view class="masonry">
+          <view class="item item-left">
+            1
+            <acticalItem></acticalItem>
+          </view>
+          <view class="item item-left">
+            2
+            <acticalItem></acticalItem>
+          </view>
+          <view class="item item-left">
+            3
+            <acticalItem></acticalItem>
+          </view>
+          <view class="item item-right">
+            4
+            <acticalItem></acticalItem>
+          </view>
+          <view class="item item-right">
+            5
+            <acticalItem></acticalItem>
+          </view>
+          <view class="item item-right">
+            6
+            <acticalItem></acticalItem>
+          </view>
+        </view>
     </view>
   </view>
-</view>
-<view class="authorize-window" wx:if="{{!userInfo.openId}}">
-  <view class="window-wrapper">
-    <view class="win-tips">授权提示</view>
-    <view class="win-content">
-      <view class="text">由于需要获取你的头像昵称，请点击下方进行授权</view>
-      <button class='get-authorize' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">去授权</button>
+  <view class="authorize-window" wx:if="{{!userInfo.openId}}">
+    <view class="window-wrapper">
+      <view class="win-tips">授权提示</view>
+      <view class="win-content">
+        <view class="text">由于需要获取你的头像昵称，请点击下方进行授权</view>
+        <button class='get-authorize' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">
+          去授权
+        </button>
+      </view>
     </view>
   </view>
-</view>
 </view>

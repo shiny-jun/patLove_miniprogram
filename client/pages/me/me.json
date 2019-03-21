@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "acticalItem":"/components/acticalItem/acticalItem"
+
+  }
 }

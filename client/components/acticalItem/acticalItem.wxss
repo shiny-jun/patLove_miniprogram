@@ -1,0 +1,59 @@
+/* components/acticalItem/acticalItem.wxss */
+@import "/assets/img/font/iconfont.wxss";
+
+.actical-item-wrapper{
+    width: 100%;
+    border: 10rpx;
+    background-color: #fff;
+    box-shadow: 0px 0px 2px 0px rgba(65, 47, 141, 0.1);
+    border-radius: 10rpx;
+    overflow: hidden;
+}
+.image{
+    width: 100%;
+    font-size: 0;
+}
+.image image{
+    width: 100%;
+}
+.content{
+    padding: 10rpx;
+
+}
+.title{
+    font-size: 28rpx;
+    padding-bottom: 16rpx;
+}
+
+.flex{
+    display: flex;
+}
+.bottom{
+    font-size: 24rpx;
+}
+.left{
+    flex: 1;
+    display: flex;
+    height: 40rpx;
+    line-height: 40rpx;
+}
+.avatar image{
+    width: 100%;
+}
+.avatar{
+    display: flex;
+    align-items: center;
+    margin-right: 10rpx;
+    width: 40rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.right{
+    flex: 1;
+    text-align: right;
+    height: 40rpx;
+    line-height: 40rpx;
+}
+

@@ -1,14 +1,41 @@
 <!-- pages/home/home.wxml -->
 <view class='page'>
   <view class='top'>
-    <searchBar canuse="false"></searchBar>
-    <current types="{{types}}">
-      <block wx:for="{{types}}" wx:key="unique">
-        <view slot="{{item.value}}">
-          <view>1{{item.name}}</view>
+    <searchBar canuse="{{false}}"></searchBar>
+    <current types="{{types}}"></current>
+    <view class="actical-wrapper">
+      <block wx:key="unique">
+        <view>
+          <view class="masonry">
+            <view class="item item-left">
+              1
+              <acticalItem></acticalItem>
+            </view>
+            <view class="item item-left">
+              2
+              <acticalItem></acticalItem>
+            </view>
+            <view class="item item-left">
+              3
+              <acticalItem></acticalItem>
+            </view>
+            <view class="item item-right">
+              4
+              <acticalItem></acticalItem>
+            </view>
+            <view class="item item-right">
+              5
+              <acticalItem></acticalItem>
+            </view>
+            <view class="item item-right">
+              6
+              <acticalItem></acticalItem>
+            </view>
+          </view>
         </view>
       </block>
-    </current>
+      
+    </view>
   </view>
   <view class="btn-wrapper" bindtap='addArticalPage'>
     <view class="btn">+</view>

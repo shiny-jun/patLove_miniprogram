@@ -1,4 +1,16 @@
-<!--pages/searchPage/searchPage.wxml-->
-<view class="search-wrapper" >
-    <searchBar canuse="true"></searchBar>
+<!-- pages/searchPage/searchPage.wxml -->
+<view class="search-wrapper">
+    <searchBar canuse="{{true}}" bindhandleInput="handleInput"></searchBar>
+    <view class="content">
+        <view class="title">
+            历史记录
+        </view>
+        <view class="history-wrapper">
+            <block wx:for="{{historys}}" wx:key="history">
+                <view class="history-item">
+                    {{item}}
+                </view>
+            </block>
+        </view>
+    </view>
 </view>

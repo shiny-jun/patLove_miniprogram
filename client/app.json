@@ -1,13 +1,14 @@
 {
   "pages": [
-    "pages/searchPage/searchPage",
     "pages/home/home",
+    "pages/searchPage/searchPage",
     "pages/addArtical/addArtical",
     "pages/msg/msg",
     "pages/dictionary/dictionary",
     "pages/me/me",
     "pages/patType/patType",
-    "pages/patType/patDetail/patDetail"
+    "pages/patType/patDetail/patDetail",
+    "pages/articalList/articalList"
   ],
   "window": {
     "backgroundColor": "#ffffff",

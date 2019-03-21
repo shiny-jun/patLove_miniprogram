@@ -9,3 +9,29 @@
 .page{
   background-color: #f5f5f5;
 }
+.masonry {
+  column-count: 2;
+  column-gap: 0;
+}
+
+.item {
+  break-inside: avoid;
+  box-sizing: border-box;
+  padding: 20rpx;
+  
+}
+.item-left {
+  padding-right: 10rpx;
+  padding-top: 0rpx;
+}
+.item-left:first-child {
+  padding-top: 20rpx;
+}
+.item-right:first-child{
+  padding-bottom: 20rpx;
+}
+.item-right{
+  padding-left: 10rpx;
+  padding-bottom: 0rpx;
+
+}
