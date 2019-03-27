@@ -1,5 +1,7 @@
 // pages/home/home.js
-import { get } from "../../utils/index.js";
+import {
+  get
+} from "../../utils/index.js";
 const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
 Page({
 
@@ -7,7 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    types: []
+    types: [],
+    currentVal: ''
   },
 
   /**
@@ -16,6 +19,13 @@ Page({
   onLoad: function (options) {
     wx.showNavigationBarLoading();
     this.getSwiperList()
+    let userInfoStr = wx.getStorageSync('userInfo')
+    if (userInfoStr) {
+      let userInfo = JSON.parse(userInfoStr)
+      this.setData({
+        userInfo: userInfo,
+      })
+    }
   },
 
   /**
@@ -67,17 +77,57 @@ Page({
 
   },
   // 获取types列表的数据
-  async getSwiperList(){
+  async getSwiperList() {
+    console.log(1)
     const types = await get("/weapp/swiperlist", {});
     console.log(types)
     this.setData({
-      types:types.list
+      types: types.list,
+      currentVal: types.list[0].value
     })
+    this.getArticalList()
     wx.hideNavigationBarLoading();
   },
-  addArticalPage(){
+  addArticalPage() {
     wx.navigateTo({
       url: '/pages/addArtical/addArtical',
     })
-  }
+  },
+  currentChange(e){
+    let currentVal = e.detail
+    this.setData({
+      currentVal
+    })
+    this.getArticalList()
+  },
+  //获取文章列表
+  async getArticalList() {
+    console.log(2)
+    let params = {}
+    if (this.data.currentVal == 'follow') {
+      if (this.data.userInfo.openId) {
+        params = {
+          value: this.data.currentVal,
+          openId: this.data.userInfo.openId
+        }
+      } else {
+        this.setData({
+          artical: []
+        })
+        return
+      }
+    } else {
+      params = {
+        value: this.data.currentVal,
+      }
+    }
+    const artical = await get("/weapp/articalList", 
+      params
+    );
+    console.log(artical)
+    this.setData({
+      artical: artical.list
+    })
+    wx.hideNavigationBarLoading();
+  },
 })

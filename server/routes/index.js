@@ -40,4 +40,6 @@ router.get('/animallist', controllers.animallist)
 router.get('/patlist', controllers.patlist)
 // get:patDetail
 router.get('/patDetail', controllers.patDetail)
+// get:articalList
+router.get('/articalList', controllers.articalList)
 module.exports = router

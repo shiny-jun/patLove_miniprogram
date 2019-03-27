@@ -1,23 +1,31 @@
 .pat-item{
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   box-sizing: border-box;
-  padding: 30rpx;
+  padding: 20rpx;
   width: 100%;
   position: relative;
+}
+.left{
+  flex: 1;
+  margin-right: 20rpx;
+}
+.right{
+  flex: 2;
 }
 .head-img{
   width: 100%;
   border-radius: 15rpx;
+  float: left;
 }
 .name{
   color: #333;
-  font-size: 34rpx;
-  line-height: 60rpx;
+  font-size: 28rpx;
+  line-height: 50rpx;
 }
 .yard-text{
   color: #999;
-  font-size: 30rpx;
-  line-height: 50rpx;
+  font-size: 26rpx;
+  line-height: 40rpx;
   margin-bottom: 10rpx;
 }

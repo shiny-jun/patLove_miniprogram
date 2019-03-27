@@ -10,6 +10,7 @@
     margin-top: 30rpx;
 }
 .item{
+    position: relative;
     border-bottom: 1rpx solid #eeeeee;
     height: 68rpx;
     line-height: 68rpx;
@@ -22,6 +23,7 @@
     border-bottom:none;
 }
 .item .icon-right{
-    float: right;
+    position: absolute;
+    right: 20rpx;
     font-size: 24rpx;
 }

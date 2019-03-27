@@ -2,7 +2,7 @@
 <view class='page'>
   <view class='top'>
     <searchBar canuse="{{false}}"></searchBar>
-    <current types="{{types}}"></current>
+    <current types="{{types}}" bindcurrentChange="currentChange"></current>
     <view class="actical-wrapper">
       <block wx:key="unique">
         <view>

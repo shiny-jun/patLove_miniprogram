@@ -1,12 +1,10 @@
-<!--components/patItem.wxml-->
+<!-- components/patItem.wxml -->
 <view class="pat-item" bindtap='goPatDetail'>
-    <view class="name">
-        {{itemMsg.patName}}({{itemMsg.EnglishName||""}})
+    <view class="left" hover-class="none" hover-stop-propagation="false">
+        <image class="head-img" src="{{itemMsg.imgSrc}}" mode="widthFix"></image>
     </view>
-    <view class="yard-text">
-        别名：{{itemMsg.otherName}}
+    <view class="right" hover-class="none" hover-stop-propagation="false">
+        <view class="name">{{itemMsg.patName}}({{itemMsg.EnglishName||""}})</view>
+        <view class="yard-text">别名：{{itemMsg.otherName}}</view>
     </view>
-    <image class="head-img" src="{{itemMsg.imgSrc}}" mode="widthFix">
-        
-    </image>
 </view>

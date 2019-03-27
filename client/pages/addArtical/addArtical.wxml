@@ -15,5 +15,10 @@
         <image class='' src='/assets/img/get-pic.png' mode="widthFix"></image>
       </view>
     </view>
+    <view class='pat'>
+      <view class='btn'>选择爱宠
+        <text>+</text>
+      </view>
+    </view>
   </form>
 </view>

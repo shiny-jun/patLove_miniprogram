@@ -70,6 +70,7 @@ Page({
   async getPatList(typeId) {
     const types = await get("/weapp/patlist", { typeId });
     console.log(types)
+    types.list.info.replace(/<br\/\>/g, "\n")
     this.setData({
       detail: types.list
     })
