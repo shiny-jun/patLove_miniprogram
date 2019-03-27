@@ -4,5 +4,5 @@
   <view class='yard-text' wx:if='{{detail.otherName}}'>别名：{{detail.otherName}}</view>
   <view class='yard-text' wx:if='{{detail.country}}'>产地：{{detail.country}}</view>
   <view class='yard-text '>寿命：{{detail.lifeend}}年</view>
-  <view class='desc'>{{detail.info}}</view>
+  <text class='desc'>{{detail.info}}</text>
 </view>
