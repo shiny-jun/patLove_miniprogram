@@ -18,7 +18,7 @@ module.exports = async (ctx) => {
             followers = await mysql('followlist').select('following').where('openId', openId)
             console.log(followers)
             sql = mysql('articallist').select().where('openId', openId)
-            for(i=0;i<followers.length;i++){
+            for (i = 0; i < followers.length; i++) {
                 sql = sql.orWhere('openId', followers[i].following)
             }
             detail = await sql
@@ -27,21 +27,14 @@ module.exports = async (ctx) => {
         }
     } else if (openId) {
         detail = await mysql('articallist').select().where('openId', openId)
-    } else if(articalId){
-        detail = await mysql('articallist').select().where('articalId',articalId)
+    } else if (articalId) {
+        detail = await mysql('articallist').select().where('articalId', articalId)
     }
-    if(detail.length){
-        detail.forEach(item => {
-            let imgs
-            imgs = await mysql('imglist').select('imgSrc').where('articalId', item.articalId)
-            // let images = []
-            // if(imgs.length){
-            //     imgs.forEach(item2=>{
-            //         images.push(item2.imgSrc)
-            //     })
-            // }
-            item.images = imgs
-        });
+    if (detail.length) {
+        for(i=0;i<detail.length;i++){
+            let imgs = await mysql('imglist').select('imgSrc').where('articalId', detail[i].articalId)
+            detail[i].images = imgs
+        }
     }
     ctx.state.data = {
         list: detail
