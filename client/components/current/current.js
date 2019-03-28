@@ -13,7 +13,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    currentTab: 0
+    currentValue: 'recommend'
   },
 
   /**
@@ -22,13 +22,9 @@ Component({
   methods: {
     changeCurrentTab(e) {
       this.setData({
-        currentTab : e.currentTarget.dataset.index
+        currentValue : e.currentTarget.dataset.val
       })
-    },
-    bindchangeCurrent(e) {
-      this.setData({
-        currentTab : e.detail.current
-      })
+      this.triggerEvent('currentChange',e.currentTarget.dataset.val)
     },
   }
 })

@@ -2,7 +2,7 @@
 <view class="current">
     <view class="scroll">
         <scroll-view class="scroll-view_H" scroll-x style="width: 100%">
-            <view wx:for="{{types}}" wx:key="unique" class="scroll-item" style="color:{{currentTab==index?'#555555':'#bbbbbb'}}" bindtap="changeCurrentTab" data-index="{{index}}">
+            <view wx:for="{{types}}" wx:key="unique" class="scroll-item" style="color:{{currentValue==item.value?'#555555':'#bbbbbb'}}" bindtap="changeCurrentTab" data-val="{{item.value}}">
                 {{item.name}}
             </view>
         </scroll-view>
