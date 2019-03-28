@@ -8,6 +8,7 @@
     "pages/me/me",
     "pages/patType/patType",
     "pages/patType/patDetail/patDetail",
+    "pages/createPatData/createPatData",
     "pages/articalList/articalList"
   ],
   "window": {

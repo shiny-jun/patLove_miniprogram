@@ -79,5 +79,10 @@ Page({
     this.setData({
       current: e.currentTarget.dataset.current
     })
-  }
+  },
+  gotoCreatePatData(){
+    wx.navigateTo({
+      url: '../createPatData/createPatData',
+    })
+  },
 })

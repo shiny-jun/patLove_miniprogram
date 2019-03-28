@@ -1,0 +1,92 @@
+.contant {
+  display: flex;
+  flex-direction: column;
+  margin: 30rpx;
+  position: relative;
+}
+
+.name-input {
+  font-size: 50rpx;
+  margin-bottom: 30rpx;
+  width: 70%;
+}
+
+.data-item {
+  display: flex;
+  flex-direction: row;
+  height: 80rpx;
+  align-items: center;
+  font-size: 28rpx;
+}
+
+.data-name {
+  font-size: 30rpx;
+  margin-right: 15rpx;
+  color: #333;
+}
+
+.select-item{
+  border: 1rpx #999 solid;
+  font-size: 28rpx;
+  color: #999;
+  border-radius: 50rpx;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120rpx;
+  height: 50rpx;
+  margin-right: 30rpx;
+}
+
+.selected{
+  background-color: #999;
+  color: white;
+}
+
+.weight-input{
+  width: 80rpx;
+  margin-right: 15rpx;
+}
+
+.sign-input{
+  height: 300rpx;
+  margin: 30rpx 0;
+  font-size: 30rpx;
+}
+.picker-text{
+  font-size: 30rpx;
+  color: #999;
+}
+.func{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column
+}
+.save{
+  width: 500rpx;
+  height: 70rpx;
+  background-color:  mediumvioletred;
+  color: white;
+  font-size: 30rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30rpx;
+  border-radius: 50rpx;
+}
+.tips{
+  font-size: 28rpx;
+  color: #333;
+}
+.head{
+  background-color: #999;
+  position: absolute;
+  top: 50rpx;
+  right: 40rpx;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+}

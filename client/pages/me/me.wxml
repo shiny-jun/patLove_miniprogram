@@ -22,7 +22,7 @@
           </view>
         </view>
         <view class='flex btn-wrapper'>
-          <view class='btn btn-msg'>编辑资料</view>
+          <view class='btn btn-msg' bindtap='gotoCreatePatData'>编辑资料</view>
           <view class='btn btn-msg'>我的宠物</view>
           <view class='btn setting'>
             <icon class='iconfont icon-shezhi'></icon>

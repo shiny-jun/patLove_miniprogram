@@ -1,0 +1,43 @@
+<view class='contant'>
+  <input class='name-input' bindinput='dataInput' data-type='name' value='{{form.name}}' placeholder='请输入主子的昵称' />
+
+  <view class='data-item'>
+    <view class='data-name'>种类：</view>
+    <view class='select-item' bindtap='patSelect'>{{form.type ? form.type:"请选择"}}</view>
+  </view>
+
+  <view class='data-item'>
+    <view class='data-name'>性别：</view>
+    <view class='select-item {{form.sex == "boy" ? "selected":""}}' bindtap='dataChoose' data-type='sex' data-key='boy'>男</view>
+    <view class='select-item {{form.sex == "girl" ? "selected":""}}' bindtap='dataChoose' data-type='sex' data-key='girl'>女</view>
+  </view>
+
+  <view class='data-item'>
+    <view class='data-name'>生日：</view>
+    <picker mode='date' start='2017-01-01' bindchange='dateChange' value='{{form.brithday}}'>
+      <view class='picker-text'>{{form.brithday ? form.brithday : "请选择主子生日"}}</view>
+    </picker>
+  </view>
+
+  <view class='data-item'>
+    <view class='data-name'>体重：</view>
+    <input class='weight-input' bindinput='dataInput' data-type='weight' value='{{form.weight}}' maxlength='5' type='digit' placeholder='体重' />Kg
+  </view>
+
+  <view class='data-item'>
+    <view class='data-name'>是否已绝育：</view>
+    <view class='select-item {{form.isUnbrith ? "selected":""}}' bindtap='dataChoose' data-type='isUnbrith' data-key='{{true}}'>是</view>
+    <view class='select-item {{form.isUnbrith ? "":"selected"}}' bindtap='dataChoose' data-type='isUnbrith' data-key='{{false}}'>否</view>
+  </view>
+
+  <view class='data-name'>个性签名：</view>
+  <textarea class='sign-input' bindinput='dataInput' data-type='signText' value='{{form.signText}}' placeholder='有啥特点~' />
+
+</view>
+
+<view class='func'>
+<view class='save'>保存</view>
+<view class='tips'>不爱我的话不仅会被我抱起来亲亲，还会打你的屁股哟</view>
+</view>
+
+<image class='head' />
