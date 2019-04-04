@@ -7,29 +7,13 @@
       <block wx:key="unique">
         <view>
           <view class="masonry">
-            <view class="item item-left">
-              1
-              <acticalItem></acticalItem>
+            <view class="item item-left" wx:for="{{articals}}" wx:if="{{index % 2 == 0}}" wx:key="left">
+              {{index}}
+              <acticalItem artical="{{item}}"></acticalItem>
             </view>
-            <view class="item item-left">
-              2
-              <acticalItem></acticalItem>
-            </view>
-            <view class="item item-left">
-              3
-              <acticalItem></acticalItem>
-            </view>
-            <view class="item item-right">
-              4
-              <acticalItem></acticalItem>
-            </view>
-            <view class="item item-right">
-              5
-              <acticalItem></acticalItem>
-            </view>
-            <view class="item item-right">
-              6
-              <acticalItem></acticalItem>
+            <view class="item item-right" wx:for="{{articals}}" wx:if="{{index % 2 == 1}}" wx:key="right">
+              {{index}}
+              <acticalItem artical="{{item}}"></acticalItem>
             </view>
           </view>
         </view>

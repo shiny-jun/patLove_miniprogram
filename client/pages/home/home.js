@@ -10,7 +10,11 @@ Page({
    */
   data: {
     types: [],
-    currentVal: ''
+    articals:[],
+    currentVal: '',
+    count:null,
+    pageSize:2,
+    pageNo:0, // 从0开始
   },
 
   /**
@@ -26,6 +30,7 @@ Page({
         userInfo: userInfo,
       })
     }
+    // this.getArticalList()
   },
 
   /**
@@ -83,7 +88,7 @@ Page({
     console.log(types)
     this.setData({
       types: types.list,
-      currentVal: types.list[0].value
+      currentVal: types.list[0].value,
     })
     this.getArticalList()
     wx.hideNavigationBarLoading();
@@ -121,12 +126,14 @@ Page({
         value: this.data.currentVal,
       }
     }
-    const artical = await get("/weapp/articalList", 
+    params.pageSize = this.data.pageSize
+    params.pageNo = this.data.pageNo
+    const articals = await get("/weapp/articalList", 
       params
     );
-    console.log(artical)
+    console.log(articals)
     this.setData({
-      artical: artical.list
+      articals: articals.list
     })
     wx.hideNavigationBarLoading();
   },
