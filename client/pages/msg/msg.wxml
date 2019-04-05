@@ -3,19 +3,19 @@
     <view class="item-wrapper">
         <view class="item">
             <icon class="iconfont icon-pinglun"></icon>
-            <text class="">评论</text>
+            <text class="item-desc">评论</text>
             <icon class="iconfont icon-right"></icon>
         </view>
         <view class="item">
             <icon class="iconfont icon-zan2"></icon>
-            <text class="">点赞</text>
+            <text class="item-desc">点赞</text>
             <icon class="iconfont icon-right"></icon>
         </view>
     </view>
     <view class="item-wrapper">
         <view class="item">
             <icon class="iconfont icon-xitongxiaoxi"></icon>
-            <text class="">系统消息</text>
+            <text class="item-desc">系统消息</text>
             <icon class="iconfont icon-right"></icon>
         </view>
     </view>

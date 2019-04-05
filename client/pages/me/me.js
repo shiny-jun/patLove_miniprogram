@@ -43,6 +43,7 @@ Page({
             logged: true
           })
           util.showSuccess('登录成功')
+          //todo:登录成功后，需要通过openId去获取本用户在本服务器的个人资料，宠物资料等
           console.log(res)
           let userInfoStr = JSON.stringify(res)
           console.log(userInfoStr)
@@ -62,6 +63,7 @@ Page({
             logged: true
           })
           util.showSuccess('登录成功')
+          //todo：首次登录，应该吧资料上传到我们本地服务器。配置一些默认资料，如个性签名
           console.log(res)
           let userInfoStr = JSON.stringify(res)
           console.log(userInfoStr)
@@ -85,4 +87,9 @@ Page({
       url: '../createPatData/createPatData',
     })
   },
+  gotoUserDataEdit(){
+    wx.navigateTo({
+      url: `../userDataEdit/userDataEdit`,
+    }) 
+  }
 })

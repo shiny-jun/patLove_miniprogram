@@ -131,10 +131,10 @@ Page({
     const articals = await get("/weapp/articalList", 
       params
     );
-    console.log(articals)
-    this.setData({
-      articals: articals.list
-    })
+    // console.log(articals)
+    // this.setData({
+    //   articals: articals.list
+    // })
     wx.hideNavigationBarLoading();
   },
 })

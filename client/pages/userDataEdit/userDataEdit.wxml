@@ -1,0 +1,35 @@
+<view class='data-item flex-between' bindtap='changeAvatar'>
+  <image class='data-img' mode='widthFix' src='{{userInfo.avatarUrl}}' />
+  <icon class="iconfont icon-right"></icon>
+</view>
+
+<view class='data-item'>
+  <view class='data-name'>昵称</view>
+  <input class='data-input' value='{{userInfo.nickName}}' bindinput='datainput' data-type='nickName' />
+</view>
+
+<view class='data-item'>
+  <view class='data-name'>性别</view>
+  <picker class='data-input' bindchange="pickChange" data-type='gender' value="{{index}}" range="{{sexArray}}">
+    <view class="picker">
+      {{sexArray[userInfo.gender]}}
+    </view>
+  </picker>
+</view>
+
+
+<view class='data-item'>
+  <view class='data-name'>生日</view>
+  <picker class='data-input' mode='date' data-type='brithday' bindchange="pickChange">
+    <view class="picker">
+      {{userInfo.brithday || "暂未填写"}}
+    </view>
+  </picker>
+</view>
+
+<view class='data-item'>
+  <view class='data-name'>个性签名</view>
+  <textarea class='data-textarea' value='{{userInfo.sign}}' bindinput='datainput' data-type='sign' />
+</view>
+
+<button class='submit' bindtap='save'>提交保存</button>

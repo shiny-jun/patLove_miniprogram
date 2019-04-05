@@ -38,3 +38,25 @@
   padding-bottom: 0rpx;
 
 }
+
+.flex-between{
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+
+.submit{
+  width: 500rpx;
+  border-radius: 50rpx;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100rpx;
+  background: linear-gradient(#f5bc36,#f8d98f);
+  color: #b49650;
+  border: 0;
+}
+.submit::after{
+  border: 0;
+}
