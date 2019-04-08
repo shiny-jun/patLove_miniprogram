@@ -1,7 +1,7 @@
 // pages/me/me.js
 var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
-var util = require('../../utils/util.js')
+import util from "../../utils/util";
 
 Page({
   data: {
@@ -12,6 +12,7 @@ Page({
     current:1
   },
   onLoad() {
+    new util(this);
     let userInfoStr = wx.getStorageSync('userInfo')
     if(userInfoStr){
       let userInfo = JSON.parse(userInfoStr)
@@ -28,7 +29,7 @@ Page({
   bindGetUserInfo() {
     if (this.data.logged) return
 
-    util.showBusy('正在登录')
+    this.showBusy('正在登录')
 
     const session = qcloud.Session.get()
 
@@ -42,7 +43,7 @@ Page({
             userInfo: res,
             logged: true
           })
-          util.showSuccess('登录成功')
+          this.showSuccess('登录成功')
           //todo:登录成功后，需要通过openId去获取本用户在本服务器的个人资料，宠物资料等
           console.log(res)
           let userInfoStr = JSON.stringify(res)
@@ -51,7 +52,7 @@ Page({
         },
         fail: err => {
           console.error(err)
-          util.showModel('登录错误', err.message)
+          this.showModel('登录错误', err.message)
         }
       })
     } else {
@@ -62,7 +63,7 @@ Page({
             userInfo: res,
             logged: true
           })
-          util.showSuccess('登录成功')
+          this.showSuccess('登录成功')
           //todo：首次登录，应该吧资料上传到我们本地服务器。配置一些默认资料，如个性签名
           console.log(res)
           let userInfoStr = JSON.stringify(res)
@@ -71,7 +72,7 @@ Page({
         },
         fail: err => {
           console.error(err)
-          util.showModel('登录错误', err.message)
+          this.showModel('登录错误', err.message)
         }
       })
     }

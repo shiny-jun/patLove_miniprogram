@@ -1,0 +1,158 @@
+
+var filters = {
+
+  getBracketsContext: function (str) {
+    if (str.indexOf('(') == -1 || str.indexOf(')') == -1) {
+      return ''
+    }
+    return str.slice(str.indexOf('(') + 1, str.indexOf(')'))
+  },
+
+
+  fuzzyData: function (str, start, end) {
+    if (!str) return
+    start = +start || 4
+    end = +end || 4
+    var startStr = str.slice(0, start)
+    var endStr = str.slice(str.length - end)
+    return startStr + '****' + endStr
+  },
+
+  formatRegions: function (regions, split) {
+    if (!regions) return null
+    return regions.join(split)
+  },
+
+  toFix: function (value) {
+    if (value === 0) {
+      return 0
+    }
+    if (!value) {
+      return ''
+    }
+    return value.toFixed(2) // 此处2为保留两位小数，保留几位小数，这里写几
+  },
+  toFixOne: function (value) {
+    var value = Math.abs(value);
+    if (value === 0) {
+      return 0
+    }
+    if (!value) {
+      return ''
+    }
+    return value.toFixed(1) // 此处2为保留两位小数，保留几位小数，这里写几
+  },
+  //逢三位转逗号
+  add_comma_toThousands: function (num) {
+    var num = (num || 0).toString();
+    var result = '';
+    while (num.length > 3) {
+      result = ',' + num.slice(-3) + result;
+      num = num.slice(0, num.length - 3);
+    }
+    if (num) { result = num + result; }
+    return result;
+  },
+  arrIncludes: function (arr, val) {
+    return arr.indexOf(val) !== -1
+  },
+  formatTime: function (timestamp) {
+    if (!timestamp) return ''
+    if (timestamp.indexOf(' ') > -1) {
+      var reg = getRegExp('-', 'g')
+      timestamp = timestamp.replace(reg, '/');
+    } else {
+      timestamp = +timestamp;
+    }
+    var curtime = Math.floor((getDate()).getTime() / 1000)
+    var passtime = Math.floor((getDate(timestamp)).getTime() / 1000)
+    if (((curtime - passtime) / 60) < 60) {
+      var minute = Math.floor((curtime - passtime) / 60)
+      if (minute < 1) {
+        return '刚刚'
+      } else {
+        return minute + '分钟前'
+      }
+    }
+    // 今天昨天前天凌晨0点
+    var todayStart = getDate(getDate().setHours(0, 0, 0, 0)) / 1000;
+    var yesterdayStart = todayStart - 86400;
+    var beforedayStart = yesterdayStart - 86400;
+    if (passtime - todayStart > 0) {
+      return getFullTime(timestamp)
+    } else if (passtime - yesterdayStart > 0) {
+      return '昨天 ' + getFullTime(timestamp)
+    } else if (passtime - beforedayStart > 0) {
+      return '前天 ' + getFullTime(timestamp)
+    }
+    return getFullDate(timestamp) + ' ' + getFullTime(timestamp)
+  },
+
+  formatDate: function (timestamp) {
+    var time = '';
+    for (var i = 0; i < timestamp.length; i++) {
+      if (timestamp[i] == ' ') {
+        return time
+      } else if (timestamp[i] == '-') {
+        time += '.'
+      } else {
+        time += timestamp[i]
+      }
+    }
+    return time
+  },
+  // 删除url的?xxxx参数串
+  deleteLinkQuery: function (url) {
+    if (!url) {
+      return ''
+    }
+    return url.split('?')[0]
+  },
+  // 配置项处理（有在数据库存成字符串的数组，特殊处理）
+  transJsonArrToStr: function (val) {
+    if (val == null) {
+      return ''
+    }
+    if ("Array" === val.constructor) {
+      return val.toString()
+    }
+    // 字符串类型数组, 包含 1.单引号或双引号 2.[ 时进行转换
+    if (
+      (val.indexOf("'") !== -1 || val.indexOf('"') !== -1)
+      && val.indexOf('[') !== -1
+    ) {
+      var reg = getRegExp("'", 'g');
+      val.indexOf("'") !== -1 && (val = val.replace(reg, '"'));
+      val = JSON.parse(val);
+      return val.slice(0, 4).join('\n');
+    }
+    return val
+  },
+  wrapByLeftBrackets: function (str) {
+    var idx = str.indexOf('(');
+    if (idx !== -1) {
+      return str.slice(0, idx) + '\n' + str.slice(idx);
+    }
+    return str
+  }
+}
+
+function getFullDate(timestamp) {
+  var time = getDate(timestamp)
+  // var Y = time.getFullYear()
+  var M = time.getMonth() + 1
+  var D = time.getDate()
+  // if (M < 10) M = '0' + M
+  // if (D < 10) D = '0' + D
+  // return Y + '-' + M + '-' + D
+  return M + '月' + D + '日'
+}
+
+function getFullTime(timestamp) {
+  var time = getDate(timestamp)
+  var H = time.getHours()
+  var M = time.getMinutes()
+  if (M < 10) M = '0' + M
+  return H + ':' + M
+}
+module.exports = filters

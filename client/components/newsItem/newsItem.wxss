@@ -1,0 +1,63 @@
+.item-view {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 180rpx;
+  box-sizing: border-box;
+  padding: 15rpx 30rpx;
+  background-color: white;
+  align-items: center;
+  border-bottom: 1rpx #e7e7e7 solid;
+}
+
+.avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+}
+
+.contant {
+  display: flex;
+  flex-direction: column;
+  width: 430rpx;
+  margin-right: 30rpx;
+}
+
+.contant-title {
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 30rpx;
+  margin-bottom: 20rpx;
+  width: 410rpx;
+}
+
+.contact-desc {
+  color: #999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 28rpx;
+  width: 410rpx;
+}
+
+.item-img {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.re-attention {
+  color: palevioletred;
+  background-color: white;
+  border: 1rpx palevioletred solid;
+  border-radius: 50rpx;
+  font-size: 30rpx;
+  width: 140rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  align-self:center;
+  justify-content: center
+}

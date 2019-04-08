@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "item-view":"/components/newsItem/newsItem"
+  },
   "navigationBarTitleText": "消息"
 }
