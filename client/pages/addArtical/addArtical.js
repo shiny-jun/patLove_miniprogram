@@ -31,26 +31,26 @@ Page({
       success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths
-        // let imageList = _this.data.imageList
-        // imageList.push(tempFilePaths)
-        // console.log(imageList)
-        // _this.setData({
-        //   imageList
-        // })
-        qiniuUploader.upload(filePath, (res) => {
-          that.setData({
-            'imageObject': res
-          });
-        }, (error) => {
-          console.error('error: ' + JSON.stringify(error));
-        },
-        null,// 可以使用上述参数，或者使用 null 作为参数占位符
-        (progress) => {
-          console.log('上传进度', progress.progress)
-            console.log('已经上传的数据长度', progress.totalBytesSent)
-            console.log('预期需要上传的数据总长度', progress.totalBytesExpectedToSend)
-        }, cancelTask => that.setData({cancelTask})
-        );
+        let imageList = _this.data.imageList
+        imageList.push(tempFilePaths)
+        console.log(imageList)
+        _this.setData({
+          imageList
+        })
+        // qiniuUploader.upload(filePath, (res) => {
+        //   that.setData({
+        //     'imageObject': res
+        //   });
+        // }, (error) => {
+        //   console.error('error: ' + JSON.stringify(error));
+        // },
+        // null,// 可以使用上述参数，或者使用 null 作为参数占位符
+        // (progress) => {
+        //   console.log('上传进度', progress.progress)
+        //     console.log('已经上传的数据长度', progress.totalBytesSent)
+        //     console.log('预期需要上传的数据总长度', progress.totalBytesExpectedToSend)
+        // }, cancelTask => that.setData({cancelTask})
+        // );
 
       }
     })
