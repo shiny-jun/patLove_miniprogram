@@ -119,13 +119,14 @@
 }
 .top-tab .btn{
   padding: 0 40rpx;
+  font-size: 32rpx;
   color: #999999;
 }
 .top-tab .active>view{
   color: #000000;
   padding-bottom: 2rpx;
   border-radius: 6rpx;
-  border-bottom: 8rpx solid #f8d98f;
+  border-bottom: 6rpx solid #f8d98f;
 }
 /* content-part */
 /* 弹窗样式 */
@@ -173,4 +174,14 @@
   background-color: #1aac1b;
   color: #fff;
   font-weight: bold;
+}
+
+.artical-wrapper{
+  margin: 20rpx;
+}
+.no-more{
+  text-align: center;
+  color: #999999;
+  font-size: 28rpx;
+  padding: 30rpx 0 60rpx;
 }

@@ -8,14 +8,16 @@
       <textarea placeholder="铲屎官在这里写下感想……" placeholder-style="width:100%; font-size:14px;" maxlength='1000' />
     </view>
     <view class='images'>
-      <view class='add-pic'>
-        <image src='/assets/img/get-pic.png' mode="widthFix"></image>
+      <view class='add-pic' wx:for="{{imageList}}" wx:key="images" bindtap="delImage" data-index="{{index}}">
+        <image src='{{item}}' mode="widthFix"></image>
       </view>
       <view class='add-pic-btn'>
-        <image class='' src='/assets/img/get-pic.png' mode="widthFix"></image>
+        <image class='' src='/assets/img/get-pic.png' mode="widthFix" bindtap="getImage"></image>
       </view>
     </view>
     <view class='pat'>
+      <view class="pat-name">aaa
+      </view>
       <view class='btn'>选择爱宠
         <text>+</text>
       </view>

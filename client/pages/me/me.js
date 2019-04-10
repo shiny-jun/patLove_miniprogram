@@ -1,27 +1,37 @@
 // pages/me/me.js
-var qcloud = require('../../vendor/wafer2-client-sdk/index')
-var config = require('../../config')
+let qcloud = require('../../vendor/wafer2-client-sdk/index')
+let config = require('../../config')
 import util from "../../utils/util";
-
+import {
+  get
+} from "../../utils/index.js";
+const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
 Page({
   data: {
     userInfo: {},
     logged: false,
     takeSession: false,
     requestResult: '',
-    current:1
+    current: 1,
+    noMore: false,
+    pageSize: 10,
+    pageNo: 0, // 从0开始
+    articals: []
   },
   onLoad() {
     new util(this);
     let userInfoStr = wx.getStorageSync('userInfo')
-    if(userInfoStr){
+    if (userInfoStr) {
       let userInfo = JSON.parse(userInfoStr)
       this.setData({
-        userInfo:userInfo,
-        logged:true
+        userInfo: userInfo,
+        logged: true
       })
       wx.setNavigationBarTitle({
         title: userInfo.nickName
+      })
+      this.getArticalList(userInfo.openId, () => {
+        this._doRefreshMasonry(this.data.articals)
       })
     }
   },
@@ -78,19 +88,63 @@ Page({
     }
   },
   // 用于切换current
-  changeCurrent(e){
+  changeCurrent(e) {
     this.setData({
       current: e.currentTarget.dataset.current
     })
   },
-  gotoCreatePatData(){
+  gotoCreatePatData() {
     wx.navigateTo({
       url: '../createPatData/createPatData',
     })
   },
-  gotoUserDataEdit(){
+  gotoUserDataEdit() {
     wx.navigateTo({
       url: `../userDataEdit/userDataEdit`,
-    }) 
+    })
+  },
+  //获取文章列表
+  async getArticalList(openId,fn) {
+    console.log(2)
+    let params = {
+      openId: openId,
+    }
+    params.pageSize = this.data.pageSize
+    params.pageNo = this.data.pageNo
+    const articals = await get("/weapp/articalList",
+      params
+    );
+    console.log(articals)
+    this.setData({
+      articals: articals.list
+    })
+    fn()
+    wx.hideNavigationBarLoading();
+  },
+  //瀑布流用到的函数
+  onReachBottom: function () {
+    if (!this.data.noMore) {
+      this.setData({
+        pageNo: this.data.pageNo + 1
+      })
+      this.getArticalList(userInfo.openId, () => {
+        this._doAppendMasonry(this.data.articals)
+      })
+    }
+  },
+
+  _doRefreshMasonry(items) {
+    this.masonryListComponent = this.selectComponent('#masonry');
+    this.masonryListComponent.start(items).then(() => {
+      console.log('refresh completed')
+    })
+  },
+
+  _doAppendMasonry(items) {
+    this.masonryListComponent = this.selectComponent('#masonry')
+    // 获取接口数据后使用瀑布流组件append方法，当append完成后调用then，是否可触底价在的标志位可以在这里处理
+    this.masonryListComponent.append(items).then(() => {
+      console.log('refresh completed')
+    })
   }
 })

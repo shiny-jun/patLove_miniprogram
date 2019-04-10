@@ -21,10 +21,19 @@
 
 .pat {
   /* padding:0 20rpx; */
+  display: flex;
+  align-items: middle;
   color: #fff;
   font-size: 28rpx;
+  height: 60rpx;
+  line-height: 60rpx;
 }
 
+.pat-name {
+  padding-right: 20rpx;
+  color: #999999;
+  font-size: 28rpx;
+}
 .pat .btn {
   width: 200rpx;
   border-radius: 30rpx;

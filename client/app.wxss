@@ -48,13 +48,13 @@
 .submit{
   width: 500rpx;
   border-radius: 50rpx;
-  height: 100rpx;
+  height: 80rpx;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 100rpx;
   background: linear-gradient(#f5bc36,#f8d98f);
-  color: #b49650;
+  color: #fff;
   border: 0;
 }
 .submit::after{

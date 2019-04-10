@@ -11,7 +11,7 @@ module.exports = async (ctx) => {
         pageSize,
         pageNo
     } = ctx.request.query
-    let detail,count = 0
+    let detail, count = 0
     if (!pageSize) {
         pageSize = 2
     }
@@ -22,26 +22,26 @@ module.exports = async (ctx) => {
         if (value == 'recommend') {
             count = await getCount('value')
             // detail = await mysql('articallist').select('articallist.*','imglist.imgSrc').join('imglist', 'articallist.articalId', 'imglist.articalId').orderBy('articallist.looked', 'desc').limit(10)
-            if(pageNo * pageSize>=count){
-                detail=[]
+            if (pageNo * pageSize >= count) {
+                detail = []
             } else {
                 detail = await mysql('articallist').select().orderBy('looked', 'desc').limit(pageSize).offset(pageNo * pageSize)
-            }   
+            }
         } else if (value == 'follow') {
-            followers = await mysql('followlist').select('following').limit(pageSize).offset(pageNo * pageSize).where('openId', openId)
+            followers = await mysql('followlist').select('following').where('openId', openId)
             console.log(followers)
-            count = await getCount('openId',openId,followers)
-            let sql = mysql('articallist').select().where('openId', openId)
+            count = await getCount('openId', openId, followers)
+            let sql = mysql('articallist').select().limit(pageSize).offset(pageNo * pageSize).where('openId', openId)
             for (i = 0; i < followers.length; i++) {
                 sql = sql.orWhere('openId', followers[i].following)
             }
             detail = await sql
         } else {
-            count = await getCount('value',value)
+            count = await getCount('value', value)
             detail = await mysql('articallist').select().where('animalvalue', value).limit(pageSize).offset(pageNo * pageSize)
         }
     } else if (openId) {
-        count = await getCount('openId',openId)
+        count = await getCount('openId', openId)
         detail = await mysql('articallist').select().where('openId', openId).limit(pageSize).offset(pageNo * pageSize)
     } else if (articalId) {
         detail = await mysql('articallist').select().where('articalId', articalId)
@@ -58,18 +58,21 @@ module.exports = async (ctx) => {
     }
 }
 
-async function getCount(type,value, followers) {
+async function getCount(type, value, followers) {
     let res, count
     if (type == 'openId') {
         let sql = mysql('articallist').select().count().where('openId', value)
-        if(followers.length){
-            for (i = 0; i < followers.length; i++) {
-                sql = sql.orWhere('openId', followers[i].following)
+        if (followers) {
+            if (followers.length) {
+                for (i = 0; i < followers.length; i++) {
+                    sql = sql.orWhere('openId', followers[i].following)
+                }
             }
         }
         count = await sql
         console.log(count)
-    } else if(type == 'value') {
+        res = count[0]['count(*)']
+    } else if (type == 'value') {
         if (value) {
             count = await mysql('articallist').select().count().where('animalvalue', value)
         } else {

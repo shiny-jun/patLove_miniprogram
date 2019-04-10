@@ -10,27 +10,47 @@ Page({
    */
   data: {
     types: [],
-    articals:[],
+    articals: [],
     currentVal: '',
-    count:null,
-    pageSize:2,
-    pageNo:0, // 从0开始
+    count: null,
+    noMore: false,
+    pageSize: 10,
+    pageNo: 0, // 从0开始
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    wx.showNavigationBarLoading();
-    this.getSwiperList()
-    let userInfoStr = wx.getStorageSync('userInfo')
-    if (userInfoStr) {
-      let userInfo = JSON.parse(userInfoStr)
+  onLoad: function () {
+    this.getSwiperList(()=>{
+      this._doRefreshMasonry(this.data.articals)
+    })
+  },
+  //瀑布流用到的函数
+  onReachBottom: function () {
+    if (!this.data.noMore) {
       this.setData({
-        userInfo: userInfo,
+        pageNo : this.data.pageNo+1
+      })
+      this.getSwiperList(()=>{
+        this._doAppendMasonry(this.data.articals)
       })
     }
-    // this.getArticalList()
+  },
+
+  _doRefreshMasonry(items) {
+    this.masonryListComponent = this.selectComponent('#masonry');
+    this.masonryListComponent.start(items).then(() => {
+      console.log('refresh completed')
+    })
+  },
+
+  _doAppendMasonry(items) {
+    this.masonryListComponent = this.selectComponent('#masonry')
+    // 获取接口数据后使用瀑布流组件append方法，当append完成后调用then，是否可触底价在的标志位可以在这里处理
+    this.masonryListComponent.append(items).then(() => {
+      console.log('refresh completed')
+    })
   },
 
   /**
@@ -69,20 +89,13 @@ Page({
   },
 
   /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
 
   },
   // 获取types列表的数据
-  async getSwiperList() {
+  async getSwiperList(fn) {
     console.log(1)
     const types = await get("/weapp/swiperlist", {});
     console.log(types)
@@ -90,7 +103,7 @@ Page({
       types: types.list,
       currentVal: types.list[0].value,
     })
-    this.getArticalList()
+    this.getArticalList(fn)
     wx.hideNavigationBarLoading();
   },
   addArticalPage() {
@@ -98,7 +111,7 @@ Page({
       url: '/pages/addArtical/addArtical',
     })
   },
-  currentChange(e){
+  currentChange(e) {
     let currentVal = e.detail
     this.setData({
       currentVal
@@ -106,7 +119,7 @@ Page({
     this.getArticalList()
   },
   //获取文章列表
-  async getArticalList() {
+  async getArticalList(fn) {
     console.log(2)
     let params = {}
     if (this.data.currentVal == 'follow') {
@@ -128,13 +141,19 @@ Page({
     }
     params.pageSize = this.data.pageSize
     params.pageNo = this.data.pageNo
-    const articals = await get("/weapp/articalList", 
+    const articals = await get("/weapp/articalList",
       params
     );
-    // console.log(articals)
-    // this.setData({
-    //   articals: articals.list
-    // })
+    console.log(articals)
+    if(articals.length<this.data.pageSize){
+      this.setData({
+        noMore: true
+      })
+    }
+    this.setData({
+      articals: articals.list
+    })
+    fn()
     wx.hideNavigationBarLoading();
   },
 })

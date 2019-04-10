@@ -3,7 +3,12 @@
 
   <view class='data-item'>
     <view class='data-name'>种类：</view>
-    <view class='select-item' bindtap='patSelect'>{{form.type ? form.type:"请选择"}}</view>
+    <!-- <view class='select-item' bindtap='patSelect'></view> -->
+    <picker bindchange="patSelect" value="{{index}}" range="{{animallist}}" range-key="chineseName">
+    <view class="select-item">
+      {{form.type ? animallist[pattypeIndex].chineseName:"请选择"}}
+    </view>
+  </picker>
   </view>
 
   <view class='data-item'>
@@ -37,7 +42,6 @@
 
 <view class='func'>
 <view class='save'>保存</view>
-<view class='tips'>不爱我的话不仅会被我抱起来亲亲，还会打你的屁股哟</view>
 </view>
 
 <image class='head' />

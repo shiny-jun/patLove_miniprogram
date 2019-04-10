@@ -50,35 +50,12 @@
         <view>收藏</view>
       </view>
     </view>
-    <view class="" hover-class="none" hover-stop-propagation="false">
-        <view class="masonry">
-          <view class="item item-left">
-            1
-            <acticalItem></acticalItem>
-          </view>
-          <view class="item item-left">
-            2
-            <acticalItem></acticalItem>
-          </view>
-          <view class="item item-left">
-            3
-            <acticalItem></acticalItem>
-          </view>
-          <view class="item item-right">
-            4
-            <acticalItem></acticalItem>
-          </view>
-          <view class="item item-right">
-            5
-            <acticalItem></acticalItem>
-          </view>
-          <view class="item item-right">
-            6
-            <acticalItem></acticalItem>
-          </view>
-        </view>
+    <view class="artical-wrapper">
+      <masonry generic:masonry-item="acticalItem" id="masonry" interval-width="20rpx"></masonry>
+      <view class="no-more" v-if="{{noMore}}">暂无更多</view>
     </view>
   </view>
+  <!-- 授权弹窗 -->
   <view class="authorize-window" wx:if="{{!userInfo.openId}}">
     <view class="window-wrapper">
       <view class="win-tips">授权提示</view>

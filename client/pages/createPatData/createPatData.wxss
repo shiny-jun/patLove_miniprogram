@@ -68,7 +68,7 @@
 .save{
   width: 500rpx;
   height: 70rpx;
-  background-color:  mediumvioletred;
+  background-color: #f5bc36;
   color: white;
   font-size: 30rpx;
   display: flex;
