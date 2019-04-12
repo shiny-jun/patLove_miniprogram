@@ -1,0 +1,8 @@
+<!--client/pages/me/myPatList/myPatList.wxml-->
+<view class="my-patlist">
+    <block wx:for="{{patList}}" wx:key="patList">
+        <myPatItem patItem="{{item}}"></myPatItem>
+    </block>
+    <view class="noPat" wx:if="{{noMore}}">没有更过啦！</view>
+    <view class="noPat" wx:if="{{noPat}}">暂无宠物，赶紧添加你的小主子吧~</view>
+</view>

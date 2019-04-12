@@ -1,0 +1,7 @@
+/* client/pages/me/myPatList/myPatList.wxss */
+.noPat{
+    color: #999999;
+    text-align: center;
+    font-size: 28rpx;
+    padding: 30rpx 0 50rpx;
+}

@@ -1,1 +1,61 @@
 /* components/myPatItem/myPatItem.wxss */
+@import "/assets/img/font/iconfont.wxss";
+.my-pat-item {
+  display: flex;
+  padding: 20rpx 0;
+  align-items: center;
+}
+
+.pat-msg {
+    flex: 2;
+  margin-left: 16rpx;
+}
+
+.pat-msg .patName {
+  /* padding-top: 10rpx; */
+  font-size: 32rpx;
+  font-weight: bold;
+  height: 40rpx;
+  line-height: 40rpx;
+}
+
+.pat-msg .patName span {
+  display: inline-block;
+  height: 28rpx;
+  line-height: 28rpx;
+  width: 65rpx;
+  background-color: #f8d98f;
+  font-size: 24rpx;
+  text-align: center;
+  border-radius: 14rpx;
+}
+
+.birthday {
+  font-size: 28rpx;
+  font-weight: normal;
+  padding-top: 10rpx;
+  color: #999;
+}
+
+.headpic {
+  width: 100rpx;
+  height: 100rpx;
+  text-align: center;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.sex .iconfont{
+    flex: 1;
+    text-align: right;
+    font-size: 60rpx;
+}
+.icon-female{
+    color: #ffb3b3;
+}
+.icon-male{
+    color: #81d4fa;
+}
+/* .headpic image{
+        width:100%;
+        height: 100%;
+    } */

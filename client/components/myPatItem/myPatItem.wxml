@@ -1,2 +1,16 @@
 <!--components/myPatItem/myPatItem.wxml-->
-<text>components/myPatItem/myPatItem.wxml</text>
+<view class="my-pat-item">
+  <view class="headpic">
+    <image class="img" src="{{patItem.headImg}}" style="width: 100rpx; height: 100rpx;" mode="aspectFill"></image>
+  </view>
+  <view class="pat-msg" hover-class="none" hover-stop-propagation="false">
+    <view class="patName">{{patItem.name}}
+      <span>{{patItem.chineseName}}</span>
+    </view>
+    <view class="birthday">{{patItem.birthday}}</view>
+  </view>
+  <view class="sex">
+    <icon class='iconfont icon-male' wx:if="{{patItem.sex}}"></icon>
+    <icon class='iconfont icon-female' wx:else></icon>
+  </view>
+</view>

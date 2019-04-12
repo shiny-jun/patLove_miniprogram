@@ -93,9 +93,9 @@ Page({
       current: e.currentTarget.dataset.current
     })
   },
-  gotoCreatePatData() {
+  gotoPatData() {
     wx.navigateTo({
-      url: '../createPatData/createPatData',
+      url: 'myPatList/myPatList',
     })
   },
   gotoUserDataEdit() {

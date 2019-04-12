@@ -42,4 +42,6 @@ router.get('/patlist', controllers.patlist)
 router.get('/patDetail', controllers.patDetail)
 // get:articalList
 router.get('/articalList', controllers.articalList)
+// get:myPatList
+router.get('/myPatList', controllers.myPatList)
 module.exports = router
