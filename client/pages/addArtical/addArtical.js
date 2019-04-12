@@ -1,6 +1,6 @@
-import {
-  initQiniu
-} from '../../utils/qiniuUpImage'
+// import {
+//   uploadFile
+// } from '../../utils/qiniuUpImage'
 import qiniuUploader from '../../utils/qiniuUploader'
 // pages/addArtical/addArtical.js
 Page({
@@ -22,7 +22,6 @@ Page({
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
   },
   getImage(e) {
-    initQiniu()
     let _this = this
     wx.chooseImage({
       count: 1,
@@ -30,13 +29,14 @@ Page({
       sourceType: ['album', 'camera'],
       success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
-        const tempFilePaths = res.tempFilePaths
-        let imageList = _this.data.imageList
-        imageList.push(tempFilePaths)
-        console.log(imageList)
-        _this.setData({
-          imageList
-        })
+        const tempFilePaths = res.tempFilePaths[0];
+        // let imageList = _this.data.imageList
+        // imageList.push(tempFilePaths)
+        // console.log(imageList)
+        // _this.setData({
+        //   imageList
+        // })
+        // uploadFile(tempFilePaths,tempFilePaths)
         // qiniuUploader.upload(filePath, (res) => {
         //   that.setData({
         //     'imageObject': res
