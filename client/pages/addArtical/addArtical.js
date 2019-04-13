@@ -1,6 +1,10 @@
 // import {
 //   uploadFile
 // } from '../../utils/qiniuUpImage'
+import {
+  get
+} from "../../utils/index.js";
+const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
 import qiniuUploader from '../../utils/qiniuUploader'
 // pages/addArtical/addArtical.js
 Page({
@@ -15,8 +19,8 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: function(options) {
+    this.getToken()
   },
   formSubmit(e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
@@ -30,31 +34,13 @@ Page({
       success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths[0];
-        // let imageList = _this.data.imageList
-        // imageList.push(tempFilePaths)
-        // console.log(imageList)
-        // _this.setData({
-        //   imageList
-        // })
-        // uploadFile(tempFilePaths,tempFilePaths)
-        // qiniuUploader.upload(filePath, (res) => {
-        //   that.setData({
-        //     'imageObject': res
-        //   });
-        // }, (error) => {
-        //   console.error('error: ' + JSON.stringify(error));
-        // },
-        // null,// 可以使用上述参数，或者使用 null 作为参数占位符
-        // (progress) => {
-        //   console.log('上传进度', progress.progress)
-        //     console.log('已经上传的数据长度', progress.totalBytesSent)
-        //     console.log('预期需要上传的数据总长度', progress.totalBytesExpectedToSend)
-        // }, cancelTask => that.setData({cancelTask})
-        // );
+        let imageList = _this.data.imageList
+        
 
       }
     })
   },
+
   // 删除照片
   delImage(e) {
     let _this = this
@@ -75,5 +61,10 @@ Page({
         console.log(res.errMsg)
       }
     })
-  }
+  },
+  // 获取types列表的数据
+  async getToken() {
+    const token = await get("/weapp/qiniu", {});
+    console.log('token', token)
+  },
 })

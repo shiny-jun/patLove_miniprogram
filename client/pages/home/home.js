@@ -23,6 +23,7 @@ Page({
    */
   onLoad: function () {
     wx.showNavigationBarLoading();
+    this.getToken()
     this.getSwiperList(()=>{
       this._doRefreshMasonry(this.data.articals)
     })
@@ -95,11 +96,15 @@ Page({
   onShareAppMessage: function () {
 
   },
+
+  async getToken() {
+    const token = await get("/weapp/qiniu", {});
+    console.log('token', token)
+  },
   // 获取types列表的数据
   async getSwiperList(fn) {
     console.log(1)
     const types = await get("/weapp/swiperlist", {});
-    console.log(types)
     this.setData({
       types: types.list,
       currentVal: types.list[0].value,

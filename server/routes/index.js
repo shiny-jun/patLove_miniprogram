@@ -34,6 +34,8 @@ router.post('/message', controllers.message.post)
 // 本次项目新增接口
 //get:swiperlist
 router.get('/swiperlist', controllers.swiperlist)
+//get:qiniu
+router.get('/qiniu', controllers.qiniu)
 // get:animallist
 router.get('/animallist', controllers.animallist)
 // get:patlist
