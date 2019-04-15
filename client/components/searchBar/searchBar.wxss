@@ -28,6 +28,7 @@
 .bar .bar-wrapper .input {
     height: 40rpx;
     line-height: 40rpx;
+    font-size: 28rpx;
     vertical-align: middle;
     margin: auto 70rpx;
     padding-top: 8rpx;

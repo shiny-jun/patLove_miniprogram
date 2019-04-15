@@ -6,21 +6,21 @@
     <!-- <view class='select-item' bindtap='patSelect'></view> -->
     <picker bindchange="patSelect" value="{{index}}" range="{{animallist}}" range-key="chineseName">
     <view class="select-item">
-      {{form.type ? animallist[pattypeIndex].chineseName:"请选择"}}
+      {{form.animalName ? animallist[pattypeIndex].chineseName:"请选择"}}
     </view>
   </picker>
   </view>
 
   <view class='data-item'>
     <view class='data-name'>性别：</view>
-    <view class='select-item {{form.sex == "boy" ? "selected":""}}' bindtap='dataChoose' data-type='sex' data-key='boy'>男</view>
-    <view class='select-item {{form.sex == "girl" ? "selected":""}}' bindtap='dataChoose' data-type='sex' data-key='girl'>女</view>
+    <view class='select-item {{form.sex === 1 ? "selected":""}}' bindtap='dataChoose' data-type='sex' data-key='{{1}}'>男</view>
+    <view class='select-item {{form.sex === 0 ? "selected":""}}' bindtap='dataChoose' data-type='sex' data-key='{{0}}'>女</view>
   </view>
 
   <view class='data-item'>
     <view class='data-name'>生日：</view>
-    <picker mode='date' start='2017-01-01' bindchange='dateChange' value='{{form.brithday}}'>
-      <view class='picker-text'>{{form.brithday ? form.brithday : "请选择主子生日"}}</view>
+    <picker mode='date' start='2017-01-01' bindchange='dateChange' value='{{form.birthday}}'>
+      <view class='picker-text'>{{form.birthday ? form.birthday : "请选择主子生日"}}</view>
     </picker>
   </view>
 
@@ -31,17 +31,23 @@
 
   <view class='data-item'>
     <view class='data-name'>是否已绝育：</view>
-    <view class='select-item {{form.isUnbrith ? "selected":""}}' bindtap='dataChoose' data-type='isUnbrith' data-key='{{true}}'>是</view>
-    <view class='select-item {{form.isUnbrith ? "":"selected"}}' bindtap='dataChoose' data-type='isUnbrith' data-key='{{false}}'>否</view>
+    <view class='select-item {{form.isUnbrith===1 ? "selected":""}}' bindtap='dataChoose' data-type='isUnbrith' data-key='{{1}}'>是</view>
+    <view class='select-item {{form.isUnbrith===0 ? "selected":""}}' bindtap='dataChoose' data-type='isUnbrith' data-key='{{0}}'>否</view>
   </view>
 
   <view class='data-name'>个性签名：</view>
-  <textarea class='sign-input' bindinput='dataInput' data-type='signText' value='{{form.signText}}' placeholder='有啥特点~' />
+  <textarea class='sign-input' bindinput='dataInput' data-type='character' value='{{form.character}}' placeholder='有啥特点~' />
 
 </view>
 
 <view class='func'>
-<view class='save'>保存</view>
+<view class='save' bindtap="submitForm">保存</view>
 </view>
-
-<image class='head' />
+<view class="head" wx:if="{{headImg}}" bindtap="chooseImage">
+  <image class='' wx:if="{{headImg}}" src="{{headImg}}" style="width: 200rpx; height: 200rpx;" mode="aspectFill" />
+</view>
+<view class="head" wx:else bindtap="chooseImage">
+  <icon class="iconfont icon-dog-astronaut">
+    
+  </icon>
+</view>

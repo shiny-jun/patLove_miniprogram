@@ -1,5 +1,5 @@
 {
     "usingComponents": {
       "myPatItem":"/components/myPatItem/myPatItem"
-    }
+      }
 }

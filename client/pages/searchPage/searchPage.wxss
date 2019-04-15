@@ -1,1 +1,22 @@
 /* pages/searchPage/searchPage.wxss */
+.title{
+    font-size: 28rpx;
+    padding: 20rpx 0 0 20rpx;
+}
+.history-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30rpx;
+}
+.history-item{
+        /* flex: 1; */
+        height: 32rpx;
+        margin-right: 15rpx;
+        margin-bottom: 10rpx;
+        line-height: 32rpx;
+        font-size: 24rpx;
+        padding: 0 6rpx;
+        border-radius: 16rpx;
+        color: #ffca50;
+        border: 1px solid #ffca50;
+    }

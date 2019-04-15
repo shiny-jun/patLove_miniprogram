@@ -3,6 +3,8 @@ import {
   get
 } from "../../utils/index.js";
 const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
+let app = getApp();
+
 Page({
 
   /**
@@ -23,8 +25,8 @@ Page({
    */
   onLoad: function () {
     wx.showNavigationBarLoading();
-    this.getToken()
-    this.getSwiperList(()=>{
+    // this.getToken()
+    this.getSwiperList(() => {
       this._doRefreshMasonry(this.data.articals)
     })
   },
@@ -32,9 +34,9 @@ Page({
   onReachBottom: function () {
     if (!this.data.noMore) {
       this.setData({
-        pageNo : this.data.pageNo+1
+        pageNo: this.data.pageNo + 1
       })
-      this.getSwiperList(()=>{
+      this.getSwiperList(() => {
         this._doAppendMasonry(this.data.articals)
       })
     }
@@ -97,10 +99,11 @@ Page({
 
   },
 
-  async getToken() {
-    const token = await get("/weapp/qiniu", {});
-    console.log('token', token)
-  },
+  // async getToken() {
+  //   const token = await get("/weapp/qiniu", {});
+  //   console.log('token', token)
+  //   wx.setStorageSync('token', token)
+  // },
   // 获取types列表的数据
   async getSwiperList(fn) {
     console.log(1)
@@ -123,16 +126,19 @@ Page({
       currentVal
     })
     this.getArticalList()
+    // this.getSwiperList(() => {
+    //   this._doRefreshMasonry(this.data.articals)
+    // })
   },
   //获取文章列表
   async getArticalList(fn) {
     console.log(2)
     let params = {}
     if (this.data.currentVal == 'follow') {
-      if (this.data.userInfo.openId) {
+      if (app.globalData.openId) {
         params = {
           value: this.data.currentVal,
-          openId: this.data.userInfo.openId
+          openId: app.globalData.openId
         }
       } else {
         this.setData({
@@ -151,7 +157,7 @@ Page({
       params
     );
     console.log(articals)
-    if(articals.length<this.data.pageSize){
+    if (articals.length < this.data.pageSize) {
       this.setData({
         noMore: true
       })
@@ -159,7 +165,9 @@ Page({
     this.setData({
       articals: articals.list
     })
-    fn()
+    if (fn) {
+      fn()
+    }
     wx.hideNavigationBarLoading();
   },
 })

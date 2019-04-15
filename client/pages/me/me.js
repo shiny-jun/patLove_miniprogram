@@ -3,8 +3,9 @@ let qcloud = require('../../vendor/wafer2-client-sdk/index')
 let config = require('../../config')
 import util from "../../utils/util";
 import {
-  get
+  get,showSuccess
 } from "../../utils/index.js";
+let app = getApp();
 const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
 Page({
   data: {
@@ -39,7 +40,7 @@ Page({
   bindGetUserInfo() {
     if (this.data.logged) return
 
-    this.showBusy('正在登录')
+    // this.showBusy('正在登录')
 
     const session = qcloud.Session.get()
 
@@ -53,12 +54,15 @@ Page({
             userInfo: res,
             logged: true
           })
-          this.showSuccess('登录成功')
+          showSuccess('登录成功')
           //todo:登录成功后，需要通过openId去获取本用户在本服务器的个人资料，宠物资料等
           console.log(res)
           let userInfoStr = JSON.stringify(res)
           console.log(userInfoStr)
           wx.setStorageSync('userInfo', userInfoStr)
+          app.globalData.openId = res.openId
+          app.globalData.avatarUrl = res.avatarUrl
+          app.globalData.nickName = res.nickName
         },
         fail: err => {
           console.error(err)
@@ -73,12 +77,15 @@ Page({
             userInfo: res,
             logged: true
           })
-          this.showSuccess('登录成功')
+          showSuccess('登录成功')
           //todo：首次登录，应该吧资料上传到我们本地服务器。配置一些默认资料，如个性签名
           console.log(res)
           let userInfoStr = JSON.stringify(res)
           console.log(userInfoStr)
           wx.setStorageSync('userInfo', userInfoStr)
+          app.globalData.openId = res.openId
+          app.globalData.avatarUrl = res.avatarUrl
+          app.globalData.nickName = res.nickName
         },
         fail: err => {
           console.error(err)

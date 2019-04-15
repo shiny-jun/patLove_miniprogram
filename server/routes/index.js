@@ -46,4 +46,6 @@ router.get('/patDetail', controllers.patDetail)
 router.get('/articalList', controllers.articalList)
 // get:myPatList
 router.get('/myPatList', controllers.myPatList)
+// post:createPat
+router.post('/createPat', controllers.createPat)
 module.exports = router
