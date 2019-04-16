@@ -13,7 +13,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imageList: []
+    imageList: [],
+    patList: []
   },
 
   /**
@@ -21,6 +22,19 @@ Page({
    */
   onLoad: function(options) {
     this.getToken()
+  },
+  onShow() {
+    this.getselectPatList()
+  },
+  // 获取已选择的宠物列表
+  getselectPatList() {
+    let patListStr = wx.getStorageSync('selectPatList')
+    if (patListStr) {
+      let patList = JSON.parse(patListStr)
+      this.setData({
+        patList
+      })
+    }
   },
   formSubmit(e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
@@ -35,12 +49,15 @@ Page({
         // tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths[0];
         let imageList = _this.data.imageList
-        
-
       }
     })
   },
-
+  // 前往选择宠物
+  goSelectPat() {
+    wx.navigateTo({
+      url: 'selectPat/selectPat',
+    })
+  },
   // 删除照片
   delImage(e) {
     let _this = this

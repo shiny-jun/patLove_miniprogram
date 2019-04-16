@@ -1,5 +1,8 @@
 <!--components/myPatItem/myPatItem.wxml-->
 <view class="my-pat-item">
+  <view class='select-point' wx:if="{{select}}">
+    <view class='point'></view>
+  </view>
   <view class="headpic">
     <image class="img" src="{{patItem.headImg}}" style="width: 100rpx; height: 100rpx;" mode="aspectFill"></image>
   </view>

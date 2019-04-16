@@ -18,7 +18,7 @@
     <view class='pat'>
       <view class="pat-name">aaa
       </view>
-      <view class='btn'>选择爱宠
+      <view class='btn' bindtap="goSelectPat">选择爱宠
         <text>+</text>
       </view>
     </view>
