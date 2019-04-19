@@ -1,1 +1,27 @@
 /* pages/addArtical/selectPat/selectPat.wxss */
+.btn-wrapper {
+  position: fixed;
+  bottom: 60rpx;
+  left: 60rpx;
+}
+.btn-wrapper-ok {
+  position: fixed;
+  bottom: 60rpx;
+  right: 60rpx;
+}
+.btn{
+    width: 70rpx;
+    height: 70rpx;
+    line-height: 70rpx;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #f8d98f;
+    color: #fff;
+    font-size: 40rpx;
+    font-weight: bold;
+    box-shadow: 0px 0px 5px 0px rgba(65, 47, 141, 0.3);
+  }
+  .btn-wrapper-ok .btn{
+    font-size: 28rpx;
+    background-color: rgb(114, 187, 81);
+  }

@@ -49,7 +49,7 @@ Page({
     }
   },
   goCreatePat(e){
-    let id = e.currentTarget.dataset.patId
+    let id = e.currentTarget.dataset.patid
     console.log(id)
     if(id){
       wx.navigateTo({

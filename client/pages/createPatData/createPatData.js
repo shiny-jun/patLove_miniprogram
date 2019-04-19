@@ -25,44 +25,20 @@ Page({
     pattypeIndex: null,
     itemList: [],
     headImg: '',
-    userInfo:null
+    userInfo: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     console.log(options)
+    let patId = options.id
+    if (patId) {
+      this.getPatDetail(patId)
+    }
     this.getAnimalList()
     // this.getUserInfo()
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
   },
 
   dateChange(e) {
@@ -158,6 +134,25 @@ Page({
     })
     wx.hideNavigationBarLoading();
   },
+  //获取宠物信息
+  async getPatDetail(patId) {
+    const detail = await get("/weapp/myPatList", {
+      patId
+    });
+    let form = detail.list[0]
+    let pattypeIndex = 0
+    let animallist = this.data.animallist
+    animallist.forEach((item, index) => {
+      if (item.animalName == form.animalName) {
+        pattypeIndex = index
+      }
+    })
+    this.setData({
+      form,
+      pattypeIndex,
+      headImg: form.headImg
+    })
+  },
 
   // 获取token
   async getToken() {
@@ -171,6 +166,8 @@ Page({
     form.openId = app.globalData.openId
     console.log(form)
     let formStr = JSON.stringify(form)
-    const submitForm = await post("/weapp/createPat", {formStr});
+    const submitForm = await post("/weapp/createPat", {
+      formStr
+    });
   },
 })

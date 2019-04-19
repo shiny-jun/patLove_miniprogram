@@ -1,26 +1,34 @@
 <!-- pages/addArtical/addArtical.wxml -->
 <view class="addArtical-wrapper">
-  <form bindsubmit="formSubmit" bindreset="formReset">
+  <form bindsubmit="formSubmit">
     <view class="title">
-      <input name="input" placeholder="来个很酷的标题让大家能搜到文章" />
+      <input name="title" placeholder="来个很酷的标题让大家能搜到文章" />
+      <button class="submit-btn" form-type="submit">发布</button>
     </view>
     <view class="content">
-      <textarea placeholder="铲屎官在这里写下感想……" placeholder-style="width:100%; font-size:14px;" maxlength='1000' />
+      <textarea name="content" placeholder="铲屎官在这里写下感想……" placeholder-style="width:100%; font-size:14px;" maxlength='1000' />
     </view>
     <view class='images'>
       <view class='add-pic' wx:for="{{imageList}}" wx:key="images" bindtap="delImage" data-index="{{index}}">
-        <image src='{{item}}' mode="widthFix"></image>
+        <image src='{{item}}' mode="aspectFill" style="width:130rpx; height:130rpx;"></image>
       </view>
       <view class='add-pic-btn'>
         <image class='' src='/assets/img/get-pic.png' mode="widthFix" bindtap="getImage"></image>
       </view>
     </view>
     <view class='pat'>
-      <view class="pat-name">aaa
+      <view class="pat-name" wx:for="{{patList}}" wx:key="patList">
+        {{item}}
       </view>
       <view class='btn' bindtap="goSelectPat">选择爱宠
         <text>+</text>
       </view>
     </view>
-  </form>
+    <view class='select-location' bindtap='selectlocation'>
+      <view class='point noselect' wx:if="{{!location}}"></view>
+      <view class='point selected' wx:else><icon class='iconfont icon-approved'></icon></view>
+      <view class='location' wx:if="{{!location}}">显示地区</view>
+      <view class='location' wx:else>{{location}}</view>
+    </view>
+</form>
 </view>

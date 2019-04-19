@@ -1,13 +1,14 @@
 /* components/myPatItem/myPatItem.wxss */
 @import "/assets/img/font/iconfont.wxss";
+
 .my-pat-item {
   display: flex;
-  padding: 20rpx 0;
+  padding: 20rpx 20rpx;
   align-items: center;
 }
 
 .pat-msg {
-    flex: 2;
+  flex: 2;
   margin-left: 16rpx;
 }
 
@@ -40,22 +41,58 @@
 .headpic {
   width: 100rpx;
   height: 100rpx;
+  margin-left: 16rpx;
   text-align: center;
   border-radius: 50%;
   overflow: hidden;
 }
-.sex .iconfont{
-    flex: 1;
-    text-align: right;
-    font-size: 60rpx;
+
+.sex .icon-female, .icon-male {
+  flex: 1;
+  text-align: right;
+  font-size: 60rpx;
 }
-.icon-female{
-    color: #ffb3b3;
+
+.icon-female {
+  color: #ffb3b3;
 }
-.icon-male{
-    color: #81d4fa;
+
+.icon-male {
+  color: #81d4fa;
 }
+
 /* .headpic image{
         width:100%;
         height: 100%;
     } */
+
+.select-point {
+  width: 50rpx;
+  height: 100%;
+  text-align: center;
+}
+
+.point, .selected-point {
+  display: inline-block;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+}
+
+.point {
+  border: 1rpx solid #999;
+}
+
+.selected-point {
+  text-align: center;
+  color: #fff;
+  background-color: #f8d98f;
+}
+
+.icon-approved {
+  display: flex;
+  justify-content: center;
+  font-size: 24rpx;
+  height: 42rpx;
+  line-height: 42rpx;
+}

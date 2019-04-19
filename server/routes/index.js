@@ -32,20 +32,22 @@ router.get('/message', controllers.message.get)
 // POST 用来处理微信转发过来的客服消息
 router.post('/message', controllers.message.post)
 // 本次项目新增接口
-//get:swiperlist
+//get:swiperlist获取swiper的列表
 router.get('/swiperlist', controllers.swiperlist)
-//get:qiniu
+//get:qiniu七牛
 router.get('/qiniu', controllers.qiniu)
-// get:animallist
+// get:animallist获取动物品种
 router.get('/animallist', controllers.animallist)
-// get:patlist
+// get:patlist获取动物详细品种
 router.get('/patlist', controllers.patlist)
-// get:patDetail
+// get:patDetail获取详情
 router.get('/patDetail', controllers.patDetail)
-// get:articalList
+// get:articalList获取文章列表
 router.get('/articalList', controllers.articalList)
-// get:myPatList
+// get:myPatList查看我的宠物
 router.get('/myPatList', controllers.myPatList)
-// post:createPat
+// post:createPat新增宠物/修改宠物资料
 router.post('/createPat', controllers.createPat)
+// post:addArtical新增文章
+router.post('/addArtical', controllers.addArtical)
 module.exports = router

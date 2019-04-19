@@ -1,17 +1,18 @@
 {
   "pages": [
+    "pages/me/me",
+    "pages/addArtical/addArtical",
+    "pages/createPatData/createPatData",
     "pages/home/home",
     "pages/searchPage/searchPage",
-    "pages/addArtical/addArtical",
+    "pages/addArtical/selectPat/selectPat",
     "pages/msg/msg",
     "pages/dictionary/dictionary",
     "pages/index/index",
-    "pages/me/me",
     "pages/me/myPatList/myPatList",
     "pages/patType/patType",
     "pages/userDataEdit/userDataEdit",
     "pages/patType/patDetail/patDetail",
-    "pages/createPatData/createPatData",
     "pages/articalList/articalList"
   ],
   "window": {
@@ -52,5 +53,10 @@
         "text": "我的"
       }
     ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
   }
 }
