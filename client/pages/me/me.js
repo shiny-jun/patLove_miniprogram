@@ -31,6 +31,7 @@ Page({
       wx.setNavigationBarTitle({
         title: userInfo.nickName
       })
+      // 获取文章列表
       this.getArticalList(userInfo.openId, () => {
         this._doRefreshMasonry(this.data.articals)
       })
@@ -63,6 +64,8 @@ Page({
           app.globalData.openId = res.openId
           app.globalData.avatarUrl = res.avatarUrl
           app.globalData.nickName = res.nickName
+          app.globalData.gender = res.gender
+          app.globalData.city = res.city
         },
         fail: err => {
           console.error(err)
@@ -86,6 +89,8 @@ Page({
           app.globalData.openId = res.openId
           app.globalData.avatarUrl = res.avatarUrl
           app.globalData.nickName = res.nickName
+          app.globalData.gender = res.gender
+          app.globalData.city = res.city
         },
         fail: err => {
           console.error(err)
@@ -122,8 +127,12 @@ Page({
       params
     );
     console.log(articals)
-    this.setData({
-      articals: articals.list
+    let noMore = false
+    if(articals.list.length<this.data.pageSize){
+      noMore = true
+    }this.setData({
+      articals: articals.list,
+      noMore
     })
     fn()
     wx.hideNavigationBarLoading();
@@ -134,7 +143,7 @@ Page({
       this.setData({
         pageNo: this.data.pageNo + 1
       })
-      this.getArticalList(userInfo.openId, () => {
+      this.getArticalList(this.data.userInfo.openId, () => {
         this._doAppendMasonry(this.data.articals)
       })
     }

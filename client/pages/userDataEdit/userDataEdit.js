@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    sexArray: [ '未知', '男','女', ]
+    sexArray: [ '未知', '男','女', ],
+    userInfo:{}
   },
 
   /**

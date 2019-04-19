@@ -65,7 +65,7 @@
   align-items: center;
   flex-direction: column
 }
-.save{
+.save,.del{
   width: 500rpx;
   height: 70rpx;
   background-color: #f5bc36;
@@ -76,6 +76,9 @@
   align-items: center;
   margin-bottom: 30rpx;
   border-radius: 50rpx;
+}
+.del{
+  background-color: #c76262;
 }
 .tips{
   font-size: 28rpx;

@@ -2,10 +2,11 @@
 //   uploadFile
 // } from '../../utils/qiniuUpImage'
 import {
-  get
+  get,post
 } from "../../utils/index.js";
 const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
 import qiniuUploader from '../../utils/qiniuUploader'
+let app = getApp();
 // pages/addArtical/addArtical.js
 Page({
 
@@ -39,12 +40,12 @@ Page({
     let patListStr = wx.getStorageSync('selectPat')
     if (patListStr) {
       let patArr = JSON.parse(patListStr)
-      let patList = []
-      patArr.forEach(item => {
-        patList.push(item.name)
-      })
+      // let patList = []
+      // patArr.forEach(item => {
+      //   patList.push(item.name)
+      // })
       this.setData({
-        patList
+        patList:patArr
       })
     }
   },
@@ -177,6 +178,7 @@ Page({
     form.imageList= this.data.imageList
     form.patList = this.data.patList
     form.location = this.data.location
+    form.openId = app.globalData.openId
     let formStr = JSON.stringify(form)
     const submitForm = await post("/weapp/addArtical", { formStr });
   },

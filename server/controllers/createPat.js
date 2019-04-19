@@ -16,7 +16,25 @@ module.exports = async (ctx) => {
             form[item] = Number(form[item])
         });
         console.log(form)
-        try {
+        if(form.patId){
+            let patId = form.patId
+            delete form['patId']
+            try {
+                await mysql('pat').update(form).where('patId',patId)
+                ctx.state.data = {
+                    data: 'ok',
+                    msg: 'success'
+                }
+            } catch (e) {
+                ctx.state = {
+                    code: -1,
+                    data: {
+                        msg: '更新失败' + e.sqlMessage
+                    }
+                }
+            }
+        }else{
+            try {
             await mysql('pat').insert(form)
             ctx.state.data = {
                 data: 'ok',
@@ -30,6 +48,8 @@ module.exports = async (ctx) => {
                 }
             }
         }
+        }
+        
     }
 
     // const detail = await mysql('animallist')

@@ -26,12 +26,16 @@ App({
             this.globalData.openId = userInfo.openId
             this.globalData.avatarUrl = userInfo.avatarUrl
             this.globalData.nickName = userInfo.nickName
+            this.globalData.gender = userInfo.gender
+            this.globalData.city = userInfo.city
           }
         },
     globalData: {
         openId: null,
         avatarUrl:null,
-        nickName:null
+        nickName:null,
+        gender:null,
+        city:null
     },
 
 })

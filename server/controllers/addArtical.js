@@ -9,17 +9,27 @@ module.exports = async (ctx) => {
     let {
         formStr
     } = ctx.request.body
-    let toNumList = ['weight', 'sex', 'isUnbrith']
     if (formStr) {
         let form = JSON.parse(formStr)
-        toNumList.forEach(item => {
-            form[item] = Number(form[item])
-        });
+        // toNumList.forEach(item => {
+        //     form[item] = Number(form[item])
+        // });
         console.log(form)
-        const findRes = await mysql('books').select().where('patId', form.patId)
-        if(findRes.length){
+        let patList = form.patList
+        delete form['patList']
+        let animalvalue = [],patIdArr=[]
+        patList.forEach((item,index)=>{
+            animalvalue.push(item.name)
+            patIdArr.push(item.patId)
+        })
+        form.animalvalue = JSON.stringify(animalvalue) 
+        form.patIdArr = JSON.stringify(patIdArr)
+        // 处理照片数组
+        let imageList = form.imageList
+        delete form['imageList']
+        if (formStr.articalId) {
             try {
-                await mysql('pat').where('patId', form.patId).update(form)
+                await mysql('articallist').where('articalId', form.articalId).update(form)
                 ctx.state.data = {
                     data: 'ok',
                     msg: 'success'
@@ -34,25 +44,29 @@ module.exports = async (ctx) => {
             }
         } else {
             try {
-            await mysql('pat').insert(form)
-            ctx.state.data = {
-                data: 'ok',
-                msg: 'success'
-            }
-        } catch (e) {
-            ctx.state = {
-                code: -1,
-                data: {
-                    msg: '新增失败' + e.sqlMessage
+                let id = await mysql('articallist').insert(form).returning('articalId')
+                if(id){
+                    let len = imageList.length
+                    for(let i = 0;i<len;i++){
+                        let obj = {
+                            articalId:id,
+                            imgSrc:imageList[i]
+                        }
+                        await mysql('imglist').insert(obj)
+                    }
+                }
+                ctx.state.data = {
+                    data: 'ok',
+                    msg: 'success'
+                }
+            } catch (e) {
+                ctx.state = {
+                    code: -1,
+                    data: {
+                        msg: '新增失败' + e.sqlMessage
+                    }
                 }
             }
         }
-        }
-        
     }
-
-    // const detail = await mysql('animallist')
-    // ctx.state.data={
-    //     list:detail
-    // }
 }

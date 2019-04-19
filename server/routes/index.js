@@ -50,4 +50,6 @@ router.get('/myPatList', controllers.myPatList)
 router.post('/createPat', controllers.createPat)
 // post:addArtical新增文章
 router.post('/addArtical', controllers.addArtical)
+// post:delete 删除文章、删除宠物
+router.post('/delete', controllers.delete)
 module.exports = router

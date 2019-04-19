@@ -18,7 +18,7 @@
     </view>
     <view class='pat'>
       <view class="pat-name" wx:for="{{patList}}" wx:key="patList">
-        {{item}}
+        {{item.name}}
       </view>
       <view class='btn' bindtap="goSelectPat">选择爱宠
         <text>+</text>

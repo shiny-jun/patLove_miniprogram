@@ -1,7 +1,8 @@
 let patTypes = ['猫猫', "狗狗", "蛇蛇", "兔兔"]
 import {
   get,
-  post
+  post,
+  showSuccess,
 } from "../../utils/index.js";
 const qiniuUploader = require("../../utils/qiniuUploader");
 const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
@@ -31,19 +32,17 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-    console.log(options)
+  onLoad: function (options) {
+    this.getAnimalList()
     let patId = options.id
     if (patId) {
       this.getPatDetail(patId)
     }
-    this.getAnimalList()
     // this.getUserInfo()
   },
 
   dateChange(e) {
     let date = e.detail.value
-    console.log(date)
     this.data.form.birthday = date;
     this.setData({
       form: this.data.form
@@ -83,7 +82,6 @@ Page({
         let tempFilePaths = res.tempFilePaths;
         let filePath = tempFilePaths[0];
         //七牛提供的上传方法
-        console.log(filePath)
         qiniuUploader.upload(filePath, (res) => {
           // wechatma.push(res.imageURL)
           _this.setData({
@@ -102,7 +100,6 @@ Page({
   },
 
   patSelect(e) {
-    console.log(e.detail.value)
     let index = e.detail.value
     let animalName = this.data.animallist[index].animalName
     let form = this.data.form
@@ -143,6 +140,7 @@ Page({
     let pattypeIndex = 0
     let animallist = this.data.animallist
     animallist.forEach((item, index) => {
+
       if (item.animalName == form.animalName) {
         pattypeIndex = index
       }
@@ -164,10 +162,41 @@ Page({
     let form = this.data.form
     form.headImg = this.data.headImg
     form.openId = app.globalData.openId
-    console.log(form)
     let formStr = JSON.stringify(form)
-    const submitForm = await post("/weapp/createPat", {
+    const res = await post("/weapp/createPat", {
       formStr
     });
+    console.log(res)
+    if (res.data == 'ok') {
+      showSuccess('保存成功')
+    }
   },
+  delPat() {
+    let patId = this.data.form.patId
+    let _this = this
+    wx.showModal({
+      title: '提示',
+      content: '请问是否删除' + this.data.form.name + '?',
+      success(res) {
+        if (res.confirm) {
+          _this.delete(patId)
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+  async delete(patId){
+    const res = await post("/weapp/delete", {
+      patId
+    });
+    if (res.data == 'ok') {
+      showSuccess('删除成功')
+      setTimeout(() => {
+        wx.navigateBack({
+          delta: 1, // 回退前 delta(默认为1) 页面
+        })
+      }, 2000)
+    }
+  }
 })
