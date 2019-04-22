@@ -20,7 +20,7 @@
 
 <view class='data-item'>
   <view class='data-name'>个性签名</view>
-  <textarea class='data-textarea' value='{{userInfo.sign}}' bindinput='datainput' data-type='sign' />
+  <textarea class='data-textarea' value='{{signature}}' bindinput='datainput' data-type='sign' placeholder="这个主人很懒，什么都没有留下~" />
 </view>
 
 <button class='submit' bindtap='save'>提交保存</button>

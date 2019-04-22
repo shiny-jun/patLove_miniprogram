@@ -3,7 +3,7 @@ const {
     mysql
 } = require('../qcloud')
 
-module.exports = async (ctx) => {
+module.exports = async(ctx) => {
     let {
         value,
         openId,
@@ -21,7 +21,7 @@ module.exports = async (ctx) => {
     if (value) {
         if (value == 'recommend') {
             count = await getCount('value')
-            // detail = await mysql('articallist').select('articallist.*','imglist.imgSrc').join('imglist', 'articallist.articalId', 'imglist.articalId').orderBy('articallist.looked', 'desc').limit(10)
+                // detail = await mysql('articallist').select('articallist.*','imglist.imgSrc').join('imglist', 'articallist.articalId', 'imglist.articalId').orderBy('articallist.looked', 'desc').limit(10)
             if (pageNo * pageSize >= count) {
                 detail = []
             } else {
@@ -50,6 +50,15 @@ module.exports = async (ctx) => {
         for (i = 0; i < detail.length; i++) {
             let imgs = await mysql('imglist').select('imgSrc').where('articalId', detail[i].articalId)
             detail[i].images = imgs
+            let userObj = await mysql('cSessionInfo').select('user_info').where('open_id', detail[i].openId)
+            let user = JSON.parse(userObj[0].user_info)
+            let userInfo = {
+                nickName: user.nickName,
+                avatar: user.avatarUrl
+            }
+            detail[i].userInfo = userInfo
+            let likeCount = await mysql('likelist').where('articalId', detail[i].articalId).count()
+            detail[i].likeCount = likeCount[0]['count(*)']
         }
     }
     ctx.state.data = {
