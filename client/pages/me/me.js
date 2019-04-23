@@ -17,7 +17,8 @@ Page({
     noMore: false,
     pageSize: 10,
     pageNo: 0, // 从0开始
-    articals: []
+    articals: [],
+    minorUserInfo:{}
   },
   onLoad() {
     new util(this);
@@ -35,6 +36,7 @@ Page({
       this.getArticalList(userInfo.openId, () => {
         this._doRefreshMasonry(this.data.articals)
       })
+      this.getminorUserInfo(userInfo.openId)
     }
   },
   // 用户登录示例
@@ -136,6 +138,19 @@ Page({
     })
     fn()
     wx.hideNavigationBarLoading();
+  },
+  async getminorUserInfo(openId) {
+    let params = {
+      openId: openId,
+    }
+    const minorUserInfo = await get("/weapp/minorUserInfo",
+      params
+    );
+    console.log(minorUserInfo)
+    this.setData({
+      minorUserInfo:minorUserInfo.data
+
+    })
   },
   //瀑布流用到的函数
   onReachBottom: function () {
