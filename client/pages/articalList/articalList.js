@@ -5,7 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    val:''
+    val:'',
+    noMore: false,
+    pageSize: 10,
+    pageNo: 0, // 从0开始
   },
 
   /**
@@ -31,19 +34,19 @@ Page({
   onShow: function () {
 
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  _doRefreshMasonry(items) {
+    this.masonryListComponent = this.selectComponent('#masonry');
+    this.masonryListComponent.start(items).then(() => {
+      console.log('refresh completed')
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  _doAppendMasonry(items) {
+    this.masonryListComponent = this.selectComponent('#masonry')
+    // 获取接口数据后使用瀑布流组件append方法，当append完成后调用then，是否可触底价在的标志位可以在这里处理
+    this.masonryListComponent.append(items).then(() => {
+      console.log('refresh completed')
+    })
   },
 
   /**
@@ -57,7 +60,14 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    if (!this.data.noMore) {
+      this.setData({
+        pageNo: this.data.pageNo + 1
+      })
+      this.getSwiperList((res) => {
+        this._doAppendMasonry(res)
+      })
+    }
   },
 
   /**

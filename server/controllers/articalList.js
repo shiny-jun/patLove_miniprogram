@@ -8,6 +8,7 @@ module.exports = async(ctx) => {
         value,
         openId,
         articalId,
+        search,
         pageSize,
         pageNo
     } = ctx.request.query
@@ -38,8 +39,12 @@ module.exports = async(ctx) => {
             detail = await sql
         } else {
             count = await getCount('value', value)
-            detail = await mysql('articallist').select().where('animalvalue', value).limit(pageSize).offset(pageNo * pageSize)
+            detail = await mysql('articallist').select().where('animalvalue','like', '%'+value+'%').limit(pageSize).offset(pageNo * pageSize)
         }
+    
+    } else if(search){
+        count = await getCount('title', '%'+search+'%')
+        detail = await mysql('articallist').select().where('title','like','%'+search+'%').limit(pageSize).offset(pageNo * pageSize)
     } else if (openId) {
         count = await getCount('openId', openId)
         detail = await mysql('articallist').select().where('openId', openId).limit(pageSize).offset(pageNo * pageSize)
@@ -88,6 +93,8 @@ async function getCount(type, value, followers) {
             count = await mysql('articallist').select().count()
         }
         res = count[0]['count(*)']
+    } else {
+        count = await mysql('articallist').select().count().where(type,'like', value)
     }
     return res
 }

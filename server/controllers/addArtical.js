@@ -19,11 +19,11 @@ module.exports = async (ctx) => {
         delete form['patList']
         let animalvalue = [],patIdArr=[]
         patList.forEach((item,index)=>{
-            animalvalue.push(item.name)
-            patIdArr.push(item.patId)
+            animalvalue.push(item.value)
+        delete item['value']
         })
         form.animalvalue = JSON.stringify(animalvalue) 
-        form.patIdArr = JSON.stringify(patIdArr)
+        form.patIdArr = JSON.stringify(patList)
         // 处理照片数组
         let imageList = form.imageList
         delete form['imageList']

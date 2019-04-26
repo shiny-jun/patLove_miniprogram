@@ -87,7 +87,8 @@ Page({
         if (selectArray.indexOf(item.patId) != -1) {
           let obj = {
             patId: item.patId,
-            name: item.name
+            name: item.name,
+            value: item.animalName
           }
           resArr.push(obj)
         }

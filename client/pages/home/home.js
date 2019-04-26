@@ -26,8 +26,8 @@ Page({
   onLoad: function () {
     wx.showNavigationBarLoading();
     // this.getToken()
-    this.getSwiperList(() => {
-      this._doRefreshMasonry(this.data.articals)
+    this.getSwiperList((res) => {
+      this._doRefreshMasonry(res)
     })
   },
   //瀑布流用到的函数
@@ -36,8 +36,8 @@ Page({
       this.setData({
         pageNo: this.data.pageNo + 1
       })
-      this.getSwiperList(() => {
-        this._doAppendMasonry(this.data.articals)
+      this.getSwiperList((res) => {
+        this._doAppendMasonry(res)
       })
     }
   },
@@ -123,12 +123,13 @@ Page({
   currentChange(e) {
     let currentVal = e.detail
     this.setData({
-      currentVal
+      currentVal,
+      pageNo: 0
     })
-    this.getArticalList()
-    // this.getSwiperList(() => {
-    //   this._doRefreshMasonry(this.data.articals)
-    // })
+    console.log(currentVal)
+    this.getArticalList((res) => {
+      this._doRefreshMasonry(res)
+    })
   },
   //获取文章列表
   async getArticalList(fn) {
@@ -162,11 +163,11 @@ Page({
         noMore: true
       })
     }
-    this.setData({
-      articals: articals.list
-    })
+    // this.setData({
+    //   articals: articals.list
+    // })
     if (fn) {
-      fn()
+      fn(articals.list)
     }
     wx.hideNavigationBarLoading();
   },

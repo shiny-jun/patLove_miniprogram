@@ -1,5 +1,7 @@
 {
   "usingComponents": {
-    "searchBar":"/components/searchBar/searchBar"
+    "searchBar":"/components/searchBar/searchBar",
+    "masonry": "../../components/masonry/masonry",
+    "acticalItem":"/components/acticalItem/acticalItem"
   }
 }
