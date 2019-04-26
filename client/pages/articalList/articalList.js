@@ -1,12 +1,18 @@
 // pages/articalList/articalList.js
+import {
+  get
+} from "../../utils/index.js";
+const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    val:'',
+    val: '',
+    current: 1,
     noMore: false,
+    userList: [],// 用户列表
     pageSize: 10,
     pageNo: 0, // 从0开始
   },
@@ -18,6 +24,12 @@ Page({
     let val = options.value
     this.setData({
       val
+    })
+    wx.setNavigationBarTitle({
+      title: val
+    })
+    this.getArticalList((res) => {
+      this._doRefreshMasonry(res)
     })
   },
 
@@ -61,20 +73,102 @@ Page({
    */
   onReachBottom: function () {
     if (!this.data.noMore) {
-      this.setData({
-        pageNo: this.data.pageNo + 1
-      })
-      this.getSwiperList((res) => {
-        this._doAppendMasonry(res)
-      })
+      if (this.data.current == 1) {
+        this.setData({
+          pageNo: this.data.pageNo + 1
+        })
+        this.getArticalList((res) => {
+          this._doAppendMasonry(res)
+        })
+      } else {
+        this.getUserList((res) => {
+          let userList = this.data.userList
+          userList.concat(res)
+          this.setData({
+            userList
+          })
+        })
+      }
+
     }
   },
+  // 用于切换current
+  changeCurrent(e) {
+    let current = e.currentTarget.dataset.current
+    if (current !== this.data.current) {
+      this.setData({
+        current
+      })
+      this.pageNo = 0
+      if (current == 1) {
+        this.getArticalList((res) => {
+          this._doRefreshMasonry(res)
+        })
+      } else {
+        this.getUserList((res) => {
+          this.setData({
+            userList: res
+          })
+        })
+      }
+    }
 
+  },
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
 
+  },
+  async getArticalList(fn) {
+    console.log(2)
+    wx.showNavigationBarLoading();
+    let params = {}
+    params = {
+      search: this.data.val,
+    }
+
+    params.pageSize = this.data.pageSize
+    params.pageNo = this.data.pageNo
+    const articals = await get("/weapp/articalList",
+      params
+    );
+    console.log(articals)
+    if (articals.length < this.data.pageSize) {
+      this.setData({
+        noMore: true
+      })
+    }
+    // this.setData({
+    //   articals: articals.list
+    // })
+    if (fn) {
+      fn(articals.list)
+    }
+    wx.hideNavigationBarLoading();
+  },
+  async getUserList() {
+    wx.showNavigationBarLoading();
+    let params = {}
+    params.search = this.data.val,
+      params.pageSize = this.data.pageSize
+    params.pageNo = this.data.pageNo
+    const userInfo = await get("/weapp/getUserList",
+      params
+    );
+    console.log(userInfo)
+    if (userInfo.length < this.data.pageSize) {
+      this.setData({
+        noMore: true
+      })
+    }
+    // this.setData({
+    //   userInfo: userInfo.list
+    // })
+    if (fn) {
+      fn(userInfo.list)
+    }
+    wx.hideNavigationBarLoading();
   }
-  
+
 })

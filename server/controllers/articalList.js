@@ -95,6 +95,7 @@ async function getCount(type, value, followers) {
         res = count[0]['count(*)']
     } else {
         count = await mysql('articallist').select().count().where(type,'like', value)
+        res = count[0]['count(*)']
     }
     return res
 }

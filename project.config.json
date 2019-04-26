@@ -13,5 +13,7 @@
 	},
 	"appid": "wx9ccb262232e0729a",
 	"projectname": "patLove_miniprogram",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {}
 }

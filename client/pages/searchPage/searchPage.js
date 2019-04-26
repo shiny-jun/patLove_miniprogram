@@ -13,7 +13,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
   },
 
   /**
@@ -66,38 +66,39 @@ Page({
   },
   handleInput(val) {
     let value = val.detail
-    if(value)
-    if (value) {
-      // 历史记录保存
-      let historystr = wx.getStorageSync('historys')
-      let res = ''
-      if (historystr) {
-        let historys = JSON.parse(historystr)
-        historys.unshift(value)
-        if (historys.length > 20) {
-          historys.slice(0, 20)
+    if (value)
+      if (value) {
+        // 历史记录保存
+        let historystr = wx.getStorageSync('historys')
+        let res = ''
+        if (historystr) {
+          let historys = JSON.parse(historystr)
+          let index = historys.indexOf(value)
+          if (index != -1) {
+            historys.splice(index, 1)
+          }
+          historys.unshift(value)
+          if (historys.length > 20) {
+            historys.slice(0, 20)
+          }
+          res = JSON.stringify(historys)
+        } else {
+          let historys = []
+          historys.unshift(value)
+          res = JSON.stringify(historys)
         }
-        res = JSON.stringify(historys)
-      } else {
-        let historys = []
-        historys.unshift(value)
-        res = JSON.stringify(historys)
+        wx.setStorageSync('historys', res)
+        // 跳转
+        this.goArticalList(value)
       }
-      wx.setStorageSync('historys', res)
-      // 跳转
-      wx.navigateTo({
-        url: '/pages/articalList/articalList?value='+value,
-        success: function(res){
-          // success
-        },
-        fail: function() {
-          // fail
-        },
-        complete: function() {
-          // complete
-        }
-      })
-    }
+  },
+  bindHistory(e){
+    this.goArticalList(e.currentTarget.dataset.value)
+  },
+  goArticalList(value) {
+    wx.navigateTo({
+      url: '/pages/articalList/articalList?value=' + value,
+    })
   },
   getHistorys() {
     let historystr = wx.getStorageSync('historys')

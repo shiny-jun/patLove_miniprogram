@@ -36,7 +36,7 @@ Page({
       this.setData({
         pageNo: this.data.pageNo + 1
       })
-      this.getSwiperList((res) => {
+      this.getArticalList((res) => {
         this._doAppendMasonry(res)
       })
     }

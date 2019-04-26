@@ -3,7 +3,9 @@ let qcloud = require('../../vendor/wafer2-client-sdk/index')
 let config = require('../../config')
 import util from "../../utils/util";
 import {
-  get,showSuccess
+  get,
+  post,
+  showSuccess
 } from "../../utils/index.js";
 let app = getApp();
 const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
@@ -18,7 +20,7 @@ Page({
     pageSize: 10,
     pageNo: 0, // 从0开始
     articals: [],
-    minorUserInfo:{}
+    minorUserInfo: {}
   },
   onLoad() {
     new util(this);
@@ -62,6 +64,7 @@ Page({
           console.log(res)
           let userInfoStr = JSON.stringify(res)
           console.log(userInfoStr)
+          // this.markUserMsg(userInfoStr)
           wx.setStorageSync('userInfo', userInfoStr)
           app.globalData.openId = res.openId
           app.globalData.avatarUrl = res.avatarUrl
@@ -87,12 +90,18 @@ Page({
           console.log(res)
           let userInfoStr = JSON.stringify(res)
           console.log(userInfoStr)
+          this.markUserMsg(userInfoStr)
           wx.setStorageSync('userInfo', userInfoStr)
           app.globalData.openId = res.openId
           app.globalData.avatarUrl = res.avatarUrl
           app.globalData.nickName = res.nickName
           app.globalData.gender = res.gender
           app.globalData.city = res.city
+          // 获取文章列表
+          this.getArticalList(userInfo.openId, () => {
+            this._doRefreshMasonry(this.data.articals)
+          })
+          this.getminorUserInfo(userInfo.openId)
         },
         fail: err => {
           console.error(err)
@@ -118,7 +127,7 @@ Page({
     })
   },
   //获取文章列表
-  async getArticalList(openId,fn) {
+  async getArticalList(openId, fn) {
     console.log(2)
     let params = {
       openId: openId,
@@ -130,9 +139,10 @@ Page({
     );
     console.log(articals)
     let noMore = false
-    if(articals.list.length<this.data.pageSize){
+    if (articals.list.length < this.data.pageSize) {
       noMore = true
-    }this.setData({
+    }
+    this.setData({
       articals: articals.list,
       noMore
     })
@@ -148,9 +158,16 @@ Page({
     );
     console.log(minorUserInfo)
     this.setData({
-      minorUserInfo:minorUserInfo.data
+      minorUserInfo: minorUserInfo.data
 
     })
+  },
+  // 首次登陆记录用户信息
+  async markUserMsg(userInfoStr) {
+    const res = await post("/weapp/markUserMsg", {
+      userInfoStr
+    });
+    console.log(res)
   },
   //瀑布流用到的函数
   onReachBottom: function () {
