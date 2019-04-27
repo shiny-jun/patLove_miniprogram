@@ -7,7 +7,7 @@
         </view>
         <view class="history-wrapper">
             <block wx:for="{{historys}}" wx:key="history">
-                <view class="history-item">
+                <view class="history-item" data-value="{{item}}" bindtap="bindHistory">
                     {{item}}
                 </view>
             </block>

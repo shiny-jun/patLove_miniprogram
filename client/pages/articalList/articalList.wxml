@@ -1,43 +1,22 @@
 <!-- pages/articalList/articalList.wxml -->
 <view class='page'>
     <searchBar canuse="{{false}}" val="{{val}}" ></searchBar>
-    <view class="current-tab">
+    <!-- <view class="current-tab">
         <view class="">文章</view>
         <view class="">用户</view>
+    </view> -->
+    <view class='top-tab flex'>
+      <view class="{{current==1?'active':''}} btn" data-current='1' bindtap='changeCurrent'>
+        <view>文章</view>
+      </view>
+      <view class="{{current==2?'active':''}} btn" data-current='2' bindtap='changeCurrent'>
+        <view>用户</view>
+      </view>
     </view>
     <view class="actical-wrapper">
-        <block wx:key="unique">
-            <view>
-                <view class="masonry">
-                    <view class="item item-left">
-                        1
-                        <acticalItem></acticalItem>
-                    </view>
-                    <view class="item item-left">
-                        2
-                        <acticalItem></acticalItem>
-                    </view>
-                    <view class="item item-left">
-                        3
-                        <acticalItem></acticalItem>
-                    </view>
-                    <view class="item item-right">
-                        4
-                        <acticalItem></acticalItem>
-                    </view>
-                    <view class="item item-right">
-                        5
-                        <acticalItem></acticalItem>
-                    </view>
-                    <view class="item item-right">
-                        6
-                        <acticalItem></acticalItem>
-                    </view>
-                </view>
-            </view>
-        </block>
+        <masonry generic:masonry-item="acticalItem" id="masonry" interval-width="20rpx"></masonry>
+      <view class="no-more" v-if="{{noMore}}">暂无更多</view>
     </view>
     <view class="user-wrapper" hover-class="none" hover-stop-propagation="false">
-        
     </view>
 </view>

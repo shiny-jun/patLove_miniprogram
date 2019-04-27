@@ -9,15 +9,15 @@
       <view class='msg-info'>
         <view class='flex'>
           <view class='part'>
-            <view class='num'>66</view>
+            <view class='num'>{{minorUserInfo.followingCount}}</view>
             <view class='title'>关注</view>
           </view>
           <view class='part'>
-            <view class='num'>1234</view>
+            <view class='num'>{{minorUserInfo.followerCount}}</view>
             <view class='title'>粉丝</view>
           </view>
           <view class='part'>
-            <view class='num'>3.3w</view>
+            <view class='num'>{{minorUserInfo.likeCount}}</view>
             <view class='title'>点赞量</view>
           </view>
         </view>
@@ -38,7 +38,7 @@
           <text>哈奇士</text>
         </view> -->
       </view>
-      <view class='Introduction'>hello,欢迎光临</view>
+      <view class='Introduction'>{{minorUserInfo.signature[0].signature}}</view>
     </view>
   </view>
   <view class="content">

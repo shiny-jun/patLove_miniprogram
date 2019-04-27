@@ -2,7 +2,7 @@
 //   uploadFile
 // } from '../../utils/qiniuUpImage'
 import {
-  get,post
+  get,post,showSuccess
 } from "../../utils/index.js";
 const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
 import qiniuUploader from '../../utils/qiniuUploader'
@@ -180,6 +180,14 @@ Page({
     form.location = this.data.location
     form.openId = app.globalData.openId
     let formStr = JSON.stringify(form)
-    const submitForm = await post("/weapp/addArtical", { formStr });
+    const res = await post("/weapp/addArtical", { formStr });
+    if (res.data == 'ok') {
+      showSuccess('发布成功')
+      setTimeout(() => {
+        wx.navigateBack({
+          delta: 1, // 回退前 delta(默认为1) 页面
+        })
+      }, 2000)
+    }
   },
 })
