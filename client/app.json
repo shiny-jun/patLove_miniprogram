@@ -13,7 +13,8 @@
     "pages/patType/patType",
     "pages/userDataEdit/userDataEdit",
     "pages/patType/patDetail/patDetail",
-    "pages/articalList/articalList"
+    "pages/articalList/articalList",
+    "pages/articalDetail/articalDetail"
   ],
   "window": {
     "backgroundColor": "#ffffff",

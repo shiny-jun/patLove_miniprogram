@@ -1,16 +1,16 @@
 <!-- components/acticalItem/acticalItem.wxml -->
-<view class="actical-item-wrapper">
+<view class="actical-item-wrapper" bindtap="goDetail" data-id="{{item.articalId}}">
     <view class="image">
-        <image class="" src="https://gss2.bdstatic.com/9fo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike180%2C5%2C5%2C180%2C60/sign=e90f5c043bd12f2eda08a6322eabbe07/9358d109b3de9c8243bbc45c6181800a18d84302.jpg" mode="widthFix"></image>
+        <image class="" src="{{item.images[0].imgSrc}}" mode="widthFix"></image>
     </view>
     <view class="content">
         <view class="title">{{item.title}}</view>
         <view class="bottom flex">
             <view class="left">
                 <view class="avatar">
-                    <image class="" src="https://gss2.bdstatic.com/9fo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike180%2C5%2C5%2C180%2C60/sign=e90f5c043bd12f2eda08a6322eabbe07/9358d109b3de9c8243bbc45c6181800a18d84302.jpg" mode='widthFix'></image>
+                    <image class="" src="{{item.userInfo.avatar}}" mode='widthFix'></image>
                 </view>
-                ikun
+                {{item.userInfo.nickName}}
             </view>
             <view class="right">
                 <icon class="iconfont icon-shoucang"></icon>
