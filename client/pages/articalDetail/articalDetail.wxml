@@ -1,13 +1,29 @@
 <!--pages/articalDetail/articalDetail.wxml-->
-<view class="" hover-class="none" hover-stop-propagation="false">
-    <view class="swiper" hover-class="none" hover-stop-propagation="false">
-        <swiper indicator-dots autoplay circular interval="2000" duration="500" previous-margin="0" next-margin="0">
-        <block wx:for="{{articalDetail.images}}" wx:key="*this">
-          <swiper-item>
-            <image src="{{item.imgSrc}}"></image>
-          </swiper-item>
-        </block>
-      </swiper>
+<view class="head">
+  <view class="header">
+    <view class='left'>
+      <view class='avatar'>
+        <image src='{{articalDetail.userInfo.avatar}}'></image>
+      </view>
+      <view class='nickname'>{{articalDetail.userInfo.nickName}}</view>
     </view>
-    
+    <view class='right'>
+      <button>关注</button>
+      <button>取关</button>
+      <view class='more-btn'>···</view>
+    </view>
+  </view>
+  <view class="swiper" hover-class="none" hover-stop-propagation="false">
+    <swiper indicator-dots autoplay circular interval="2000" duration="500" previous-margin="0" bindchange="bindchange" next-margin="0" style="height:{{imgheights[current]}}rpx;">
+      <block wx:for="{{articalDetail.images}}" wx:key="this">
+        <swiper-item>
+          <image src="{{item.imgSrc}}" data-id='{{index}}' mode="widthFix" style="width:100%" bindload="imageLoad"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+</view>
+<view class='content'>
+  <view class='title'>{{articalDetail.title}}</view>
+  <view class='title'>{{articalDetail.content}}</view>
 </view>
