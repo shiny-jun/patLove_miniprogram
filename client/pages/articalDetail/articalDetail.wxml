@@ -3,13 +3,13 @@
   <view class="header">
     <view class='left'>
       <view class='avatar'>
-        <image src='{{articalDetail.userInfo.avatar}}'></image>
+        <image src='{{articalDetail.userInfo.avatar}}' mode="widthFix"></image>
       </view>
       <view class='nickname'>{{articalDetail.userInfo.nickName}}</view>
     </view>
     <view class='right'>
-      <button>关注</button>
-      <button>取关</button>
+      <view class="follow btn">关注</view>
+      <view class="nofollow btn">取关</view>
       <view class='more-btn'>···</view>
     </view>
   </view>

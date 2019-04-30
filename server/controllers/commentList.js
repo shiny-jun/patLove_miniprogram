@@ -11,7 +11,7 @@ module.exports = async(ctx) => {
     } = ctx.request.query
     const detail = await mysql('commentlist').whereIn('articalId', articalId)
     for (let i = 0; i < detail.length; i++) {
-        let userObj = await mysql('cSessionInfo').select('user_info').where('articalId', detail[i].openId)
+        let userObj = await mysql('cSessionInfo').select('user_info').where('open_id', detail[i].openId)
         let user = JSON.parse(userObj[i].user_info)
         let userInfo = {
             nickName: user.nickName,

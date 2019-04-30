@@ -1,1 +1,42 @@
 /* pages/articalDetail/articalDetail.wxss */
+.head{
+
+}
+.header{
+  padding: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.left,.right{
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.avatar{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.avatar image{
+    width:80rpx;
+  }
+ .right .btn{
+    width: 100rpx;
+    padding: 0;
+    height: 46rpx;
+    line-height: 46rpx;
+    font-size: 30rpx;
+    background-color: #ffffff;
+    border-radius: 46rpx;
+    text-align: center;
+  }
+  .follow{
+    border: 1rpx solid #b93634;
+    color: #b93634;
+  }
+.nofollow{
+    border: 1rpx solid #999999;
+    color: #999999;
+  }

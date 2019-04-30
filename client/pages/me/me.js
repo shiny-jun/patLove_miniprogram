@@ -98,10 +98,10 @@ Page({
           app.globalData.gender = res.gender
           app.globalData.city = res.city
           // 获取文章列表
-          this.getArticalList(userInfo.openId, () => {
+          this.getArticalList(res.openId, () => {
             this._doRefreshMasonry(this.data.articals)
           })
-          this.getminorUserInfo(userInfo.openId)
+          this.getminorUserInfo(res.openId)
         },
         fail: err => {
           console.error(err)
