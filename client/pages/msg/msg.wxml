@@ -1,12 +1,12 @@
 <!-- pages/msg/msg.wxml -->
 <view class="page">
     <view class="item-wrapper">
-        <view class="item">
+        <view class="item" bindtap="goMsgList" data-type="comment">
             <icon class="iconfont icon-pinglun"></icon>
             <text class="item-desc">评论</text>
             <icon class="iconfont icon-right"></icon>
         </view>
-        <view class="item">
+        <view class="item" bindtap="goMsgList" data-type="like">
             <icon class="iconfont icon-zan2"></icon>
             <text class="item-desc">点赞</text>
             <icon class="iconfont icon-right"></icon>
@@ -16,7 +16,7 @@
         <view class="item">
             <icon class="iconfont icon-xitongxiaoxi"></icon>
             <text class="item-desc">系统消息</text>
-            <icon class="iconfont icon-right"></icon>
+            <!-- <icon class="iconfont icon-right"></icon> -->
         </view>
     </view>
     <view wx:for="{{newsList}}" wx:key='$this' >

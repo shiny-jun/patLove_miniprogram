@@ -14,7 +14,8 @@ module.exports = async (ctx) => {
         form.articalId = Number(form.articalId)
         try {
             let id = await mysql('commentlist').insert(form).returning('commentId')
-            await mysql('msglist').insert({openId:form.openId,type:'comment',CommentId:id})
+            let author = await mysql('articallist').select('openId').where({articalId:form.articalId}).first()
+            await mysql('msglist').insert({openId:author.openId,type:'comment',CommentId:id})
             ctx.state.data = {
                 data: 'ok',
                 msg: 'success'

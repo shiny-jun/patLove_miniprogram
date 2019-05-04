@@ -76,6 +76,8 @@ router.post('/markUserMsg', controllers.markUserMsg)
 router.post('/likeChange', controllers.likeChange)
 // get:likeArtical 获取收藏笔记
 router.get('/likeArtical', controllers.likeArtical)
-// post:followChange 修改收藏状态
+// post:followChange 修改关注状态
 router.post('/followChange', controllers.followChange)
+// get:msgList 获取消息列表
+router.get('/msgList', controllers.msgList)
 module.exports = router

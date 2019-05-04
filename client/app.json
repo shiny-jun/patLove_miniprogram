@@ -9,6 +9,7 @@
     "pages/searchPage/searchPage",
     "pages/addArtical/selectPat/selectPat",
     "pages/msg/msg",
+    "pages/msg/msgList/msgList",
     "pages/dictionary/dictionary",
     "pages/index/index",
     "pages/me/myPatList/myPatList",
@@ -22,7 +23,7 @@
     "backgroundColor": "#ffffff",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#f8d98f",
-    "navigationBarTitleText": "Wafer Quick Start",
+    "navigationBarTitleText": "patLove",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

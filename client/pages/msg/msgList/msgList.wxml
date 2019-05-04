@@ -1,0 +1,7 @@
+<!--pages/msg/msgList/msgList.wxml-->
+<view class="msgList">
+    <view wx:for="{{newsList}}" wx:key='$this' >
+      <item-view id='newsItem' item='{{item}}' bindavaterClick='avaterClick' binditemClick='itemClick' bindreAttention='reAttention'/>
+    </view>
+     <view class="user-no-more" v-if="{{noMore}}">暂无更多</view>
+</view>

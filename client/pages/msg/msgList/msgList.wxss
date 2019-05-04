@@ -1,0 +1,8 @@
+/* pages/msg/msgList/msgList.wxss */
+.user-no-more{
+    background-color: #ffffff;
+    text-align: center;
+    color: #999999;
+    font-size: 28rpx;
+    padding: 30rpx 0 60rpx;
+  }

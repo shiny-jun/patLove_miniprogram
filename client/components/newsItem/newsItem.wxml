@@ -1,20 +1,19 @@
 <wxs module="filters" src="../../pages/inc/filters.wxs"></wxs>
 
 <view class='item-view'>
-  <image class='avatar' catchtap='_avaterClick' src='{{item.avatar}}' />
+  <image class='avatar' catchtap='_avaterClick' src='{{item.userInfo.avatarUrl}}' />
 
   <view class='contant' bindtap='_itemClick'>
     <block>
-      <view class='contant-title' wx:if='{{item.type == "ZAN"}}'>{{item.otherUserName}} 赞了你的{{item.place}}</view>
-      <view class='contant-title' wx:if='{{item.type == "ATTENTION"}}'>{{item.otherUserName}} 开始关注你了</view>
-      <view class='contant-title' wx:if='{{item.type == "COMMENT"}}'>{{item.otherUserName}} 评论了你</view>
+      <view class='contant-title' wx:if='{{item.type == "like"}}'>{{item.userInfo.nickName}} 赞了你的笔记</view>
+      <view class='contant-title' wx:if='{{item.type == "follow"}}'>{{item.userInfo.nickName}} 开始关注你了</view>
+      <view class='contant-title' wx:if='{{item.type == "comment"}}'>{{item.userInfo.nickName}} 评论了你</view>
     </block>
     <block>
-      <view class='contact-desc' wx:if='{{item.type == "COMMENT"}}'>{{item.comment}}</view>
-      <view class='contact-desc' wx:else>{{filters.formatTime(item.time)}}</view>
+      <view class='contact-desc' wx:if='{{item.type == "comment"}}'>{{item.commentMsg.content}}</view>
+      <view class='contact-desc' wx:else>{{item.time}}</view>
     </block>
   </view>
-
-  <image class='item-img' mode='aspectFill' src='{{item.img}}' wx:if='{{item.img && item.type != "ATTENTION"}}'/>
-  <view class='re-attention' catchtap='_reAttention' wx:if='{{item.type == "ATTENTION"}}'>回粉</view>
+  <image class='item-img' mode='aspectFill' src='{{item.articalImg}}' wx:if='{{item.articalImg && item.type != "follow"}}'/>
+  <view class='re-attention' catchtap='_reAttention' wx:if='{{item.type == "follow"}}'>回粉</view>
 </view>

@@ -66,3 +66,14 @@ export function login(userInfo, callback, reset) {
     }
   })
 }
+
+// 弹窗封装
+export function getTime(time) {
+  let dt = new Date(time)
+  let y = dt.getFullYear()
+  let m = dt.getMonth()+1<10?'0'+(dt.getMonth()+1):dt.getMonth()+1
+  let d = dt.getDate()<10?'0'+dt.getDate():dt.getDate()
+  let h = dt.getHours()<10?'0'+dt.getHours():dt.getHours()
+  let mm = dt.getMinutes()<10?'0'+dt.getMinutes():dt.getMinutes()
+  return `${y}-${m}-${d} ${h}:${mm}`
+}

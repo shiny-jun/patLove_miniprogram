@@ -21,7 +21,8 @@ module.exports = async (ctx) => {
     if (like=="true") {
         try {
             let id = await mysql('likelist').insert(params).returning('likeId')
-            await mysql('msglist').insert({openId,type:'like',likeId:id})
+            let author = await mysql('articallist').select('openId').where({articalId}).first()
+            await mysql('msglist').insert({openId:author.openId,type:'like',likeId:id})
             ctx.state.data = {
                 data: 'ok',
                 msg: 'success'
@@ -35,7 +36,10 @@ module.exports = async (ctx) => {
             }
         }
     } else {
+        let id =  await mysql('likelist').select('likeId').where(params).first()
         await mysql('likelist').where(params).del()
+        let author = await mysql('articallist').select('openId').where({articalId}).first()
+        await mysql('msglist').where({openId:author.openId,type:'like',likeId:id.likeId}).del()
         try {
             ctx.state.data = {
                 data: 'ok',

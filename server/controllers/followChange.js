@@ -16,12 +16,10 @@ module.exports = async (ctx) => {
         following
     }
     // console.log(typeof like)
-    console.log(openId)
-    console.log(following)
     if (follow=="true") {
         try {
-            await mysql('followlist').insert(params)
-            await mysql('msglist').insert({openId,type:'follow'})
+            let id = await mysql('followlist').insert(params).returning('followId')
+            await mysql('msglist').insert({openId:following,type:'follow',followId:id})
             ctx.state.data = {
                 data: 'ok',
                 msg: 'success'
@@ -35,7 +33,10 @@ module.exports = async (ctx) => {
             }
         }
     } else {
+        let id = await mysql('followlist').select('followId').where(params).first()
+        console.log(id)
         await mysql('followlist').where(params).del()
+        await mysql('msglist').where({openId:following,type:'follow',followId:id.followId}).del()
         try {
             ctx.state.data = {
                 data: 'ok',
