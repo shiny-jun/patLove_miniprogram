@@ -67,7 +67,15 @@ router.post('/delete', controllers.delete)
 // post:getSignature 更改个人签名
 router.post('/signature', controllers.postSignature)
 // get:commentList 评论列表
-router.post('/commentList', controllers.commentList)
+router.get('/commentList', controllers.commentList)
+// post:addComment 评论列表
+router.post('/addComment', controllers.addComment)
 // post:markUserMsg 登记用户信息
 router.post('/markUserMsg', controllers.markUserMsg)
+// post:likeChange 修改收藏状态
+router.post('/likeChange', controllers.likeChange)
+// get:likeArtical 获取收藏笔记
+router.get('/likeArtical', controllers.likeArtical)
+// post:followChange 修改收藏状态
+router.post('/followChange', controllers.followChange)
 module.exports = router

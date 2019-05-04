@@ -1,6 +1,6 @@
-<!--pages/articalDetail/articalDetail.wxml-->
+<!-- pages/articalDetail/articalDetail.wxml -->
 <view class="head">
-  <view class="header">
+  <view class="header" bindtap="goUserhome">
     <view class='left'>
       <view class='avatar'>
         <image src='{{articalDetail.userInfo.avatar}}' mode="widthFix"></image>
@@ -8,13 +8,17 @@
       <view class='nickname'>{{articalDetail.userInfo.nickName}}</view>
     </view>
     <view class='right'>
-      <view class="follow btn">关注</view>
-      <view class="nofollow btn">取关</view>
-      <view class='more-btn'>···</view>
+      <block wx:if="{{openId!==articalDetail.userInfo.openId}}">
+        <view class='more-btn' catchtap="getMore">···</view>
+      </block>
+      <block wx:else>
+        <view class="follow btn" wx:if="{{!follow}}" catchtap="followChange" data-follow="follow">关注</view>
+        <view class="nofollow btn" wx:else catchtap="followChange" data-follow="nofollow">已关注</view>
+      </block>
     </view>
   </view>
-  <view class="swiper" hover-class="none" hover-stop-propagation="false">
-    <swiper indicator-dots autoplay circular interval="2000" duration="500" previous-margin="0" bindchange="bindchange" next-margin="0" style="height:{{imgheights[current]}}rpx;">
+  <view class="swiper">
+    <swiper indicator-dots circular interval="2000" duration="500" previous-margin="0" bindchange="bindchange" next-margin="0" style="height:{{imgheights[current]}}rpx;">
       <block wx:for="{{articalDetail.images}}" wx:key="this">
         <swiper-item>
           <image src="{{item.imgSrc}}" data-id='{{index}}' mode="widthFix" style="width:100%" bindload="imageLoad"></image>
@@ -23,7 +27,41 @@
     </swiper>
   </view>
 </view>
-<view class='content'>
+<view class='main'>
   <view class='title'>{{articalDetail.title}}</view>
-  <view class='title'>{{articalDetail.content}}</view>
+  <view class='content'>{{articalDetail.content}}</view>
+</view>
+<view class="msg">
+  <view class="location">
+    <icon class="iconfont icon-location"></icon>
+    {{articalDetail.location}}
+  </view>
+  <view class="control">
+    <view class="look">
+      <icon class="iconfont icon-eye1"></icon>
+      {{articalDetail.looked}}
+    </view>
+    <view class="like">
+      <icon class="iconfont icon-shoucang" style="color:{{like?'#b93634':'#999999'}}" bindtap="likeChange">
+        {{articalDetail.likeCount||0}}
+      </icon>
+    </view>
+    <view class="comment">
+      <icon class="iconfont icon-comment">{{commentlist.length||0}}</icon>
+    </view>
+  </view>
+</view>
+<form class="form" bindsubmit="formSubmit">
+  <view class="comment-text">
+    <textarea name="comment" id="" cols="30" rows="2" placeholder="请输入你的评论"></textarea>
+  </view>
+  <view class="submit-wrapper">
+    <button class="submit-btn" form-type="submit">提交</button>
+  </view>
+</form>
+<view class="comment-list">
+  <view class="comment-item" wx:for="{{commentlist}}" wx:key="commentList">
+    <text class="username">{{item.userInfo.nickName}}</text>
+    : {{item.content}}
+  </view>
 </view>

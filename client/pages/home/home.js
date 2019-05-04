@@ -89,7 +89,16 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.setData({
+      pageNo:0,
+      noMore:false
+    })
+    wx.showNavigationBarLoading();
+    // this.getToken()
+    this.getArticalList((res) => {
+      this._doRefreshMasonry(res)
+    })
+    wx.stopPullDownRefresh();
   },
 
   /**

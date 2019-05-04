@@ -2,11 +2,11 @@
 <view class="addArtical-wrapper">
   <form bindsubmit="formSubmit">
     <view class="title">
-      <input name="title" placeholder="来个很酷的标题让大家能搜到文章" />
+      <input name="title" value="{{form.title}}" placeholder="来个很酷的标题让大家能搜到文章" />
       <button class="submit-btn" form-type="submit">发布</button>
     </view>
     <view class="content">
-      <textarea name="content" placeholder="铲屎官在这里写下感想……" placeholder-style="width:100%; font-size:14px;" maxlength='1000' />
+      <textarea name="content" value="{{form.content}}" placeholder="铲屎官在这里写下感想……" placeholder-style="width:100%; font-size:14px;" maxlength='1000' />
     </view>
     <view class='images'>
       <view class='add-pic' wx:for="{{imageList}}" wx:key="images" bindtap="delImage" data-index="{{index}}">

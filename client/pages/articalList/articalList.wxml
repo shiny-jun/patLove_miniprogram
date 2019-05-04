@@ -13,10 +13,14 @@
         <view>用户</view>
       </view>
     </view>
-    <view class="actical-wrapper">
+    <view class="actical-wrapper" wx:if="{{current==1}}">
         <masonry generic:masonry-item="acticalItem" id="masonry" interval-width="20rpx"></masonry>
       <view class="no-more" v-if="{{noMore}}">暂无更多</view>
     </view>
-    <view class="user-wrapper" hover-class="none" hover-stop-propagation="false">
+    <view class="user-wrapper" wx:else>
+      <block wx:for="{{userList}}" wx:key="unqie">
+        <userItem msg="{{item}}" index="{{index}}" bindfollowChange="followChange"></userItem>
+      </block>
+      <view class="user-no-more" v-if="{{noMore}}">暂无更多</view>      
     </view>
 </view>

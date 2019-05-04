@@ -2,7 +2,9 @@
 //   uploadFile
 // } from '../../utils/qiniuUpImage'
 import {
-  get,post,showSuccess
+  get,
+  post,
+  showSuccess
 } from "../../utils/index.js";
 const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
 import qiniuUploader from '../../utils/qiniuUploader'
@@ -17,9 +19,10 @@ Page({
     imageList: [],
     patList: [],
     location: '',
-    form:{
-      title:'',
-      content:'',
+    articalId:'',
+    form: {
+      title: '',
+      content: '',
       imageList: [],
       patList: [],
       location: '',
@@ -30,6 +33,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.articalId) {
+      let articalId = options.articalId
+      this.setData({articalId})
+      this.getArtical(articalId)
+    }
     this.getToken()
   },
   onShow() {
@@ -40,12 +48,8 @@ Page({
     let patListStr = wx.getStorageSync('selectPat')
     if (patListStr) {
       let patArr = JSON.parse(patListStr)
-      // let patList = []
-      // patArr.forEach(item => {
-      //   patList.push(item.name)
-      // })
       this.setData({
-        patList:patArr
+        patList: patArr
       })
     }
   },
@@ -175,12 +179,15 @@ Page({
   async formSubmit(e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
     let form = e.detail.value
-    form.imageList= this.data.imageList
+    form.imageList = this.data.imageList
     form.patList = this.data.patList
     form.location = this.data.location
     form.openId = app.globalData.openId
+    form.articalId = this.data.articalId
     let formStr = JSON.stringify(form)
-    const res = await post("/weapp/addArtical", { formStr });
+    const res = await post("/weapp/addArtical", {
+      formStr
+    });
     if (res.data == 'ok') {
       showSuccess('发布成功')
       setTimeout(() => {
@@ -190,4 +197,36 @@ Page({
       }, 2000)
     }
   },
+  //修改文章时获取文章内容
+  async getArtical(articalId) {
+    wx.showNavigationBarLoading();
+    const articals = await get("/weapp/articalList", {
+      articalId
+    });
+    let articalDetail = articals.list[0]
+    let imageList = []
+    articalDetail.images.forEach(item => {
+      imageList.push(item.imgSrc)
+    })
+    wx.setStorageSync('selectPat', articalDetail.patIdArr)
+    let animalvalue = JSON.parse(articalDetail.animalvalue)
+    let patList = JSON.parse(articalDetail.patIdArr)
+    patList.forEach((item,index)=>{
+      item.value = animalvalue[index]
+    })
+    let form = {
+      title: articalDetail.title,
+      content: articalDetail.content,
+      imageList: [],
+      patList: [],
+      location: '',
+    }  
+    this.setData({
+      form,
+      imageList,
+      patList,
+      location: articalDetail.location,
+    })
+    wx.hideNavigationBarLoading();
+  }
 })

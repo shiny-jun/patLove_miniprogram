@@ -8,11 +8,13 @@ const {
 module.exports = async(ctx) => {
     let {
         articalId,
+        pageNo,
+        pageSize
     } = ctx.request.query
-    const detail = await mysql('commentlist').whereIn('articalId', articalId)
+    const detail = await mysql('commentlist').where('articalId', articalId).limit(pageSize).offset(pageNo * pageSize).orderBy('commentId', 'desc')
     for (let i = 0; i < detail.length; i++) {
         let userObj = await mysql('cSessionInfo').select('user_info').where('open_id', detail[i].openId)
-        let user = JSON.parse(userObj[i].user_info)
+        let user = JSON.parse(userObj[0].user_info)
         let userInfo = {
             nickName: user.nickName,
             avatar: user.avatarUrl
@@ -21,6 +23,6 @@ module.exports = async(ctx) => {
     }
     console.log(detail)
     ctx.state.data = {
-        list: articalList
+        list: detail
     }
 }

@@ -13,8 +13,7 @@
                 {{item.userInfo.nickName}}
             </view>
             <view class="right">
-                <icon class="iconfont icon-shoucang"></icon>
-                <text>{{item.likeCount}}</text>
+                <icon class="iconfont icon-shoucang"></icon>{{item.likeCount}}
             </view>
         </view>
     </view>

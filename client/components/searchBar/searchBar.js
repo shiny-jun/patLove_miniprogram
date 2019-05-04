@@ -27,6 +27,7 @@ Component({
   pageLifetimes: {
     show() {
       // 在组件实例进入页面节点树时执行
+      console.log(this.data.val)
       if (this.data.val) {
         console.log(this.data.val)
         this.setData({
@@ -84,15 +85,15 @@ Component({
       })
     },
     valChange(e) {
-      console.log(e.detail.value)
       let val = e.detail.value;
+      console.log(val)
       this.setData({
         inpVal: val
       })
     },
     //pc测试用
     searchhandleInput() {
-      console.log(this.data.inpVal)
+      console.log(this.data.val)
       this.triggerEvent("handleInput", this.data.inpVal);
     }
   }

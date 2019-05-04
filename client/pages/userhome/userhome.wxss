@@ -1,0 +1,186 @@
+/* pages/userhome/userhome.wxss */
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .head{
+    width: 100%;
+  }
+  .userinfo {
+    height: 260rpx;
+    width: 100%;
+    background: #fff;
+    border-left: none;
+    border-right: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition: all 300ms ease;
+  }
+  
+  .userinfo-avatar {
+    width: 180rpx;
+    height: 180rpx;
+    margin: 20rpx;
+    border-radius: 50%;
+  }
+  
+  .userinfo-nickname {
+    font-size: 32rpx;
+    color: #007aff;
+    background-color: white;
+  }
+  
+  .userinfo-nickname::after {
+    border: none;
+  }
+  
+  .userinfo .msg-info{
+    flex: 1;
+  }
+  
+  .msg-info .part{
+    flex: 1;
+  }
+  
+  .msg-info .part>view{
+    text-align: center;
+  }
+  
+  .msg-info .part .num{
+    font-size: 32rpx;
+    font-weight: bold;
+  }
+  
+  .msg-info .part .title{
+    font-size: 24rpx;
+    color: #999999;
+  }
+  .btn-wrapper{
+    margin: 16rpx;
+  }
+  .btn-wrapper .btn{
+    /* display: inline-block; */
+    height: 56rpx;
+    line-height: 56rpx;
+    border-radius: 28rpx;
+    border: 1px solid #cccccc;
+    text-align: center;
+    margin: 0rpx 10rpx;
+  }
+  
+  .btn-msg{
+    flex: 3;
+    font-size: 24rpx;
+    font-weight: bold;
+  }
+  .setting{
+    flex: 1;
+  }
+  .setting .icon-shezhi{
+    position: relative;
+    top: -5rpx;
+    font-size: 36rpx;
+    height: 56rpx;
+    line-height: 56rpx;
+  }
+  .otherInfo{
+    padding: 10rpx;
+  }
+  .otherInfo .top{
+    justify-content: flex-start;
+  }
+  .otherInfo .top >view{
+    font-size: 24rpx;
+    padding: 0 20rpx;
+    border-right: 1rpx solid #cccccc; 
+  }
+  .otherInfo .top >view:last-child{
+    border-right:none;
+  }
+  .otherInfo .Introduction{
+    padding: 20rpx;
+    font-size: 28rpx;
+  }
+  .content{
+    width: 100%;
+  }
+  .content .top-tab{
+    width: 100%;
+    height: 80rpx;
+    padding: 0 200rpx;
+    box-sizing: border-box;
+    /* border-top: 1rpx solid #eeeeee; */
+    box-shadow: 0px 0px 2px 0px rgba(65, 47, 141, 0.1);
+  }
+  .top-tab .btn{
+    padding: 0 40rpx;
+    font-size: 32rpx;
+    color: #999999;
+  }
+  .top-tab .active>view{
+    color: #000000;
+    padding-bottom: 2rpx;
+    border-radius: 6rpx;
+    border-bottom: 6rpx solid #f8d98f;
+  }
+  /* content-part */
+  /* 弹窗样式 */
+  
+  .authorize-window {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 110vh;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
+  .window-wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 570rpx;
+    height: 470rpx;
+    border-radius: 6rpx;
+    background-color: #fff;
+  }
+  
+  .win-tips {
+    text-align: center;
+    font-size: 34rpx;
+    padding: 30rpx 0;
+    border-bottom: 1rpx solid #eaeaea;
+  }
+  
+  .win-content {
+    padding: 50rpx;
+  }
+  
+  .text {
+    padding-bottom: 55rpx;
+    font-size: 32rpx;
+  }
+  
+  .get-authorize {
+    background-color: #1aac1b;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .artical-wrapper{
+    margin: 20rpx;
+  }
+  .no-more{
+    text-align: center;
+    color: #999999;
+    font-size: 28rpx;
+    padding: 30rpx 0 60rpx;
+  }

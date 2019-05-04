@@ -1,8 +1,10 @@
 // pages/articalList/articalList.js
 import {
-  get
+  get,post,showSuccess
 } from "../../utils/index.js";
 const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
+let app = getApp();
+
 Page({
 
   /**
@@ -73,10 +75,10 @@ Page({
    */
   onReachBottom: function () {
     if (!this.data.noMore) {
+      this.setData({
+        pageNo: this.data.pageNo + 1
+      })
       if (this.data.current == 1) {
-        this.setData({
-          pageNo: this.data.pageNo + 1
-        })
         this.getArticalList((res) => {
           this._doAppendMasonry(res)
         })
@@ -97,9 +99,9 @@ Page({
     let current = e.currentTarget.dataset.current
     if (current !== this.data.current) {
       this.setData({
-        current
+        current,
+        pageNo : 0
       })
-      this.pageNo = 0
       if (current == 1) {
         this.getArticalList((res) => {
           this._doRefreshMasonry(res)
@@ -147,12 +149,14 @@ Page({
     }
     wx.hideNavigationBarLoading();
   },
-  async getUserList() {
+  //获取用户列表
+  async getUserList(fn) {
     wx.showNavigationBarLoading();
     let params = {}
     params.search = this.data.val,
-      params.pageSize = this.data.pageSize
+    params.pageSize = this.data.pageSize
     params.pageNo = this.data.pageNo
+    params.myId = app.globalData.openId
     const userInfo = await get("/weapp/getUserList",
       params
     );
@@ -169,6 +173,27 @@ Page({
       fn(userInfo.list)
     }
     wx.hideNavigationBarLoading();
+  },
+  //关注用户
+  async followChange(e){
+    let index = e.detail
+    let userList = this.data.userList
+    userList[index].follow=!userList[index].follow
+    this.setData({
+      userList
+    })
+    // console.log(this.data.like)
+    let res = await post("/weapp/followChange", {
+      follow: userList[index].follow,
+      openId: app.globalData.openId,
+      following: userList[index].openId
+    })
+    if (res.data == 'ok') {
+      if(this.data.follow){
+        showSuccess('关注成功')
+      } else {
+        showSuccess('取关成功')
+      }
+    }
   }
-
 })

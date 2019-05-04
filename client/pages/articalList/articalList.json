@@ -2,6 +2,7 @@
   "usingComponents": {
     "searchBar":"/components/searchBar/searchBar",
     "masonry": "../../components/masonry/masonry",
-    "acticalItem":"/components/acticalItem/acticalItem"
+    "acticalItem":"/components/acticalItem/acticalItem",
+    "userItem":"/components/userItem/userItem"
   }
 }

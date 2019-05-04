@@ -1,0 +1,14 @@
+<!-- components/userItem.wxml -->
+<view class="user-item" bindtap="goUserHome">
+    <view class="avatar">
+        <image src="{{msg.avatarUrl}}" mode="widthFix"/>
+    </view>
+    <view class="msg">
+        <view class="nickname">{{msg.nickName}}</view>
+        <view class="sex">{{msg.gender==1?'男':'女'}}</view>
+    </view>
+    <view class="btns" wx:if="{{type=='following'}}">
+        <view class="follow btn" wx:if="{{!msg.follow}}" catchtap="followChange">关注</view>
+        <view class="nofollow btn" wx:else catchtap="followChange">已关注</view>
+    </view>
+</view>

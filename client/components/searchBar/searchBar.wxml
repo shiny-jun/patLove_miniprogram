@@ -3,15 +3,15 @@
    <view class="bar" wx:if="{{!canuse}}">
        <view class="bar-wrapper" bindtap="goSearchPage">
            <icon class="iconfont icon-search"></icon>
-           <input class="input" value="{{inpVal}}" type="text" disabled />
-           <icon class="iconfont icon-del2" wx:if="{{inpVal}}"></icon>
+           <input class="input" value="{{val}}" type="text" disabled />
+           <icon class="iconfont icon-del2" wx:if="{{val}}"></icon>
        </view>
    </view>
    <view class="bar flex" wx:if="{{canuse}}">
        <view class="bar-wrapper">
            <icon class="iconfont icon-search"></icon>
-           <input class="input" value="{{inpVal}}" type="text" confirm-type="search" bindconfirm="handleInput" bindinput="valChange"/>
-           <icon class="iconfont icon-del2" wx:if="{{inpVal}}" catchtap="clearVal"></icon>
+           <input class="input" value="{{val}}" type="text" confirm-type="search" bindconfirm="handleInput" bindinput="valChange"/>
+           <icon class="iconfont icon-del2" wx:if="{{val}}" catchtap="clearVal"></icon>
        </view>
        <view class="close" bindtap="goback">取消</view> 
        <!-- 电脑端没有键盘右下角的搜索，用着先 -->

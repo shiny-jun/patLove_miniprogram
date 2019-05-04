@@ -1,0 +1,7 @@
+<!--pages/userList/userList.wxml-->
+<view class="userList">
+    <block wx:for="{{userList}}" wx:key="unqie">
+        <userItem msg="{{item}}" type="{{type}}" index="{{index}}" bindfollowChange="followChange"></userItem>
+      </block>
+      <view class="user-no-more" v-if="{{noMore}}">暂无更多</view>
+</view>

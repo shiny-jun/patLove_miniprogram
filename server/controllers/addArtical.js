@@ -17,19 +17,32 @@ module.exports = async (ctx) => {
         console.log(form)
         let patList = form.patList
         delete form['patList']
-        let animalvalue = [],patIdArr=[]
-        patList.forEach((item,index)=>{
+        let animalvalue = [],
+            patIdArr = []
+        patList.forEach((item, index) => {
             animalvalue.push(item.value)
-        delete item['value']
+            delete item['value']
         })
-        form.animalvalue = JSON.stringify(animalvalue) 
+        form.animalvalue = JSON.stringify(animalvalue)
         form.patIdArr = JSON.stringify(patList)
         // 处理照片数组
         let imageList = form.imageList
         delete form['imageList']
-        if (formStr.articalId) {
+        if (form.articalId) {
+            let articalId = Number(form.articalId)
             try {
-                await mysql('articallist').where('articalId', form.articalId).update(form)
+                await mysql('articallist').where('articalId', articalId).update(form)
+                // 删除图片地址
+                await mysql('imglist').where('articalId', articalId).del()
+                //保存图片地址
+                let len = imageList.length
+                for (let i = 0; i < len; i++) {
+                    let obj = {
+                        articalId: articalId,
+                        imgSrc: imageList[i]
+                    }
+                    await mysql('imglist').insert(obj)
+                }
                 ctx.state.data = {
                     data: 'ok',
                     msg: 'success'
@@ -45,12 +58,12 @@ module.exports = async (ctx) => {
         } else {
             try {
                 let id = await mysql('articallist').insert(form).returning('articalId')
-                if(id){
+                if (id) {
                     let len = imageList.length
-                    for(let i = 0;i<len;i++){
+                    for (let i = 0; i < len; i++) {
                         let obj = {
-                            articalId:id,
-                            imgSrc:imageList[i]
+                            articalId: id,
+                            imgSrc: imageList[i]
                         }
                         await mysql('imglist').insert(obj)
                     }

@@ -64,6 +64,7 @@ Page({
   onShareAppMessage: function () {
 
   },
+
   handleInput(val) {
     let value = val.detail
     if (value)

@@ -1,9 +1,11 @@
 {
   "pages": [
+    "pages/home/home",
+    "pages/userhome/userhome",
+    "pages/userList/userList",
     "pages/me/me",
     "pages/addArtical/addArtical",
     "pages/createPatData/createPatData",
-    "pages/home/home",
     "pages/searchPage/searchPage",
     "pages/addArtical/selectPat/selectPat",
     "pages/msg/msg",

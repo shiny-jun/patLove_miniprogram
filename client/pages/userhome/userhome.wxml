@@ -1,18 +1,18 @@
-<!-- pages/me/me.wxml -->
+<!--pages/userhome/userhome.wxml-->
 <view class="container">
   <!-- 用户登录测试 -->
   <view class='head'>
     <view class="userinfo flex">
       <view>
-        <image class="userinfo-avatar" src="{{logged ? userInfo.avatarUrl : '/assets/img/user-unlogin.png'}}" background-size="cover"></image>
+        <image class="userinfo-avatar" src="{{userInfo.avatarUrl ? userInfo.avatarUrl : '/assets/img/user-unlogin.png'}}" background-size="cover"></image>
       </view>
       <view class='msg-info'>
         <view class='flex'>
-          <view class='part' bindtap="goUserList" data-type="following">
+          <view class='part'>
             <view class='num'>{{minorUserInfo.followingCount}}</view>
             <view class='title'>关注</view>
           </view>
-          <view class='part' bindtap="goUserList" data-type="fans">
+          <view class='part'>
             <view class='num'>{{minorUserInfo.followerCount}}</view>
             <view class='title'>粉丝</view>
           </view>
@@ -22,11 +22,8 @@
           </view>
         </view>
         <view class='flex btn-wrapper'>
-          <view class='btn btn-msg' bindtap='gotoUserDataEdit'>编辑资料</view>
-          <view class='btn btn-msg' bindtap='gotoPatData'>我的宠物</view>
-          <view class='btn setting'>
-            <icon class='iconfont icon-shezhi'></icon>
-          </view>
+          <view class='btn btn-msg' wx:if="{{!follow}}" bindtap='followChange'>关注</view>
+          <view class='btn btn-msg' wx:else bindtap='followChange'>已关注</view>
         </view>
       </view>
     </view>
@@ -53,18 +50,6 @@
     <view class="artical-wrapper">
       <masonry generic:masonry-item="acticalItem" id="masonry" interval-width="20rpx"></masonry>
       <view class="no-more" v-if="{{noMore}}">暂无更多</view>
-    </view>
-  </view>
-  <!-- 授权弹窗 -->
-  <view class="authorize-window" wx:if="{{!userInfo.openId}}">
-    <view class="window-wrapper">
-      <view class="win-tips">授权提示</view>
-      <view class="win-content">
-        <view class="text">由于需要获取你的头像昵称，请点击下方进行授权</view>
-        <button class='get-authorize' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">
-          去授权
-        </button>
-      </view>
     </view>
   </view>
 </view>

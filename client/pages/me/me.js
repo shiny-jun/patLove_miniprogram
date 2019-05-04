@@ -112,9 +112,19 @@ Page({
   },
   // 用于切换current
   changeCurrent(e) {
+    let current = e.currentTarget.dataset.current
     this.setData({
-      current: e.currentTarget.dataset.current
+      current
     })
+    if(current==1){
+      this.getArticalList(this.data.userInfo.openId, () => {
+        this._doRefreshMasonry(this.data.articals)
+      })
+    } else {
+      this.getLikeArticalList(this.data.userInfo.openId, () => {
+        this._doRefreshMasonry(this.data.articals)
+      })
+    }
   },
   gotoPatData() {
     wx.navigateTo({
@@ -126,6 +136,13 @@ Page({
       url: `../userDataEdit/userDataEdit`,
     })
   },
+  // 去用户列表
+  goUserList(e){
+    let type = e.currentTarget.dataset.type
+    wx.navigateTo({
+      url: `../userList/userList?type=${type}&openId=${this.data.userInfo.openId}`,
+    })
+  },
   //获取文章列表
   async getArticalList(openId, fn) {
     console.log(2)
@@ -135,6 +152,29 @@ Page({
     params.pageSize = this.data.pageSize
     params.pageNo = this.data.pageNo
     const articals = await get("/weapp/articalList",
+      params
+    );
+    console.log(articals)
+    let noMore = false
+    if (articals.list.length < this.data.pageSize) {
+      noMore = true
+    }
+    this.setData({
+      articals: articals.list,
+      noMore
+    })
+    fn()
+    wx.hideNavigationBarLoading();
+  },
+  //获取文章列表
+  async getLikeArticalList(openId, fn) {
+    console.log(2)
+    let params = {
+      openId: openId,
+    }
+    params.pageSize = this.data.pageSize
+    params.pageNo = this.data.pageNo
+    const articals = await get("/weapp/likeArtical",
       params
     );
     console.log(articals)
@@ -175,9 +215,15 @@ Page({
       this.setData({
         pageNo: this.data.pageNo + 1
       })
+      if(this.data.current==1){
       this.getArticalList(this.data.userInfo.openId, () => {
         this._doAppendMasonry(this.data.articals)
       })
+    }else{
+      this.getLikeArticalList(this.data.userInfo.openId, () => {
+        this._doAppendMasonry(this.data.articals)
+      })
+    }
     }
   },
 

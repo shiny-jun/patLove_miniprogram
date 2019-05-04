@@ -28,9 +28,12 @@
   .actical-wrapper{
       margin: 20rpx;
   }
-  .no-more{
+  .no-more,.user-no-more{
     text-align: center;
     color: #999999;
     font-size: 28rpx;
     padding: 30rpx 0 60rpx;
+  }
+  .user-no-more{
+    background-color: #ffffff;
   }
