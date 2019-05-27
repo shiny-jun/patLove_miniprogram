@@ -19,9 +19,9 @@ const CONF = {
   mysql: {
     host: '172.16.0.13',
     port: 3306,
-    user: 'root',
-    db: 'cAuth',
-    pass: '090130mnw',
+    user: 'admin',
+    db: 'pet',
+    pass: '4d89qw465dc9s5d98d74qw4d6',
     char: 'utf8mb4'
   },
 

@@ -31,15 +31,34 @@ Page({
         userInfo: userInfo,
         logged: true
       })
+      app.globalData.openId = userInfo.openId
+      app.globalData.avatarUrl = userInfo.avatarUrl
+      app.globalData.nickName = userInfo.nickName
+      app.globalData.gender = userInfo.gender
+      app.globalData.city = userInfo.city
       wx.setNavigationBarTitle({
         title: userInfo.nickName
       })
-      // 获取文章列表
+      // 获取笔记列表
       this.getArticalList(userInfo.openId, () => {
         this._doRefreshMasonry(this.data.articals)
       })
       this.getminorUserInfo(userInfo.openId)
     }
+  },
+  // 下拉刷新
+  onPullDownRefresh: function () {
+    this.setData({
+      pageNo:0,
+      noMore:false
+    })
+    wx.showNavigationBarLoading();
+    // this.getToken()
+    this.getArticalList(this.data.userInfo.openId, () => {
+      this._doRefreshMasonry(this.data.articals)
+    })
+    this.getminorUserInfo(this.data.userInfo.openId)
+    wx.stopPullDownRefresh();
   },
   // 用户登录示例
   bindGetUserInfo() {
@@ -97,7 +116,7 @@ Page({
           app.globalData.nickName = res.nickName
           app.globalData.gender = res.gender
           app.globalData.city = res.city
-          // 获取文章列表
+          // 获取笔记列表
           this.getArticalList(res.openId, () => {
             this._doRefreshMasonry(this.data.articals)
           })
@@ -143,7 +162,7 @@ Page({
       url: `../userList/userList?type=${type}&openId=${this.data.userInfo.openId}`,
     })
   },
-  //获取文章列表
+  //获取笔记列表
   async getArticalList(openId, fn) {
     console.log(2)
     let params = {
@@ -166,7 +185,7 @@ Page({
     fn()
     wx.hideNavigationBarLoading();
   },
-  //获取文章列表
+  //获取笔记列表
   async getLikeArticalList(openId, fn) {
     console.log(2)
     let params = {

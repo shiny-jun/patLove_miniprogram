@@ -9,7 +9,7 @@ module.exports = async(ctx) => {
         signature
     } = ctx.request.body
     try {
-        await mysql('cSessionInfo').where('open_id', openId).update('signature', signature)
+        await mysql('userInfo').where('openId', openId).update('signature', signature)
         ctx.state.data = {
             data: 'ok',
             msg: 'success'
@@ -21,6 +21,5 @@ module.exports = async(ctx) => {
                 msg: '更新失败' + e.sqlMessage
             }
         }
-
     }
 }

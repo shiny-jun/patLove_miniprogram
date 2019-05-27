@@ -2,6 +2,6 @@
   "usingComponents": {
     "acticalItem":"/components/acticalItem/acticalItem",
     "masonry": "../../components/masonry/masonry"
-
-  }
+  },
+  "enablePullDownRefresh": true  
 }

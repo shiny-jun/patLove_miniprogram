@@ -1,6 +1,6 @@
 // pages/userList/userList.js
 import {
-  get,post,showSuccess
+  get,post,showSuccess,showToast
 } from "../../utils/index.js";
 const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
 let app = getApp();
@@ -102,6 +102,7 @@ Page({
   async getUserList(fn) {
     wx.showNavigationBarLoading();
     let params = {}
+    console.log(this.data.type)
     params.type = this.data.type,
     params.pageSize = this.data.pageSize
     params.pageNo = this.data.pageNo
@@ -125,6 +126,10 @@ Page({
   },
   //关注用户
   async followChange(e){
+    if(!app.globalData.openId){
+      showToast('请先授权')  
+      return
+  }
     let index = e.detail
     let userList = this.data.userList
     userList[index].follow=!userList[index].follow

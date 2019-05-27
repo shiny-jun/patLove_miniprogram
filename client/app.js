@@ -21,6 +21,8 @@ App({
     },
     getUserInfo(){
           let userInfoStr = wx.getStorageSync('userInfo')
+          console.log(111111111111)
+          console.log(userInfoStr)
           if (userInfoStr) {
             let userInfo = JSON.parse(userInfoStr)
             this.globalData.openId = userInfo.openId

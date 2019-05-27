@@ -48,7 +48,7 @@ module.exports = async (ctx) => {
                     avatarUrl: user.avatarUrl
                 }
                 detail[i].userInfo = userInfo
-                //找文章图片
+                //找笔记图片
                 let articalId = commentMsg.articalId
                 let imgUrl = await mysql('imglist').select().where('articalId', articalId).first()
                 detail[i].articalImg = imgUrl.imgSrc
@@ -74,7 +74,7 @@ module.exports = async (ctx) => {
                     avatarUrl: user.avatarUrl
                 }
                 detail[i].userInfo = userInfo
-                //找文章图片
+                //找笔记图片
                 let articalId = likeMsg.articalId
                 let imgUrl = await mysql('imglist').select().where('articalId', articalId).first()
                 detail[i].articalImg = imgUrl.imgSrc

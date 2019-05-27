@@ -22,8 +22,8 @@
           </view>
         </view>
         <view class='flex btn-wrapper'>
-          <view class='btn btn-msg' wx:if="{{!follow}}" bindtap='followChange'>关注</view>
-          <view class='btn btn-msg' wx:else bindtap='followChange'>已关注</view>
+          <view class='btn btn-msg' wx:if="{{!follow&&btnShow}}" bindtap='followChange'>关注</view>
+          <view class='btn btn-msg' wx:if="{{follow&&btnShow}}" bindtap='followChange'>已关注</view>
         </view>
       </view>
     </view>
@@ -35,7 +35,7 @@
           <text>哈奇士</text>
         </view> -->
       </view>
-      <view class='Introduction'>{{minorUserInfo.signature[0].signature}}</view>
+      <view class='Introduction'>{{minorUserInfo.signature[0].signature?minorUserInfo.signature[0].signature:'这个主人很懒 什么都没有留下~'}}</view>
     </view>
   </view>
   <view class="content">
@@ -49,7 +49,7 @@
     </view>
     <view class="artical-wrapper">
       <masonry generic:masonry-item="acticalItem" id="masonry" interval-width="20rpx"></masonry>
-      <view class="no-more" v-if="{{noMore}}">暂无更多</view>
+      <view class="no-more" wx:if="{{noMore}}">暂无更多</view>
     </view>
   </view>
 </view>

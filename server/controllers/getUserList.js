@@ -25,47 +25,32 @@ module.exports = async (ctx) => {
     }
     if (openId) {
         detail = await mysql('userInfo').select().where('openId', openId)
-        // console.log('hihihi')
-        // let follow = false
-        // if (following == openId) {
-        //     follow = true
-        // } else {
-        //     let params = {
-        //         following:openId,
-        //         openId:myId
-        //     }
-        //     let followRes = await simpleGetCount('followlist', params)
-        //     // let commentList = await mysql('commentlist').select().where('articalId', articalId)
-        //     follow = followRes >= 1 ? true : false
-        // // }
-        // detail[0].follow = follow
     }
     if(type){
         let userArr=[],user=[],key=''
         if(type=='following'){
             key = 'openId'
+            otherkey = 'following'
         } else if(type=="fans"){
             key="following"
+            otherkey = 'openId'
         }
+        console.log(type)
         user = await mysql('followlist').select().where(key, myId)
+        console.log(user)
         for(let j=0;j<user.length;j++){
-            userArr.push(user[j][key])
+            userArr.push(user[j][otherkey])
         }
         detail = await mysql('userInfo').select().whereIn('openId', userArr).limit(pageSize).offset(pageNo * pageSize)
     }
     for (let i = 0; i < detail.length; i++) {
         let follow = false
-        // if (following == openId) {
-        //     follow = true
-        // } else {
         let params = {
             following: detail[i].openId,
             openId: myId
         }
         let followRes = await simpleGetCount('followlist', params)
-        // let commentList = await mysql('commentlist').select().where('articalId', articalId)
         follow = followRes >= 1 ? true : false
-        // }
         detail[i].follow = follow
     }
     ctx.state.data = {

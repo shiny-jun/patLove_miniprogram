@@ -4,7 +4,8 @@
 import {
   get,
   post,
-  showSuccess
+  showSuccess,
+  showToast
 } from "../../utils/index.js";
 const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
 import qiniuUploader from '../../utils/qiniuUploader'
@@ -19,7 +20,7 @@ Page({
     imageList: [],
     patList: [],
     location: '',
-    articalId:'',
+    articalId: '',
     form: {
       title: '',
       content: '',
@@ -35,7 +36,9 @@ Page({
   onLoad: function (options) {
     if (options.articalId) {
       let articalId = options.articalId
-      this.setData({articalId})
+      this.setData({
+        articalId
+      })
       this.getArtical(articalId)
     }
     this.getToken()
@@ -61,7 +64,7 @@ Page({
       token = wx.getStorageSync('token')
     }
     wx.chooseImage({
-      count: 9,
+      count: (9-this.data.imageList.length), // 最多9张
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success(res) {
@@ -69,8 +72,6 @@ Page({
         let imageList = _this.data.imageList
         let wechatma = [];
         let tempFilePaths = res.tempFilePaths;
-        // let filePath = tempFilePaths[0];
-
         //七牛提供的上传方法
         console.log(tempFilePaths)
         tempFilePaths.forEach((item, index) => {
@@ -84,7 +85,7 @@ Page({
             console.log('error: ' + error);
           }, {
             region: 'ECN',
-            domain: 'http://ppq8kswcf.bkt.clouddn.com/',
+            domain: 'http://prfo1ihvv.bkt.clouddn.com',
             uptoken: token, // 由其他程序生成七牛 uptoken
           });
 
@@ -167,8 +168,6 @@ Page({
               })
             }
           },
-          fail: () => {},
-          complete: () => {}
         });
       },
       fail: () => {
@@ -179,25 +178,31 @@ Page({
   async formSubmit(e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
     let form = e.detail.value
-    form.imageList = this.data.imageList
-    form.patList = this.data.patList
-    form.location = this.data.location
-    form.openId = app.globalData.openId
-    form.articalId = this.data.articalId
-    let formStr = JSON.stringify(form)
-    const res = await post("/weapp/addArtical", {
-      formStr
-    });
-    if (res.data == 'ok') {
-      showSuccess('发布成功')
-      setTimeout(() => {
-        wx.navigateBack({
-          delta: 1, // 回退前 delta(默认为1) 页面
-        })
-      }, 2000)
+    if (!form.title) {
+      showToast('请输入笔记标题！')
+    } else if (!form.content) {
+      showToast('请输入笔记内容！')
+    } else {
+      form.imageList = this.data.imageList
+      form.patList = this.data.patList
+      form.location = this.data.location
+      form.openId = app.globalData.openId
+      form.articalId = this.data.articalId
+      let formStr = JSON.stringify(form)
+      const res = await post("/weapp/addArtical", {
+        formStr
+      });
+      if (res.data == 'ok') {
+        showSuccess('发布成功')
+        setTimeout(() => {
+          wx.navigateBack({
+            delta: 1, // 回退前 delta(默认为1) 页面
+          })
+        }, 2000)
+      }
     }
   },
-  //修改文章时获取文章内容
+  //修改笔记时获取笔记内容
   async getArtical(articalId) {
     wx.showNavigationBarLoading();
     const articals = await get("/weapp/articalList", {
@@ -211,7 +216,7 @@ Page({
     wx.setStorageSync('selectPat', articalDetail.patIdArr)
     let animalvalue = JSON.parse(articalDetail.animalvalue)
     let patList = JSON.parse(articalDetail.patIdArr)
-    patList.forEach((item,index)=>{
+    patList.forEach((item, index) => {
       item.value = animalvalue[index]
     })
     let form = {
@@ -220,7 +225,7 @@ Page({
       imageList: [],
       patList: [],
       location: '',
-    }  
+    }
     this.setData({
       form,
       imageList,

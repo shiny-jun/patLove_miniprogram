@@ -1,6 +1,6 @@
 // client/pages/me/myPatList/myPatList.js
 import {
-  get
+  get, getDate
 } from "../../../utils/index.js";
 const regeneratorRuntime = require('../../../utils/regenerator-runtime/runtime')
 let app = getApp();
@@ -12,7 +12,6 @@ Page({
    */
   data: {
     patList: [],
-    noPat: false,
     noMore: false,
     pageSize: 10,
     pageNo: 0, // 从0开始
@@ -23,11 +22,31 @@ Page({
    */
   onShow: function (options) {
     wx.showNavigationBarLoading();
-    this.getSwiperList()
+    this.setData({pageNo:0})
+    this.getPatList((res)=>{
+      this.setData({
+        patList: res,
+      })
+    })
   },
+
+  // 上拉加載
+  onReachBottom: function () {
+    this.setData({
+      pageNo:this.data.pageNo+1
+    })
+    this.getPatList((res) => {
+      let patList = this.data.patList
+      patList.concat(res)
+      this.setData({
+        patList
+      })
+    })
+  },
+
 // 获取宠物列表
 
-  async getSwiperList() {
+  async getPatList(fn) {
     if (app.globalData.openId) {
       let openId = app.globalData.openId
       let params = {
@@ -36,15 +55,18 @@ Page({
         pageNo: this.data.pageNo
       }
       const patList = await get("/weapp/myPatList", params);
-      if (patList.list) {
-        this.setData({
-          patList: patList.list,
-        })
-      } else {
-        this.setData({
-          noPat: true
-        })
+      if(patList.list){
+        if(patList.list.length<this.data.pageSize){
+          this.setData({noMore:true})
+        }
+        if(fn){
+          patList.list.forEach(item => {
+            item.birthday = getDate(item.birthday)
+          });
+        fn(patList.list)
       }
+      }
+      
       wx.hideNavigationBarLoading();
     }
   },
@@ -53,7 +75,7 @@ Page({
     console.log(id)
     if(id){
       wx.navigateTo({
-        url: '../../createPatData/createPatData?id='+id,
+        url: '../../patDetail/patDetail?id='+id,
       })
     }else{
       wx.navigateTo({

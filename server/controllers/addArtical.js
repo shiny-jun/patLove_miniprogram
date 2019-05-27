@@ -30,8 +30,7 @@ module.exports = async (ctx) => {
         delete form['imageList']
         if (form.articalId) {
             let articalId = Number(form.articalId)
-            try {
-                await mysql('articallist').where('articalId', articalId).update(form)
+            try {                await mysql('articallist').where('articalId', articalId).update(form)
                 // 删除图片地址
                 await mysql('imglist').where('articalId', articalId).del()
                 //保存图片地址
@@ -56,6 +55,7 @@ module.exports = async (ctx) => {
                 }
             }
         } else {
+            delete form['articalId']
             try {
                 let id = await mysql('articallist').insert(form).returning('articalId')
                 if (id) {

@@ -3,6 +3,8 @@ import {
   get,
   post,
   showSuccess,
+  showToast,
+  getDate,
 } from "../../utils/index.js";
 const qiniuUploader = require("../../utils/qiniuUploader");
 const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
@@ -26,7 +28,8 @@ Page({
     pattypeIndex: null,
     itemList: [],
     headImg: '',
-    userInfo: null
+    userInfo: null,
+    toastShow:true,
   },
 
   /**
@@ -66,6 +69,26 @@ Page({
       form: this.data.form,
     })
   },
+  // 显示输入框
+  toastShowChange(){
+    let toastShow = !this.data.toastShow
+    console.log(toastShow)
+    this.setData({toastShow})
+  },
+  toastInput(e){
+    let word = e.detail.value;
+    this.setData({
+      vaccine:word,
+    })
+  },
+  // 确认疫苗名称
+  submitVaccine(){
+    let vaccineList = this.data.vaccineList
+    vaccineList.push(this.data.vaccine)
+    this.setData({
+      vaccineList
+    })
+  },
   chooseImage(e) {
     let _this = this
     let token = wx.getStorageSync('token')
@@ -92,13 +115,12 @@ Page({
           console.log('error: ' + error);
         }, {
           region: 'ECN',
-          domain: 'http://ppq8kswcf.bkt.clouddn.com/',
+          domain: 'http://prfo1ihvv.bkt.clouddn.com',
           uptoken: token, // 由其他程序生成七牛 uptoken
         });
       }
     })
   },
-
   patSelect(e) {
     let index = e.detail.value
     let animalName = this.data.animallist[index].animalName
@@ -140,11 +162,11 @@ Page({
     let pattypeIndex = 0
     let animallist = this.data.animallist
     animallist.forEach((item, index) => {
-
       if (item.animalName == form.animalName) {
         pattypeIndex = index
       }
     })
+    form.birthday = getDate(form.birthday)
     this.setData({
       form,
       pattypeIndex,
@@ -160,6 +182,16 @@ Page({
   //提交表单
   async submitForm() {
     let form = this.data.form
+    console.log(form)
+    if(!form.name){
+      showToast('请输入主子昵称')
+    } else if(!form.animalName){
+      showToast('请选择主子所属种类')
+    } else if(!form.sex){
+      showToast('请选择主子性别')
+    } else if(!form.birthday){
+      showToast('请选择主子生日')
+    }
     form.headImg = this.data.headImg
     form.openId = app.globalData.openId
     let formStr = JSON.stringify(form)
@@ -169,6 +201,11 @@ Page({
     console.log(res)
     if (res.data == 'ok') {
       showSuccess('保存成功')
+      setTimeout(() => {
+        wx.navigateBack({
+          delta: 1, // 回退前 delta(默认为1) 页面
+        })
+      }, 2000)
     }
   },
   delPat() {

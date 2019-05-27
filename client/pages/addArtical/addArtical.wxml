@@ -2,7 +2,7 @@
 <view class="addArtical-wrapper">
   <form bindsubmit="formSubmit">
     <view class="title">
-      <input name="title" value="{{form.title}}" placeholder="来个很酷的标题让大家能搜到文章" />
+      <input name="title" value="{{form.title}}" placeholder="来个很酷的标题让大家能搜到笔记" />
       <button class="submit-btn" form-type="submit">发布</button>
     </view>
     <view class="content">
@@ -12,8 +12,8 @@
       <view class='add-pic' wx:for="{{imageList}}" wx:key="images" bindtap="delImage" data-index="{{index}}">
         <image src='{{item}}' mode="aspectFill" style="width:130rpx; height:130rpx;"></image>
       </view>
-      <view class='add-pic-btn'>
-        <image class='' src='/assets/img/get-pic.png' mode="widthFix" bindtap="getImage"></image>
+      <view class='add-pic-btn' wx:if="{{imageList.length<9}}">
+        <image src='/assets/img/get-pic.png' mode="widthFix" bindtap="getImage"></image>
       </view>
     </view>
     <view class='pat'>

@@ -1,6 +1,6 @@
 <!-- pages/articalDetail/articalDetail.wxml -->
 <view class="head">
-  <view class="header" bindtap="goUserhome">
+  <view class="header" bindtap="goUserhome" data-openid="{{articalDetail.userInfo.openId}}">
     <view class='left'>
       <view class='avatar'>
         <image src='{{articalDetail.userInfo.avatar}}' mode="widthFix"></image>
@@ -8,11 +8,13 @@
       <view class='nickname'>{{articalDetail.userInfo.nickName}}</view>
     </view>
     <view class='right'>
-      <block wx:if="{{openId!==articalDetail.userInfo.openId}}">
+      <block wx:if="{{openId==articalDetail.userInfo.openId}}">
         <view class='more-btn' catchtap="getMore">···</view>
       </block>
       <block wx:else>
-        <view class="follow btn" wx:if="{{!follow}}" catchtap="followChange" data-follow="follow">关注</view>
+        <view class="follow btn" wx:if="{{!follow}}" catchtap="followChange" data-follow="follow">
+          关注
+        </view>
         <view class="nofollow btn" wx:else catchtap="followChange" data-follow="nofollow">已关注</view>
       </block>
     </view>
@@ -30,9 +32,13 @@
 <view class='main'>
   <view class='title'>{{articalDetail.title}}</view>
   <view class='content'>{{articalDetail.content}}</view>
+  <view class='pat' wx:if="{{patList.length}}">
+    <text class="pat-title">Pat:</text><text wx:for="{{patList}}" class="patList" wx:key="patList" bindtap="goPatDetail" data-id="{{item.patId}}">{{item.name}}</text>
+  </view>
+  <view class="time">{{articalDetail.time}}</view>
 </view>
 <view class="msg">
-  <view class="location">
+  <view class="location" wx:if="{{articalDetail.location}}">
     <icon class="iconfont icon-location"></icon>
     {{articalDetail.location}}
   </view>
@@ -61,7 +67,15 @@
 </form>
 <view class="comment-list">
   <view class="comment-item" wx:for="{{commentlist}}" wx:key="commentList">
-    <text class="username">{{item.userInfo.nickName}}</text>
-    : {{item.content}}
+    <view class="avatar" bindtap="goUserhome" data-openid="{{item.userInfo.openId}}">
+      <image src="{{item.userInfo.avatar}}" mode="widthFix"></image>
+    </view>
+    <view class="name">
+      <view class="top">
+        <view class="username">{{item.userInfo.nickName}}</view>
+        <view class="comment-time">{{item.createdtime}}</view>
+      </view>
+      <view class="content">{{item.content}}</view>
+    </view>
   </view>
 </view>

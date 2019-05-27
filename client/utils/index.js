@@ -2,7 +2,6 @@
 import config from '../config'
 
 function request(url, method, data) {
-  console.log(url)
   return new Promise((reslove, reject) => {
     wx.request({
       data: data,
@@ -36,7 +35,15 @@ export function post(url, data) {
 export function showSuccess(text) {
   wx.showToast({
     title: text,
-    content: 'success',
+    icon: 'success',
+  })
+}
+
+// 吐司封装
+export function showToast(text) {
+  wx.showToast({
+    title: text,
+    icon: 'none',
   })
 }
 
@@ -76,4 +83,12 @@ export function getTime(time) {
   let h = dt.getHours()<10?'0'+dt.getHours():dt.getHours()
   let mm = dt.getMinutes()<10?'0'+dt.getMinutes():dt.getMinutes()
   return `${y}-${m}-${d} ${h}:${mm}`
+}
+// 获取日期
+export function getDate(time) {
+  let dt = new Date(time)
+  let y = dt.getFullYear()
+  let m = dt.getMonth()+1<10?'0'+(dt.getMonth()+1):dt.getMonth()+1
+  let d = dt.getDate()<10?'0'+dt.getDate():dt.getDate()
+  return `${y}-${m}-${d}`
 }

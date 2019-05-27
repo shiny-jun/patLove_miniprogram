@@ -2,7 +2,9 @@
 import {
   get,
   post,
-  showSuccess
+  showSuccess,
+  getTime,
+  showToast
 } from "../../utils/index.js";
 let app = getApp();
 const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
@@ -22,6 +24,7 @@ Page({
     //默认  
     current: 0,
     commentlist: [],
+    patList:[],
     like: false,
     follow: false,
     noMore: false,
@@ -38,19 +41,10 @@ Page({
       this.setData({
         articalId
       })
-      // this.getArticalList()
-      // this.setData({
-      //   Page: 0,
-      //   noMore: false
-      // })
-      // this.getCommentList(res => {
-      //   this.setData({
-      //     commentlist: res
-      //   })
-      // })
     }
   },
   onShow(){
+    this.setData({openId:app.globalData.openId})
     if(this.data.articalId){
       this.getArticalList()
       this.setData({
@@ -75,7 +69,16 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.setData({
+      Page: this.data.page+1
+    })
+    this.getCommentList(res => {
+      let commentlist = this.data.commentlist
+      commentlist.concat(res)
+      this.setData({
+        commentlist
+      })
+    })
   },
 
   /**
@@ -83,6 +86,13 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  goPatDetail(e){
+    let patId = e.currentTarget.dataset.id
+    console.log(patId)
+    wx.navigateTo({
+      url: '/pages/patDetail/patDetail?id='+patId,
+    });
   },
   getMore(){
     let _this = this
@@ -98,7 +108,7 @@ Page({
         else if (res.tapIndex == 1) {
           wx.showModal({
             title: '提示',
-            content: '确认删除这篇文章？',
+            content: '确认删除这篇笔记？',
             success(res) {
               if (res.confirm) {
                 // console.log('用户点击确定')
@@ -115,9 +125,10 @@ Page({
       }
     })
   },
-  goUserhome(){
+  goUserhome(e){
+    let openId = e.currentTarget.dataset.openid
     wx.navigateTo({
-      url: '/pages/userhome/userhome?openId='+this.data.articalDetail.userInfo.openId
+      url: '/pages/userhome/userhome?openId='+openId
     });
   },
   // 删除笔记
@@ -143,14 +154,17 @@ Page({
       openId
     });
     let articalDetail = articals.list[0]
+    articalDetail.time = getTime(articalDetail.createdtime)
+    let patList = JSON.parse(articalDetail.patIdArr)
     this.setData({
       articalDetail,
+      patList,
       like: articalDetail.like ? true : false,
       follow:articalDetail.follow
     })
     wx.hideNavigationBarLoading();
   },
-  async getCommentList() {
+  async getCommentList(fn) {
     wx.showNavigationBarLoading();
     let articalId = this.data.articalId
     let pageNo = this.data.pageNo
@@ -165,13 +179,18 @@ Page({
     if (commentlistRes.list.length < this.data.pageSize) {
       noMore = true
     }
+    commentlistRes.list.forEach(item=>{
+      item.createdtime = getTime(item.createdtime)
+    })
     this.setData({
-      commentlist: commentlistRes.list,
       noMore,
     })
+    if(fn){
+      fn(commentlistRes.list)
+    }
     wx.hideNavigationBarLoading();
   },
-  // 跑马灯用于计算高度
+  // 轮播图用于计算高度
   imageLoad: function (e) { //获取图片真实宽度  
     var imgwidth = e.detail.width,
       imgheight = e.detail.height,
@@ -196,6 +215,10 @@ Page({
   },
   //提交评论
   async formSubmit(e) {
+    if(!app.globalData.openId){
+      showToast('请先授权')  
+      return
+  }
     let content = e.detail.value.comment
     let form = {
       openId: app.globalData.openId,
@@ -216,6 +239,10 @@ Page({
     }
   },
   async likeChange() {
+    if(!app.globalData.openId){
+      showToast('请先授权')  
+      return
+  }
     this.setData({
       like: !this.data.like
     })
@@ -236,6 +263,10 @@ Page({
     })
   },
   async followChange() {
+    if(!app.globalData.openId){
+      showToast('请先授权')  
+      return
+  }
     this.setData({
       follow: !this.data.follow
     })

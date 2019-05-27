@@ -17,7 +17,8 @@ module.exports = async(ctx) => {
         let user = JSON.parse(userObj[0].user_info)
         let userInfo = {
             nickName: user.nickName,
-            avatar: user.avatarUrl
+            avatar: user.avatarUrl,
+            openId:user.openId
         }
         detail[i].userInfo = userInfo
     }

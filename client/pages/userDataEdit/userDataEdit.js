@@ -98,8 +98,10 @@ Page({
         let openId = this.data.userInfo.openId
         let detail = await get('/weapp/signature', { openId })
         console.log(detail)
-        this.setData({
+        if(detail.list){
+            this.setData({
             signature: detail.list[0].signature
         })
+        }
     }
 })

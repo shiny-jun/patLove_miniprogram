@@ -8,7 +8,7 @@
 .name-input {
   font-size: 50rpx;
   margin-bottom: 30rpx;
-  width: 70%;
+  width: 80%;
 }
 
 .data-item {
@@ -48,9 +48,12 @@
   width: 80rpx;
   margin-right: 15rpx;
 }
-
+.food-input{
+  width: 70%;
+}
 .sign-input{
-  height: 300rpx;
+  height: 200rpx;
+  width: 100%;
   margin: 30rpx 0;
   font-size: 30rpx;
 }
@@ -99,4 +102,63 @@
 .icon-dog-astronaut{
 color: white;
 font-size: 90rpx;
+}
+.submit-view{
+  z-index: 999;
+}
+.toast-box-wrapper{
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.5)
+}
+.toast-box{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 10000;
+  width: 60%;
+  height: 200rpx;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 10rpx;
+}
+.toast-box .save,.close{
+  display: inline-block;
+  width: 45%;
+  height: 50rpx;
+  line-height: 50rpx;
+  background-color: #f5bc36;
+  color: white;
+  font-size: 28rpx;
+  margin-bottom: 10rpx;
+  border-radius: 50rpx;
+}
+.toast-box .save{
+  margin-right: 10rpx;
+}
+.toast-box .close{
+  background-color: #999999;
+}
+.toast-item{
+  width: 90%;
+  margin: 40rpx auto;
+  text-align: left;
+  font-size: 28rpx;
+}
+.add-btn{
+  display: inline-block;
+  background-color: #f5bc36;
+  color: #ffffff;
+  text-align: center;
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  border-radius: 40rpx;
 }

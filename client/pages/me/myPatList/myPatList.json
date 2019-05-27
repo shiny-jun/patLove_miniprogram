@@ -1,5 +1,6 @@
 {
     "usingComponents": {
       "myPatItem":"/components/myPatItem/myPatItem"
-      }
+      },
+      "navigationBarTitleText": "爱宠列表"
 }

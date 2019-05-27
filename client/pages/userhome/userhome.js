@@ -1,5 +1,5 @@
 import {
-  get,post,showSuccess
+  get,post,showSuccess,showToast
 } from "../../utils/index.js";
 const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
 let app = getApp();
@@ -18,7 +18,9 @@ Page({
     pageNo: 0, // 从0开始
     articals: [],
     minorUserInfo: {},
-    follow:false
+    follow:false,
+    openId:'',
+    btnShow:true
   },
 
   /**
@@ -28,18 +30,22 @@ Page({
     console.log(options.openId)
     if (options.openId) {
       let openId = options.openId
-      this.getUserInfo(openId,()=>{
+      if(openId===app.globalData.openId){
+        this.setData({btnShow:false})
+      }
+      this.setData({openId})
+      this.getUserInfo(()=>{
         let userInfo = this.data.userInfo
       console.log(111)
       console.log(userInfo)
       wx.setNavigationBarTitle({
         title: userInfo.nickName
       })
-      // 获取文章列表
-      this.getArticalList(userInfo.openId, () => {
+      // 获取笔记列表
+      this.getArticalList(() => {
         this._doRefreshMasonry(this.data.articals)
       })
-      this.getminorUserInfo(userInfo.openId)
+      this.getminorUserInfo()
       })
     }
   },
@@ -50,10 +56,10 @@ Page({
 
   },
 //获取用户信息
-  async getUserInfo(openId,fn) {
+  async getUserInfo(fn) {
     let res = await get('/weapp/getUserList', {
-      openId,
-      myId:app.globalData.openId
+      openId : this.data.openId,
+      myId : app.globalData.openId
     })
     let userInfo = res.list[0]
     this.setData({
@@ -82,6 +88,10 @@ Page({
   },
   //关注、取关
   async followChange() {
+    if(!app.globalData.openId){
+      showToast('请先授权')  
+      return
+  }
     this.setData({
       follow: !this.data.follow
     })
@@ -99,11 +109,11 @@ Page({
       }
     }
   },
-  //获取文章列表
-  async getArticalList(openId, fn) {
+  //获取笔记列表
+  async getArticalList( fn) {
     console.log(2)
     let params = {
-      openId: openId,
+      openId: this.data.openId,
     }
     params.pageSize = this.data.pageSize
     params.pageNo = this.data.pageNo
@@ -119,10 +129,12 @@ Page({
       articals: articals.list,
       noMore
     })
-    fn()
+    if(fn){
+      fn()
+    }
     wx.hideNavigationBarLoading();
   },
-  //获取文章列表
+  //获取笔记列表
   async getLikeArticalList(openId, fn) {
     console.log(2)
     let params = {
@@ -145,9 +157,9 @@ Page({
     fn()
     wx.hideNavigationBarLoading();
   },
-  async getminorUserInfo(openId) {
+  async getminorUserInfo() {
     let params = {
-      openId: openId,
+      openId: this.data.openId,
     }
     const minorUserInfo = await get("/weapp/minorUserInfo",
       params

@@ -47,7 +47,7 @@ router.get('/animallist', controllers.animallist)
 router.get('/patlist', controllers.patlist)
 // get:patDetail获取详情
 router.get('/patDetail', controllers.patDetail)
-// get:articalList获取文章列表
+// get:articalList获取笔记列表
 router.get('/articalList', controllers.articalList)
 // get:myPatList查看我的宠物
 router.get('/myPatList', controllers.myPatList)
@@ -60,9 +60,9 @@ router.get('/getUserList', controllers.getUserList)
 //post
 // post:createPat新增宠物/修改宠物资料
 router.post('/createPat', controllers.createPat)
-// post:addArtical新增文章
+// post:addArtical新增笔记
 router.post('/addArtical', controllers.addArtical)
-// post:delete 删除文章、删除宠物
+// post:delete 删除笔记、删除宠物
 router.post('/delete', controllers.delete)
 // post:getSignature 更改个人签名
 router.post('/signature', controllers.postSignature)

@@ -1,6 +1,6 @@
 // pages/articalList/articalList.js
 import {
-  get,post,showSuccess
+  get,post,showSuccess, showToast
 } from "../../utils/index.js";
 const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
 let app = getApp();
@@ -157,18 +157,12 @@ Page({
     params.pageSize = this.data.pageSize
     params.pageNo = this.data.pageNo
     params.myId = app.globalData.openId
-    const userInfo = await get("/weapp/getUserList",
-      params
-    );
-    console.log(userInfo)
+    const userInfo = await get("/weapp/getUserList",params);
     if (userInfo.length < this.data.pageSize) {
       this.setData({
         noMore: true
       })
     }
-    // this.setData({
-    //   userInfo: userInfo.list
-    // })
     if (fn) {
       fn(userInfo.list)
     }
@@ -176,6 +170,10 @@ Page({
   },
   //关注用户
   async followChange(e){
+    if(!app.globalData.openId){
+        showToast('请先授权')  
+        return
+    }
     let index = e.detail
     let userList = this.data.userList
     userList[index].follow=!userList[index].follow

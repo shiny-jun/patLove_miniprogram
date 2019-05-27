@@ -1,11 +1,12 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/createPatData/createPatData",
     "pages/userhome/userhome",
     "pages/userList/userList",
+    "pages/patDetail/patDetail",
     "pages/me/me",
     "pages/addArtical/addArtical",
-    "pages/createPatData/createPatData",
     "pages/searchPage/searchPage",
     "pages/addArtical/selectPat/selectPat",
     "pages/msg/msg",
@@ -23,7 +24,7 @@
     "backgroundColor": "#ffffff",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#f8d98f",
-    "navigationBarTitleText": "patLove",
+    "navigationBarTitleText": "petLove",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

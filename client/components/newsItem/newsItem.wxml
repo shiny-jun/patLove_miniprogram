@@ -2,7 +2,6 @@
 
 <view class='item-view'>
   <image class='avatar' catchtap='_avaterClick' src='{{item.userInfo.avatarUrl}}' />
-
   <view class='contant' bindtap='_itemClick'>
     <block>
       <view class='contant-title' wx:if='{{item.type == "like"}}'>{{item.userInfo.nickName}} 赞了你的笔记</view>
@@ -11,9 +10,8 @@
     </block>
     <block>
       <view class='contact-desc' wx:if='{{item.type == "comment"}}'>{{item.commentMsg.content}}</view>
-      <view class='contact-desc' wx:else>{{item.time}}</view>
+      <view class='contact-desc' wx:else>{{item.createdtime}}</view>
     </block>
   </view>
   <image class='item-img' mode='aspectFill' src='{{item.articalImg}}' wx:if='{{item.articalImg && item.type != "follow"}}'/>
-  <view class='re-attention' catchtap='_reAttention' wx:if='{{item.type == "follow"}}'>回粉</view>
 </view>

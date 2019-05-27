@@ -36,18 +36,26 @@ Page({
     })
   },
 
-  avaterClick() {
-    this.showToast('点击头部')
+  avaterClick(e) {
+    // this.showToast('点击头部')
+    let openId = e.detail.userInfo.openId
+    wx.navigateTo({
+      url: '/pages/userhome/userhome?openId=' + openId
+    });
   },
 
-  itemClick() {
-    this.showToast('点击一整条')
+  itemClick(e) {
+    // this.showToast('点击一整条')
+    let openId = e.detail.userInfo.openId
+    wx.navigateTo({
+      url: '/pages/userhome/userhome?openId=' + openId
+    });
   },
 
   reAttention() {
-    this.showToast('点击回粉')
+    // this.showToast('点击回粉')
+    this.showToast('功能未完善')
   },
-
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
@@ -87,7 +95,7 @@ Page({
     let newlist = res.list
     console.log(res)
     newlist.forEach(item => {
-      item.time = getTime(item.createTime)
+      item.createdtime = getTime(item.createdtime)
     });
     if(fn){
       fn(newlist)

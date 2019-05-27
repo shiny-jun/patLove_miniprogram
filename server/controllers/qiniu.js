@@ -6,11 +6,10 @@ module.exports = async (ctx) => {
   let mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
   
   let options = {
-    scope: 'patlove',
+    scope: 'patlove2',
   };
   let putPolicy = new qiniu.rs.PutPolicy(options);
   let uploadToken = await putPolicy.uploadToken(mac);
   console.log('uploadToken', uploadToken)
   ctx.state.data = uploadToken
-  // ctx.state.data = {detail:'hello'}
 }

@@ -81,7 +81,6 @@ module.exports = async (ctx) => {
         }
     }
     if (articalId && openId) {
-        console.log('hihihi')
         let following = detail[0].userInfo.openId
         let follow = false
         // if (following == openId) {

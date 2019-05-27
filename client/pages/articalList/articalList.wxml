@@ -2,12 +2,12 @@
 <view class='page'>
     <searchBar canuse="{{false}}" val="{{val}}" ></searchBar>
     <!-- <view class="current-tab">
-        <view class="">文章</view>
+        <view class="">笔记</view>
         <view class="">用户</view>
     </view> -->
     <view class='top-tab flex'>
       <view class="{{current==1?'active':''}} btn" data-current='1' bindtap='changeCurrent'>
-        <view>文章</view>
+        <view>笔记</view>
       </view>
       <view class="{{current==2?'active':''}} btn" data-current='2' bindtap='changeCurrent'>
         <view>用户</view>
@@ -15,12 +15,13 @@
     </view>
     <view class="actical-wrapper" wx:if="{{current==1}}">
         <masonry generic:masonry-item="acticalItem" id="masonry" interval-width="20rpx"></masonry>
-      <view class="no-more" v-if="{{noMore}}">暂无更多</view>
+      <view class="no-more" wx:if="{{noMore}}">暂无更多</view>
     </view>
     <view class="user-wrapper" wx:else>
       <block wx:for="{{userList}}" wx:key="unqie">
         <userItem msg="{{item}}" index="{{index}}" bindfollowChange="followChange"></userItem>
       </block>
-      <view class="user-no-more" v-if="{{noMore}}">暂无更多</view>      
+      <view class="user-no-more" wx:if="{{noMore}}">暂无更多</view>      
+      <view class="user-no-more" wx:if="{{userList.length==0}}">不存在该用户</view>      
     </view>
 </view>

@@ -4,18 +4,8 @@
     <searchBar canuse="{{false}}"></searchBar>
     <current types="{{types}}" bindcurrentChange="currentChange"></current>
     <view class="actical-wrapper">
-      <!-- <view class="masonry">
-        <view class="item item-left" wx:for="{{articals}}" wx:if="{{index % 2 == 0}}" wx:key="left">
-          {{index}}
-          <acticalItem artical="{{item}}"></acticalItem>
-        </view>
-        <view class="item item-right" wx:for="{{articals}}" wx:if="{{index % 2 == 1}}" wx:key="right">
-          {{index}}
-          <acticalItem artical="{{item}}"></acticalItem>
-        </view>
-      </view> -->
       <masonry generic:masonry-item="acticalItem" id="masonry" interval-width="20rpx"></masonry>
-      <view class="no-more" v-if="{{noMore}}">暂无更多</view>
+      <view class="no-more" wx:if="{{noMore}}">暂无更多</view>
     </view>
   </view>
   <view class="btn-wrapper" bindtap='addArticalPage'>

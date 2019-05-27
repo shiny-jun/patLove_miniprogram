@@ -1,6 +1,6 @@
 // pages/home/home.js
 import {
-  get
+  get, showToast
 } from "../../utils/index.js";
 const regeneratorRuntime = require('../../utils/regenerator-runtime/runtime')
 let app = getApp();
@@ -32,6 +32,7 @@ Page({
   },
   //瀑布流用到的函数
   onReachBottom: function () {
+    console.log(this.data.noMore)
     if (!this.data.noMore) {
       this.setData({
         pageNo: this.data.pageNo + 1
@@ -125,24 +126,32 @@ Page({
     wx.hideNavigationBarLoading();
   },
   addArticalPage() {
+    if(!app.globalData.openId){
+      showToast('请先授权')
+      return
+    }
     wx.navigateTo({
       url: '/pages/addArtical/addArtical',
     })
   },
+  // 点击分类
   currentChange(e) {
     let currentVal = e.detail
-    this.setData({
-      currentVal,
-      pageNo: 0
-    })
     console.log(currentVal)
-    this.getArticalList((res) => {
-      this._doRefreshMasonry(res)
-    })
+    if(currentVal!==this.data.currentVal){
+      this.setData({
+        currentVal,
+        pageNo: 0,
+        noMore: false
+      })
+      console.log(currentVal)
+      this.getArticalList((res) => {
+        this._doRefreshMasonry(res)
+      })
+    }
   },
-  //获取文章列表
+  //获笔记列表
   async getArticalList(fn) {
-    console.log(2)
     let params = {}
     if (this.data.currentVal == 'follow') {
       if (app.globalData.openId) {
@@ -151,9 +160,8 @@ Page({
           openId: app.globalData.openId
         }
       } else {
-        this.setData({
-          artical: []
-        })
+        this.setData({artical: []})
+        showToast('请先授权')
         return
       }
     } else {
@@ -163,18 +171,10 @@ Page({
     }
     params.pageSize = this.data.pageSize
     params.pageNo = this.data.pageNo
-    const articals = await get("/weapp/articalList",
-      params
-    );
-    console.log(articals)
-    if (articals.length < this.data.pageSize) {
-      this.setData({
-        noMore: true
-      })
+    const articals = await get("/weapp/articalList",params);
+    if (articals.list.length < this.data.pageSize) {
+      this.setData({noMore: true})
     }
-    // this.setData({
-    //   articals: articals.list
-    // })
     if (fn) {
       fn(articals.list)
     }

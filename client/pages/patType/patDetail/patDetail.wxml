@@ -3,6 +3,7 @@
   <view class='name'>{{detail.patName}}({{detail.EnglishName||""}})</view>
   <view class='yard-text' wx:if='{{detail.otherName}}'>别名：{{detail.otherName}}</view>
   <view class='yard-text' wx:if='{{detail.country}}'>产地：{{detail.country}}</view>
-  <view class='yard-text '>寿命：{{detail.lifeend}}年</view>
+  <view class='yard-text' wx:if="{{detail.lifeStart}}">寿命：{{detail.lifeStart}}-{{detail.lifeEnd}}年</view>
+  <view class='yard-text' wx:if="{{detail.weightStart}}">体重：{{detail.weightStart}}-{{detail.weightEnd}}年</view>
   <text class='desc'>{{detail.info}}</text>
 </view>

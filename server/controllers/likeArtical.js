@@ -16,7 +16,7 @@ module.exports = async (ctx) => {
     if (!pageNo) {
         pageNo = 0
     }
-    //获取点赞的文章ids
+    //获取点赞的笔记ids
     let articalId = await mysql('likelist').select().where('openId', openId).limit(pageSize).offset(pageNo * pageSize).orderBy('likeId', 'desc')
     let articalIdArr = []
     for(let i=0;i<articalId.length;i++){

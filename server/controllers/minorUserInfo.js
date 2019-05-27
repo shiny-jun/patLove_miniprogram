@@ -9,7 +9,7 @@ module.exports = async(ctx) => {
     let {
         openId,
     } = ctx.request.query
-    const signature = await mysql('cSessionInfo').select('signature').where('open_id', openId)
+    const signature = await mysql('userInfo').select('signature').where('openId', openId)
     let articalIdList = await mysql('articallist').select('articalId').where('openId', openId)
     let articalIds = []
     for (let i = 0; i < articalIdList.length; i++) {
